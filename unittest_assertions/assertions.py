@@ -10,8 +10,8 @@ from string import Template
 
 class AbstractAssertion:
     def __init__(
-            self,
-            function: Callable,
+        self,
+        function: Callable,
     ):
         ...
 
@@ -55,6 +55,7 @@ class AssertFalse(AssertTrue):
 class AssertEqual(BasicBuiltinAssertion):
     function: Callable = field(default=TestCase().assertEqual, init=False)
 
+
 @dataclass
 class AssertNotEqual(BasicBuiltinAssertion):
     function: Callable = field(default=TestCase().assertNotEqual, init=False)
@@ -63,24 +64,26 @@ class AssertNotEqual(BasicBuiltinAssertion):
 @dataclass
 class AssertAlmostEqual(BuiltinAssertion):
     function: Callable = field(
-            default=TestCase().assertAlmostEqual, init=False
+        default=TestCase().assertAlmostEqual, init=False
     )
 
     def __call__(self, first, second, places=None, delta=None):
-        super().__call__(first=first, second=second, places=places, delta=delta)
+        super().__call__(
+            first=first, second=second, places=places, delta=delta
+        )
 
 
 @dataclass
 class AssertNotAlmostEqual(AssertAlmostEqual):
     function: Callable = field(
-            default=TestCase().assertNotAlmostEqual, init=False
+        default=TestCase().assertNotAlmostEqual, init=False
     )
 
 
 @dataclass
 class AssertSequanceEqual(BuiltinAssertion):
     function: Callable = field(
-            default=TestCase().assertSequenceEqual, init=False
+        default=TestCase().assertSequenceEqual, init=False
     )
 
     def __call__(self, seq1, seq2):
@@ -91,7 +94,7 @@ class AssertSequanceEqual(BuiltinAssertion):
 class AssertListEqual(BuiltinAssertion):
     function: Callable = field(default=TestCase().assertListEqual, init=False)
 
-    def __call__(self, list1, list2, msg=None):
+    def __call__(self, list1, list2):
         super().__call__(list1=list1, list2=list2)
 
 
@@ -153,7 +156,7 @@ class AssertCountEqual(BasicBuiltinAssertion):
 @dataclass
 class AssertMultilineEqual(BasicBuiltinAssertion):
     function: Callable = field(
-            default=TestCase().assertMultiLineEqual, init=False
+        default=TestCase().assertMultiLineEqual, init=False
     )
 
 
@@ -178,7 +181,7 @@ class AssertGreater(AssertLess):
 @dataclass
 class AssertGreaterEqual(AssertLess):
     function: Callable = field(
-            default=TestCase().assertGreaterEqual, init=False
+        default=TestCase().assertGreaterEqual, init=False
     )
 
 
@@ -206,7 +209,7 @@ class AssertIsInstance(BuiltinAssertion):
 @dataclass
 class AssertNotIsInstance(AssertIsInstance):
     function: Callable = field(
-            default=TestCase().assertNotIsInstance, init=False
+        default=TestCase().assertNotIsInstance, init=False
     )
 
 
@@ -237,11 +240,15 @@ class AssertLogs(BuiltinAssertion):
 @dataclass
 class AssertRaisesRegex(BuiltinAssertion):
     function: Callable = field(
-            default=TestCase().assertRaisesRegex, init=False
+        default=TestCase().assertRaisesRegex, init=False
     )
 
     def __call__(self, expected_exception, expected_regex, **kwargs):
-        super().__call__(expected_exception=expected_exception, expected_regex=expected_regex, **kwargs)
+        super().__call__(
+            expected_exception=expected_exception,
+            expected_regex=expected_regex,
+            **kwargs
+        )
 
 
 @dataclass
@@ -249,7 +256,11 @@ class AssertWarnsRegex(BuiltinAssertion):
     function: Callable = field(default=TestCase().assertWarnsRegex, init=False)
 
     def __call__(self, expected_warning, expected_regex, **kwargs):
-        super().__call__(expected_warning=expected_warning, expected_regex=expected_regex,  **kwargs)
+        super().__call__(
+            expected_warning=expected_warning,
+            expected_regex=expected_regex,
+            **kwargs
+        )
 
 
 @dataclass
