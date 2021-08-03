@@ -91,3 +91,31 @@ class AssertDictEqual(BuiltinAssertion):
 
     def __call__(self, dict1, dict2):
         super().__call__(dict1=dict1, dict2=dict2)
+
+
+@dataclass
+class ComparisonAssertion(BuiltinAssertion):
+    def __call__(self, a, b):
+        super().__call__(a=a, b=b)
+
+
+@dataclass
+class AssertLess(ComparisonAssertion):
+    function: Callable = field(default=TestCase().assertLess, init=False)
+
+
+@dataclass
+class AssertLessEqual(ComparisonAssertion):
+    function: Callable = field(default=TestCase().assertLessEqual, init=False)
+
+
+@dataclass
+class AssertGreater(ComparisonAssertion):
+    function: Callable = field(default=TestCase().assertGreater, init=False)
+
+
+@dataclass
+class AssertGreaterEqual(ComparisonAssertion):
+    function: Callable = field(
+        default=TestCase().assertGreaterEqual, init=False
+    )
