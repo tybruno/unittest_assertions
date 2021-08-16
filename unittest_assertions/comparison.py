@@ -1,12 +1,12 @@
 from unittest_assertions.base import BuiltinAssertion
 from dataclasses import dataclass, field
-from typing import Callable
+from typing import Callable, Any, Sequence
 from unittest import TestCase
 
 
 @dataclass
 class EqualityAssertion(BuiltinAssertion):
-    def __call__(self, first, second, **kwargs):
+    def __call__(self, first: Any, second: Any, **kwargs):
         super().__call__(first=first, second=second, **kwargs)
 
 
@@ -26,10 +26,17 @@ class AssertAlmostEqual(EqualityAssertion):
         default=TestCase().assertAlmostEqual, init=False
     )
 
-    def __call__(self, first, second, places=None, delta=None):
+    def __call__(self, first: Any, second: Any, places=None, delta=None):
         super().__call__(
             first=first, second=second, places=places, delta=delta
         )
+
+
+@dataclass
+class AssertNotAlmostEqual(AssertAlmostEqual):
+    function: Callable = field(
+        default=TestCase().assertNotAlmostEqual, init=False
+    )
 
 
 @dataclass
@@ -41,13 +48,6 @@ class AssertCountEqual(EqualityAssertion):
 class AssertMultilineEqual(EqualityAssertion):
     function: Callable = field(
         default=TestCase().assertMultiLineEqual, init=False
-    )
-
-
-@dataclass
-class AssertNotAlmostEqual(AssertAlmostEqual):
-    function: Callable = field(
-        default=TestCase().assertNotAlmostEqual, init=False
     )
 
 
