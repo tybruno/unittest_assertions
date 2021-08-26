@@ -1,5 +1,5 @@
 # unittest_assertions
-Made the unittest assertions standalone allowing developers to use the builtin assertions for non unittest use cases.
+Thin wrapper around the python builtin `unittest` allowing developers to use the builtin assertions for non-unittest use cases.
 
 
 #### Key Features:
