@@ -12,7 +12,7 @@ Made the unittest assertions standalone allowing developers to use the builtin a
 
 ## Installation
 ```bash
-pip install "git+https://github.com/tybruno/unittest_assertions.git#egg=unittest_assertions"
+pip install unittest-assertions
 ```
 ## Example
 ```python
