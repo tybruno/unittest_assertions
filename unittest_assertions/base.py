@@ -2,7 +2,7 @@ from dataclasses import (
     dataclass,
     field,
 )
-from typing import Callable, Union, Optional
+from typing import Callable, Any, Optional
 from abc import abstractmethod
 from string import Template
 
@@ -21,11 +21,11 @@ class AbstractAssertion:
 
 @dataclass
 class BuiltinAssertion(AbstractAssertion):
-    function: Callable
-    msg: Optional[Union[None, str, Template]] = field(default=None)
+    _function: Callable
+    msg: Optional[Any] = field(default=None)
 
     def __call__(self, **kwargs):
         msg = self.msg
         if isinstance(msg, Template):
             msg = msg.substitute(kwargs)
-        self.function(**kwargs, msg=msg)
+        self._function(**kwargs, msg=msg)

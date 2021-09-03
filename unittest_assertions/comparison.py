@@ -12,12 +12,12 @@ class EqualityAssertion(BuiltinAssertion):
 
 @dataclass
 class AssertEqual(EqualityAssertion):
-    function: Callable = field(default=TestCase().assertEqual, init=False)
+    _function: Callable = field(default=TestCase().assertEqual, init=False)
 
 
 @dataclass
 class AssertNotEqual(EqualityAssertion):
-    function: Callable = field(default=TestCase().assertNotEqual, init=False)
+    _function: Callable = field(default=TestCase().assertNotEqual, init=False)
 
 
 @dataclass
