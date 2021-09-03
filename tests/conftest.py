@@ -63,3 +63,28 @@ def combined_non_equal_all_basic_types():
         )
     )
     return combined_types
+
+
+def equal_sequences():
+    combined_sequences = (
+        (sequence, sequence) for sequence in BASIC_CONTAINERS_1.values()
+    )
+    return combined_sequences
+
+
+def not_equal_sequences():
+    combined_sequences = (
+        (seq1, seq2)
+        for seq1, seq2 in zip(BASIC_CONTAINERS_1.values(), BASIC_CONTAINERS_2)
+    )
+    return combined_sequences
+
+
+def equal_lists():
+    equal_list = (BASIC_CONTAINERS_1[list], BASIC_CONTAINERS_1[list])
+    return equal_list
+
+
+def non_equal_list():
+    equal_list = (BASIC_CONTAINERS_1[list], BASIC_CONTAINERS_2[list])
+    return equal_list
