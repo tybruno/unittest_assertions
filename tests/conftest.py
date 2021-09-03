@@ -8,11 +8,13 @@ BASIC_CONTAINERS_1 = {
     list: [value for value in BASIC_TYPES_1.values()],
     tuple: tuple(value for value in BASIC_TYPES_1.values()),
     set: set(value for value in BASIC_TYPES_1.values()),
+    dict: BASIC_TYPES_1,
 }
 BASIC_CONTAINERS_2 = {
     list: [value for value in BASIC_TYPES_2.values()],
     tuple: tuple(value for value in BASIC_TYPES_2.values()),
     set: set(value for value in BASIC_TYPES_2.values()),
+    dict: BASIC_TYPES_2,
 }
 ALL_BASIC_TYPES_1 = {**BASIC_TYPES_1, **BASIC_CONTAINERS_1}
 ALL_BASIC_TYPES_2 = {**BASIC_TYPES_2, **BASIC_CONTAINERS_2}

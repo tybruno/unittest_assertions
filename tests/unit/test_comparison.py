@@ -6,6 +6,9 @@ from unittest_assertions.comparison import (
     AssertNotEqual,
     AssertAlmostEqual,
     AssertNotAlmostEqual,
+    AssertDictEqual,
+    AssertSetEqual,
+    AssertTupleEqual,
     AssertCountEqual,
     AssertSequanceEqual,
     AssertListEqual,
@@ -80,6 +83,90 @@ class TestAssertNotEqual(ComparisonTester):
     )
     def test_assertion_raises(self, testing_data):
         super().test_assertion_raises(testing_data)
+
+
+class TestAssertTupleEqual(ComparisonTester):
+    _assertion = AssertTupleEqual
+
+    @pytest.mark.parametrize(
+        "testing_data",
+        (
+            (
+                BASIC_CONTAINERS_1[tuple],
+                BASIC_CONTAINERS_1[tuple],
+            ),
+        ),
+    )
+    def test_assertion_passes(self, testing_data):
+        super().test_assertion_passes(testing_data)
+
+    @pytest.mark.parametrize(
+        "testing_data",
+        (
+            (tup1, tup2)
+            for tup1, tup2 in zip(
+                BASIC_CONTAINERS_1[tuple], BASIC_CONTAINERS_2[tuple]
+            )
+        ),
+    )
+    def test_assertion_raises(self, testing_data):
+        super().test_assertion_raises(testing_data)
+
+
+class TestAssertSetEqual(ComparisonTester):
+    _assertion = AssertSetEqual
+
+    @pytest.mark.parametrize(
+        "testing_data",
+        (
+            (
+                BASIC_CONTAINERS_1[set],
+                BASIC_CONTAINERS_1[set],
+            ),
+        ),
+    )
+    def test_assertion_passes(self, testing_data):
+        super().test_assertion_passes(testing_data)
+
+    @pytest.mark.parametrize(
+        "testing_data",
+        (
+            (set1, set2)
+            for set1, set2 in zip(
+                BASIC_CONTAINERS_1[set], BASIC_CONTAINERS_2[set]
+            )
+        ),
+    )
+    def test_assertion_raises(self, testing_data):
+        super().test_assertion_raises(testing_data)
+
+
+class TestAssertDictEqual(ComparisonTester):
+    _assertion = AssertDictEqual
+
+    @pytest.mark.parametrize(
+        "testing_data",
+        (
+            (
+                BASIC_CONTAINERS_1[dict],
+                BASIC_CONTAINERS_1[dict],
+            ),
+        ),
+    )
+    def test_assertion_passes(self, testing_data):
+        super().test_assertion_passes(*testing_data)
+
+    @pytest.mark.parametrize(
+        "testing_data",
+        (
+            (dict1, dict2)
+            for dict1, dict2 in zip(
+                BASIC_CONTAINERS_1[dict], BASIC_CONTAINERS_2[dict]
+            )
+        ),
+    )
+    def test_assertion_raises(self, testing_data):
+        super().test_assertion_raises(*testing_data)
 
 
 class TestAssertCountEqual(ComparisonTester):
