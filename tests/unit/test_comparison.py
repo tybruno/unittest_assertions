@@ -1,5 +1,6 @@
 from abc import abstractmethod
 from typing import Type
+from tests.base import AssertionTester
 from unittest_assertions.comparison import (
     EqualityAssertion,
     AssertEqual,
@@ -34,25 +35,7 @@ from tests.conftest import (
 import pytest
 
 
-class ComparisonTester:
-    _assertion: Type[EqualityAssertion]
-
-    @pytest.mark.parametrize("msg", ("message", None, 2))
-    def test_init(self, msg):
-        assertion = self._assertion(msg=msg)
-        assert assertion.msg == msg
-
-    def test_assertion_passes(self, testing_data):
-        assertion = self._assertion()
-        assertion(*testing_data)
-
-    def test_assertion_raises(self, testing_data):
-        assertion = self._assertion()
-        with pytest.raises(AssertionError):
-            assertion(*testing_data)
-
-
-class TestAssertEqual(ComparisonTester):
+class TestAssertEqual(AssertionTester):
     _assertion = AssertEqual
 
     @pytest.mark.parametrize(
@@ -70,7 +53,7 @@ class TestAssertEqual(ComparisonTester):
         super().test_assertion_raises(testing_data)
 
 
-class TestAssertNotEqual(ComparisonTester):
+class TestAssertNotEqual(AssertionTester):
     _assertion = AssertNotEqual
 
     @pytest.mark.parametrize(
@@ -88,7 +71,7 @@ class TestAssertNotEqual(ComparisonTester):
         super().test_assertion_raises(testing_data)
 
 
-class TestAssertTupleEqual(ComparisonTester):
+class TestAssertTupleEqual(AssertionTester):
     _assertion = AssertTupleEqual
 
     @pytest.mark.parametrize(
@@ -116,7 +99,7 @@ class TestAssertTupleEqual(ComparisonTester):
         super().test_assertion_raises(testing_data)
 
 
-class TestAssertSetEqual(ComparisonTester):
+class TestAssertSetEqual(AssertionTester):
     _assertion = AssertSetEqual
 
     @pytest.mark.parametrize(
@@ -144,7 +127,7 @@ class TestAssertSetEqual(ComparisonTester):
         super().test_assertion_raises(testing_data)
 
 
-class TestAssertDictEqual(ComparisonTester):
+class TestAssertDictEqual(AssertionTester):
     _assertion = AssertDictEqual
 
     @pytest.mark.parametrize(
@@ -172,7 +155,7 @@ class TestAssertDictEqual(ComparisonTester):
         super().test_assertion_raises(testing_data)
 
 
-class TestAssertCountEqual(ComparisonTester):
+class TestAssertCountEqual(AssertionTester):
     _assertion = AssertCountEqual
 
     @pytest.mark.parametrize(
@@ -205,7 +188,7 @@ class TestAssertCountEqual(ComparisonTester):
         super().test_assertion_raises(testing_data)
 
 
-class TestAssertSequenceEqual(ComparisonTester):
+class TestAssertSequenceEqual(AssertionTester):
     _assertion = AssertSequanceEqual
 
     @pytest.mark.parametrize(
@@ -223,7 +206,7 @@ class TestAssertSequenceEqual(ComparisonTester):
         super().test_assertion_raises(testing_data)
 
 
-class TestAssertListEqual(ComparisonTester):
+class TestAssertListEqual(AssertionTester):
     _assertion = AssertListEqual
 
     @pytest.mark.parametrize(
@@ -242,7 +225,7 @@ class TestAssertListEqual(ComparisonTester):
         super().test_assertion_raises(testing_data)
 
 
-class TestAssertLess(ComparisonTester):
+class TestAssertLess(AssertionTester):
     _assertion = AssertLess
 
     @pytest.mark.parametrize(
@@ -270,7 +253,7 @@ class TestAssertLess(ComparisonTester):
         super().test_assertion_raises(testing_data)
 
 
-class TestAssertLessEqual(ComparisonTester):
+class TestAssertLessEqual(AssertionTester):
     _assertion = AssertLessEqual
 
     @pytest.mark.parametrize(
@@ -306,7 +289,7 @@ class TestAssertLessEqual(ComparisonTester):
         super().test_assertion_raises(testing_data)
 
 
-class TestAssertGreater(ComparisonTester):
+class TestAssertGreater(AssertionTester):
     _assertion = AssertGreater
 
     @pytest.mark.parametrize(
@@ -333,7 +316,7 @@ class TestAssertGreater(ComparisonTester):
         super().test_assertion_raises(testing_data)
 
 
-class TestAssertGreaterEqual(ComparisonTester):
+class TestAssertGreaterEqual(AssertionTester):
     _assertion = AssertGreaterEqual
 
     @pytest.mark.parametrize(
@@ -367,7 +350,7 @@ class TestAssertGreaterEqual(ComparisonTester):
         super().test_assertion_raises(testing_data)
 
 
-class TestAssertMultilineEqual(ComparisonTester):
+class TestAssertMultilineEqual(AssertionTester):
     _assertion = AssertMultilineEqual
 
     @pytest.mark.parametrize(
