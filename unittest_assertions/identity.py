@@ -8,8 +8,8 @@ from unittest import TestCase
 class AssertIs(BuiltinAssertion):
     _function: Callable = field(default=TestCase().assertIs, init=False)
 
-    def __call__(self, exp1, exp2):
-        super().__call__(exp1=exp1, exp2=exp2)
+    def __call__(self, expr1, expr2):
+        super().__call__(expr1=expr1, expr2=expr2)
 
 
 @dataclass
