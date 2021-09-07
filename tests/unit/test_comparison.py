@@ -16,6 +16,7 @@ from unittest_assertions.comparison import (
     AssertLessEqual,
     AssertGreater,
     AssertGreaterEqual,
+    AssertMultilineEqual,
 )
 
 from tests.conftest import (
@@ -27,6 +28,8 @@ from tests.conftest import (
     not_equal_sequences,
     equal_lists,
     non_equal_list,
+    MULTILINE_1,
+    MULTILINE_2,
 )
 import pytest
 
@@ -360,5 +363,20 @@ class TestAssertGreaterEqual(ComparisonTester):
         "testing_data",
         ((1, 2), (-1, 2), (1.1, 1.2), ("str", "string"), ([], [2])),
     )
+    def test_assertion_raises(self, testing_data):
+        super().test_assertion_raises(testing_data)
+
+
+class TestAssertMultilineEqual(ComparisonTester):
+    _assertion = AssertMultilineEqual
+
+    @pytest.mark.parametrize(
+        "testing_data",
+        ((MULTILINE_1, MULTILINE_1),),
+    )
+    def test_assertion_passes(self, testing_data):
+        super().test_assertion_passes(testing_data)
+
+    @pytest.mark.parametrize("testing_data", ((MULTILINE_1, MULTILINE_2),))
     def test_assertion_raises(self, testing_data):
         super().test_assertion_raises(testing_data)

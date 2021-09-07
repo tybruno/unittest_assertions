@@ -3,6 +3,8 @@ import pytest
 BASIC_TYPES_1 = {str: "string1", int: 1, float: 1.1}
 BASIC_TYPES_2 = {str: "string2", int: 2, float: 1.2}
 
+MULTILINE_1 = """Multiline1\nTest1\n\n"""
+MULTILINE_2 = """Multiline2\nTest2\n\n"""
 
 BASIC_CONTAINERS_1 = {
     list: [value for value in BASIC_TYPES_1.values()],
