@@ -93,8 +93,8 @@ class AssertSetEqual(BuiltinAssertion):
 class AssertDictEqual(BuiltinAssertion):
     _function: Callable = field(default=TestCase().assertDictEqual, init=False)
 
-    def __call__(self, dict1, dict2):
-        super().__call__(dict1=dict1, dict2=dict2)
+    def __call__(self, d1, d2):
+        super().__call__(d1=d1, d2=d2)
 
 
 @dataclass
