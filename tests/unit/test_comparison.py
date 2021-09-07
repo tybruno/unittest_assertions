@@ -141,32 +141,32 @@ class TestAssertSetEqual(ComparisonTester):
         super().test_assertion_raises(testing_data)
 
 
-class TestAssertDictEqual(ComparisonTester):
-    _assertion = AssertDictEqual
-
-    @pytest.mark.parametrize(
-        "testing_data",
-        (
-            (
-                BASIC_CONTAINERS_1[dict],
-                BASIC_CONTAINERS_1[dict],
-            ),
-        ),
-    )
-    def test_assertion_passes(self, testing_data):
-        super().test_assertion_passes(*testing_data)
-
-    @pytest.mark.parametrize(
-        "testing_data",
-        (
-            (dict1, dict2)
-            for dict1, dict2 in zip(
-                BASIC_CONTAINERS_1[dict], BASIC_CONTAINERS_2[dict]
-            )
-        ),
-    )
-    def test_assertion_raises(self, testing_data):
-        super().test_assertion_raises(*testing_data)
+# class TestAssertDictEqual(ComparisonTester):
+#     _assertion = AssertDictEqual
+#
+#     @pytest.mark.parametrize(
+#         "testing_data",
+#         (
+#             (
+#                 BASIC_CONTAINERS_1[dict],
+#                 BASIC_CONTAINERS_1[dict],
+#             ),
+#         ),
+#     )
+#     def test_assertion_passes(self, testing_data):
+#         super().test_assertion_passes(*testing_data)
+#
+#     @pytest.mark.parametrize(
+#         "testing_data",
+#         (
+#             (dict1, dict2)
+#             for dict1, dict2 in zip(
+#                 BASIC_CONTAINERS_1[dict], BASIC_CONTAINERS_2[dict]
+#             )
+#         ),
+#     )
+#     def test_assertion_raises(self, testing_data):
+#         super().test_assertion_raises(*testing_data)
 
 
 class TestAssertCountEqual(ComparisonTester):
@@ -190,8 +190,11 @@ class TestAssertCountEqual(ComparisonTester):
             (
                 (container1, container2)
                 for container1, container2 in zip(
-                    BASIC_CONTAINERS_1.values(), BASIC_CONTAINERS_2.values()
+                    BASIC_CONTAINERS_1.values(),
+                    BASIC_CONTAINERS_2.values(),
                 )
+                if not isinstance(container1, dict)
+                and not isinstance(container2, dict)
             )
         ),
     )
