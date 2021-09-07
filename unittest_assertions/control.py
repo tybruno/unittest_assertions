@@ -6,7 +6,7 @@ from unittest import TestCase
 
 @dataclass
 class AssertRaises(BuiltinAssertion):
-    function: Callable = field(default=TestCase().assertRaises, init=False)
+    _function: Callable = field(default=TestCase().assertRaises, init=False)
 
     def __call__(self, expected_exception, **kwargs):
         super().__call__(expected_exception=expected_exception, **kwargs)
@@ -14,7 +14,7 @@ class AssertRaises(BuiltinAssertion):
 
 @dataclass
 class AssertWarns(BuiltinAssertion):
-    function: Callable = field(default=TestCase().assertWarns, init=False)
+    _function: Callable = field(default=TestCase().assertWarns, init=False)
 
     def __call__(self, expected_warning, **kwargs):
         super().__call__(expected_warning=expected_warning, **kwargs)
@@ -22,7 +22,7 @@ class AssertWarns(BuiltinAssertion):
 
 @dataclass
 class AssertLogs(BuiltinAssertion):
-    function: Callable = field(default=TestCase().assertLogs, init=False)
+    _function: Callable = field(default=TestCase().assertLogs, init=False)
 
     def __call__(self, logger=None, level=None):
         super().__call__(logger=logger, level=level)

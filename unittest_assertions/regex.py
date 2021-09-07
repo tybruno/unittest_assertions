@@ -10,7 +10,7 @@ from unittest_assertions.base import BuiltinAssertion
 
 @dataclass
 class AssertRaisesRegex(BuiltinAssertion):
-    function: Callable = field(
+    _function: Callable = field(
         default=TestCase().assertRaisesRegex, init=False
     )
 
@@ -24,7 +24,9 @@ class AssertRaisesRegex(BuiltinAssertion):
 
 @dataclass
 class AssertWarnsRegex(BuiltinAssertion):
-    function: Callable = field(default=TestCase().assertWarnsRegex, init=False)
+    _function: Callable = field(
+        default=TestCase().assertWarnsRegex, init=False
+    )
 
     def __call__(self, expected_warning, expected_regex, **kwargs):
         super().__call__(
@@ -36,7 +38,7 @@ class AssertWarnsRegex(BuiltinAssertion):
 
 @dataclass
 class AssertRegex(BuiltinAssertion):
-    function: Callable = field(default=TestCase().assertRegex, init=False)
+    _function: Callable = field(default=TestCase().assertRegex, init=False)
 
     def __call__(self, text, expected_regex):
         super().__call__(text=text, expected_regex=expected_regex)
@@ -44,7 +46,7 @@ class AssertRegex(BuiltinAssertion):
 
 @dataclass
 class AssertNotRegex(BuiltinAssertion):
-    function: Callable = field(default=TestCase().assertNotRegex, init=False)
+    _function: Callable = field(default=TestCase().assertNotRegex, init=False)
 
     def __call__(self, text, unexpected_regex):
         super().__call__(text=text, unexpected_regex=unexpected_regex)

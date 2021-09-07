@@ -12,9 +12,9 @@ class LogicalAssertion(BuiltinAssertion):
 
 @dataclass
 class AssertTrue(LogicalAssertion):
-    function: Callable = field(default=TestCase().assertTrue, init=False)
+    _function: Callable = field(default=TestCase().assertTrue, init=False)
 
 
 @dataclass
 class AssertFalse(LogicalAssertion):
-    function: Callable = field(default=TestCase().assertFalse, init=False)
+    _function: Callable = field(default=TestCase().assertFalse, init=False)
