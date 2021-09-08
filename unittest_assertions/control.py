@@ -4,16 +4,21 @@ from typing import Callable
 from unittest import TestCase
 
 
+class ControlAssertion(BuiltinAssertion):
+    def __call__(self, *args, **kwargs):
+        self._function(*args, **kwargs)
+
+
 @dataclass
-class AssertRaises(BuiltinAssertion):
+class AssertRaises(ControlAssertion):
     _function: Callable = field(default=TestCase().assertRaises, init=False)
 
-    def __call__(self, expected_exception, **kwargs):
-        super().__call__(expected_exception=expected_exception, **kwargs)
+    def __call__(self, expected_exception, *args, **kwargs):
+        super().__call__(expected_exception, *args, **kwargs)
 
 
 @dataclass
-class AssertWarns(BuiltinAssertion):
+class AssertWarns(ControlAssertion):
     _function: Callable = field(default=TestCase().assertWarns, init=False)
 
     def __call__(self, expected_warning, **kwargs):
@@ -21,7 +26,7 @@ class AssertWarns(BuiltinAssertion):
 
 
 @dataclass
-class AssertLogs(BuiltinAssertion):
+class AssertLogs(ControlAssertion):
     _function: Callable = field(default=TestCase().assertLogs, init=False)
 
     def __call__(self, logger=None, level=None):
