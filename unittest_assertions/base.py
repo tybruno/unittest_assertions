@@ -24,8 +24,10 @@ class BuiltinAssertion(AbstractAssertion):
     _function: Callable
     msg: Optional[Any] = field(default=None)
 
-    def __call__(self, **kwargs):
-        msg = self.msg
-        if isinstance(msg, Template):
-            msg = msg.substitute(kwargs)
-        self._function(**kwargs, msg=msg)
+    def __call__(self, *args, **kwargs):
+        if "msg" not in kwargs:
+            msg = self.msg
+            if isinstance(msg, Template):
+                msg = msg.substitute(kwargs)
+            kwargs["msg"] = msg
+        self._function(*args, **kwargs)
