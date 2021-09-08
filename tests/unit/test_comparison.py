@@ -40,17 +40,17 @@ class TestAssertEqual(AssertionTester):
 
     @pytest.mark.parametrize(
         "testing_data",
-        tuple(combined_equal_all_basic_types()),
+        combined_equal_all_basic_types(),
     )
     def test_assertion_passes(self, testing_data):
-        super().test_assertion_passes(testing_data)
+        super().test_assertion_passes(*testing_data)
 
     @pytest.mark.parametrize(
         "testing_data",
-        tuple(combined_non_equal_all_basic_types()),
+        combined_non_equal_all_basic_types(),
     )
     def test_assertion_raises(self, testing_data):
-        super().test_assertion_raises(testing_data)
+        super().test_assertion_raises(*testing_data)
 
 
 class TestAssertNotEqual(AssertionTester):
@@ -58,17 +58,17 @@ class TestAssertNotEqual(AssertionTester):
 
     @pytest.mark.parametrize(
         "testing_data",
-        tuple(combined_non_equal_all_basic_types()),
+        combined_non_equal_all_basic_types(),
     )
     def test_assertion_passes(self, testing_data):
-        super().test_assertion_passes(testing_data)
+        super().test_assertion_passes(*testing_data)
 
     @pytest.mark.parametrize(
         "testing_data",
-        tuple(combined_equal_all_basic_types()),
+        combined_equal_all_basic_types(),
     )
     def test_assertion_raises(self, testing_data):
-        super().test_assertion_raises(testing_data)
+        super().test_assertion_raises(*testing_data)
 
 
 class TestAssertTupleEqual(AssertionTester):
@@ -84,7 +84,7 @@ class TestAssertTupleEqual(AssertionTester):
         ),
     )
     def test_assertion_passes(self, testing_data):
-        super().test_assertion_passes(testing_data)
+        super().test_assertion_passes(*testing_data)
 
     @pytest.mark.parametrize(
         "testing_data",
@@ -96,7 +96,7 @@ class TestAssertTupleEqual(AssertionTester):
         ),
     )
     def test_assertion_raises(self, testing_data):
-        super().test_assertion_raises(testing_data)
+        super().test_assertion_raises(*testing_data)
 
 
 class TestAssertSetEqual(AssertionTester):
@@ -112,7 +112,7 @@ class TestAssertSetEqual(AssertionTester):
         ),
     )
     def test_assertion_passes(self, testing_data):
-        super().test_assertion_passes(testing_data)
+        super().test_assertion_passes(*testing_data)
 
     @pytest.mark.parametrize(
         "testing_data",
@@ -124,7 +124,7 @@ class TestAssertSetEqual(AssertionTester):
         ),
     )
     def test_assertion_raises(self, testing_data):
-        super().test_assertion_raises(testing_data)
+        super().test_assertion_raises(*testing_data)
 
 
 class TestAssertDictEqual(AssertionTester):
@@ -140,7 +140,7 @@ class TestAssertDictEqual(AssertionTester):
         ),
     )
     def test_assertion_passes(self, testing_data):
-        super().test_assertion_passes(testing_data)
+        super().test_assertion_passes(*testing_data)
 
     @pytest.mark.parametrize(
         "testing_data",
@@ -152,7 +152,7 @@ class TestAssertDictEqual(AssertionTester):
         ),
     )
     def test_assertion_raises(self, testing_data):
-        super().test_assertion_raises(testing_data)
+        super().test_assertion_raises(*testing_data)
 
 
 class TestAssertCountEqual(AssertionTester):
@@ -161,31 +161,26 @@ class TestAssertCountEqual(AssertionTester):
     @pytest.mark.parametrize(
         "testing_data",
         tuple(
-            (
-                (container, container)
-                for container in BASIC_CONTAINERS_1.values()
-            )
+            (container, container) for container in BASIC_CONTAINERS_1.values()
         ),
     )
     def test_assertion_passes(self, testing_data):
-        super().test_assertion_passes(testing_data)
+        super().test_assertion_passes(*testing_data)
 
     @pytest.mark.parametrize(
         "testing_data",
         tuple(
-            (
-                (container1, container2)
-                for container1, container2 in zip(
-                    BASIC_CONTAINERS_1.values(),
-                    BASIC_CONTAINERS_2.values(),
-                )
-                if not isinstance(container1, dict)
-                and not isinstance(container2, dict)
+            (container1, container2)
+            for container1, container2 in zip(
+                BASIC_CONTAINERS_1.values(),
+                BASIC_CONTAINERS_2.values(),
             )
+            if not isinstance(container1, dict)
+            and not isinstance(container2, dict)
         ),
     )
     def test_assertion_raises(self, testing_data):
-        super().test_assertion_raises(testing_data)
+        super().test_assertion_raises(*testing_data)
 
 
 class TestAssertSequenceEqual(AssertionTester):
@@ -193,17 +188,17 @@ class TestAssertSequenceEqual(AssertionTester):
 
     @pytest.mark.parametrize(
         "testing_data",
-        tuple(equal_sequences()),
+        equal_sequences(),
     )
     def test_assertion_passes(self, testing_data):
-        super().test_assertion_passes(testing_data)
+        super().test_assertion_passes(*testing_data)
 
     @pytest.mark.parametrize(
         "testing_data",
-        tuple(not_equal_sequences()),
+        not_equal_sequences(),
     )
     def test_assertion_raises(self, testing_data):
-        super().test_assertion_raises(testing_data)
+        super().test_assertion_raises(*testing_data)
 
 
 class TestAssertListEqual(AssertionTester):
@@ -215,14 +210,14 @@ class TestAssertListEqual(AssertionTester):
     )
     def test_assertion_passes(self, testing_data):
         print(testing_data)
-        super().test_assertion_passes(testing_data)
+        super().test_assertion_passes(*testing_data)
 
     @pytest.mark.parametrize(
         "testing_data",
         (non_equal_list(),),
     )
     def test_assertion_raises(self, testing_data):
-        super().test_assertion_raises(testing_data)
+        super().test_assertion_raises(*testing_data)
 
 
 class TestAssertLess(AssertionTester):
@@ -233,7 +228,7 @@ class TestAssertLess(AssertionTester):
         ((1, 2), (-1, 2), (1.1, 1.2), ("str", "string"), ([], [2])),
     )
     def test_assertion_passes(self, testing_data):
-        super().test_assertion_passes(testing_data)
+        super().test_assertion_passes(*testing_data)
 
     @pytest.mark.parametrize(
         "testing_data",
@@ -250,7 +245,7 @@ class TestAssertLess(AssertionTester):
         ),
     )
     def test_assertion_raises(self, testing_data):
-        super().test_assertion_raises(testing_data)
+        super().test_assertion_raises(*testing_data)
 
 
 class TestAssertLessEqual(AssertionTester):
@@ -270,7 +265,7 @@ class TestAssertLessEqual(AssertionTester):
         ),
     )
     def test_assertion_passes(self, testing_data):
-        super().test_assertion_passes(testing_data)
+        super().test_assertion_passes(*testing_data)
 
     @pytest.mark.parametrize(
         "testing_data",
@@ -286,7 +281,7 @@ class TestAssertLessEqual(AssertionTester):
         ),
     )
     def test_assertion_raises(self, testing_data):
-        super().test_assertion_raises(testing_data)
+        super().test_assertion_raises(*testing_data)
 
 
 class TestAssertGreater(AssertionTester):
@@ -306,14 +301,14 @@ class TestAssertGreater(AssertionTester):
         ),
     )
     def test_assertion_passes(self, testing_data):
-        super().test_assertion_passes(testing_data)
+        super().test_assertion_passes(*testing_data)
 
     @pytest.mark.parametrize(
         "testing_data",
         ((1, 2), (-1, 2), (1.1, 1.2), ("str", "string"), ([], [2])),
     )
     def test_assertion_raises(self, testing_data):
-        super().test_assertion_raises(testing_data)
+        super().test_assertion_raises(*testing_data)
 
 
 class TestAssertGreaterEqual(AssertionTester):
@@ -340,14 +335,14 @@ class TestAssertGreaterEqual(AssertionTester):
         ),
     )
     def test_assertion_passes(self, testing_data):
-        super().test_assertion_passes(testing_data)
+        super().test_assertion_passes(*testing_data)
 
     @pytest.mark.parametrize(
         "testing_data",
         ((1, 2), (-1, 2), (1.1, 1.2), ("str", "string"), ([], [2])),
     )
     def test_assertion_raises(self, testing_data):
-        super().test_assertion_raises(testing_data)
+        super().test_assertion_raises(*testing_data)
 
 
 class TestAssertMultilineEqual(AssertionTester):
@@ -358,8 +353,8 @@ class TestAssertMultilineEqual(AssertionTester):
         ((MULTILINE_1, MULTILINE_1),),
     )
     def test_assertion_passes(self, testing_data):
-        super().test_assertion_passes(testing_data)
+        super().test_assertion_passes(*testing_data)
 
     @pytest.mark.parametrize("testing_data", ((MULTILINE_1, MULTILINE_2),))
     def test_assertion_raises(self, testing_data):
-        super().test_assertion_raises(testing_data)
+        super().test_assertion_raises(*testing_data)

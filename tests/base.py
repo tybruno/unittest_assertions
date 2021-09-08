@@ -11,11 +11,11 @@ class AssertionTester:
         assertion = self._assertion(msg=msg)
         assert assertion.msg == msg
 
-    def test_assertion_passes(self, testing_data):
+    def test_assertion_passes(self, *args, **kwargs):
         assertion = self._assertion()
-        assertion(*testing_data)
+        assertion(*args, **kwargs)
 
-    def test_assertion_raises(self, testing_data):
+    def test_assertion_raises(self, *args, **kwargs):
         assertion = self._assertion()
         with pytest.raises(AssertionError):
-            assertion(*testing_data)
+            assertion(*args, **kwargs)

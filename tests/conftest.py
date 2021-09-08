@@ -56,6 +56,7 @@ def combined_equal_all_basic_types():
     combined_types = tuple(
         (value, value) for value in ALL_BASIC_TYPES_1.values()
     )
+
     return combined_types
 
 
