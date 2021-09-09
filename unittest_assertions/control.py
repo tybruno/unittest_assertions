@@ -1,16 +1,11 @@
-from unittest_assertions.base import BuiltinAssertion
+from unittest_assertions.base import BasicBuiltinAssertion
 from dataclasses import dataclass, field
 from typing import Callable
 from unittest import TestCase
 
 
-class ControlAssertion(BuiltinAssertion):
-    def __call__(self, *args, **kwargs):
-        self._function(*args, **kwargs)
-
-
 @dataclass
-class AssertRaises(ControlAssertion):
+class AssertRaises(BasicBuiltinAssertion):
     _function: Callable = field(default=TestCase().assertRaises, init=False)
 
     def __call__(self, expected_exception, *args, **kwargs):
@@ -18,7 +13,7 @@ class AssertRaises(ControlAssertion):
 
 
 @dataclass
-class AssertWarns(ControlAssertion):
+class AssertWarns(BasicBuiltinAssertion):
     _function: Callable = field(default=TestCase().assertWarns, init=False)
 
     def __call__(self, expected_warning, **kwargs):
@@ -26,7 +21,7 @@ class AssertWarns(ControlAssertion):
 
 
 @dataclass
-class AssertLogs(ControlAssertion):
+class AssertLogs(BasicBuiltinAssertion):
     _function: Callable = field(default=TestCase().assertLogs, init=False)
 
     def __call__(self, logger=None, level=None):
