@@ -16,8 +16,8 @@ class AssertRaises(BasicBuiltinAssertion):
 class AssertWarns(BasicBuiltinAssertion):
     _function: Callable = field(default=TestCase().assertWarns, init=False)
 
-    def __call__(self, expected_warning, **kwargs):
-        super().__call__(expected_warning=expected_warning, **kwargs)
+    def __call__(self, expected_warning, *args, **kwargs):
+        super().__call__(expected_warning, *args, **kwargs)
 
 
 @dataclass
