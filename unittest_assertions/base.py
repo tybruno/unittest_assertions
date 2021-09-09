@@ -8,20 +8,21 @@ from string import Template
 
 
 class AbstractAssertion:
-    def __init__(
-        self,
-        function: Callable,
-    ):
-        ...
-
     @abstractmethod
     def __call__(self, *args, **kwargs):
         ...
 
 
 @dataclass
-class BuiltinAssertion(AbstractAssertion):
+class BasicBuiltinAssertion(AbstractAssertion):
     _function: Callable
+
+    def __call__(self, *args, **kwargs):
+        self._function(*args, **kwargs)
+
+
+@dataclass
+class BuiltinAssertion(BasicBuiltinAssertion):
     msg: Optional[Any] = field(default=None)
 
     def __call__(self, *args, **kwargs):
@@ -30,4 +31,4 @@ class BuiltinAssertion(AbstractAssertion):
             if isinstance(msg, Template):
                 msg = msg.substitute(kwargs)
             kwargs["msg"] = msg
-        self._function(*args, **kwargs)
+        super().__call__(*args, **kwargs)
