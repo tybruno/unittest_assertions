@@ -22,6 +22,23 @@ ALL_BASIC_TYPES_1 = {**BASIC_TYPES_1, **BASIC_CONTAINERS_1}
 ALL_BASIC_TYPES_2 = {**BASIC_TYPES_2, **BASIC_CONTAINERS_2}
 
 
+def create_not_instance_testing_data(dictionary):
+    testing_data = list()
+    for _type in dictionary.keys():
+        temp_dict = dictionary.copy()
+        temp_dict.pop(_type)
+
+        for obj in temp_dict.values():
+            testing_data.append((obj, _type))
+
+    return testing_data
+
+
+NOT_INSTANCE_TESTING_DATA = create_not_instance_testing_data(ALL_BASIC_TYPES_1)
+
+print(create_not_instance_testing_data(ALL_BASIC_TYPES_1))
+
+
 @pytest.fixture
 def basic_types_1():
     return BASIC_TYPES_1
