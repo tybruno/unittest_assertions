@@ -4,7 +4,6 @@ from dataclasses import (
 )
 from typing import Callable, Any, Optional
 from abc import abstractmethod
-from string import Template
 
 
 class AbstractAssertion:
@@ -28,7 +27,6 @@ class BuiltinAssertion(BasicBuiltinAssertion):
     def __call__(self, *args, **kwargs):
         if "msg" not in kwargs:
             msg = self.msg
-            if isinstance(msg, Template):
-                msg = msg.substitute(kwargs)
             kwargs["msg"] = msg
+
         super().__call__(*args, **kwargs)

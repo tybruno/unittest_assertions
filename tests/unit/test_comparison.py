@@ -1,8 +1,5 @@
-from abc import abstractmethod
-from typing import Type
 from tests.base import AssertionTester
 from unittest_assertions.comparison import (
-    EqualityAssertion,
     AssertEqual,
     AssertNotEqual,
     AssertAlmostEqual,
@@ -78,7 +75,7 @@ class TestAlmostEqual(AssertionTester):
         "testing_data",
         (
             (1.00000001, 1.0),
-            (0, 0.1 + 0.1j, 0),
+            (0, 0.1 + 0.1j, 0, None),
             (float("inf"), float("inf")),
             (1.1, 1.0, None, 0.5),
             (1.1, 1.1, None, 0.5),
