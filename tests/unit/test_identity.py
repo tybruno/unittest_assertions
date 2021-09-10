@@ -107,7 +107,6 @@ class TestAssertIsInstance(AssertionTester):
     def test_assertion_passes(self, testing_data: tuple):
         super().test_assertion_passes(*testing_data)
 
-    #
     @pytest.mark.parametrize("testing_data", tuple(NOT_INSTANCE_TESTING_DATA))
     def test_assertion_raises(self, testing_data: tuple):
         super().test_assertion_raises(*testing_data)

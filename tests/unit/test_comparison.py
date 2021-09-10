@@ -71,6 +71,63 @@ class TestAssertNotEqual(AssertionTester):
         super().test_assertion_raises(*testing_data)
 
 
+class TestAlmostEqual(AssertionTester):
+    _assertion = AssertAlmostEqual
+
+    @pytest.mark.parametrize(
+        "testing_data",
+        (
+            (1.00000001, 1.0),
+            (0, 0.1 + 0.1j, 0),
+            (float("inf"), float("inf")),
+            (1.1, 1.0, None, 0.5),
+            (1.1, 1.1, None, 0.5),
+        ),
+    )
+    def test_assertion_passes(self, testing_data: tuple):
+        super().test_assertion_passes(*testing_data)
+
+    @pytest.mark.parametrize(
+        "testing_data",
+        (
+            (1.00000001, 2.0),
+            (0, 0.1 + 0.1j, 1),
+            (1.1, 1.0, None, 0.05),
+            (1.1, 1.1, None, 0.05),
+        ),
+    )
+    def test_assertion_raises(self, testing_data: tuple):
+        super().test_assertion_raises(*testing_data)
+
+
+class TestNotAlmostEqual(AssertionTester):
+    _assertion = AssertNotAlmostEqual
+
+    @pytest.mark.parametrize(
+        "testing_data",
+        (
+            (1.00000001, 2.0),
+            (0, 0.1 + 0.1j, 1),
+            (1.1, 1.0, None, 0.05),
+        ),
+    )
+    def test_assertion_passes(self, testing_data: tuple):
+        super().test_assertion_passes(*testing_data)
+
+    @pytest.mark.parametrize(
+        "testing_data",
+        (
+            (1.00000001, 1.0),
+            (0, 0.1 + 0.1j, 0),
+            (float("inf"), float("inf")),
+            (1.1, 1.0, None, 0.5),
+            (1.1, 1.1, None, 0.5),
+        ),
+    )
+    def test_assertion_raises(self, testing_data: tuple):
+        super().test_assertion_raises(*testing_data)
+
+
 class TestAssertTupleEqual(AssertionTester):
     _assertion = AssertTupleEqual
 
