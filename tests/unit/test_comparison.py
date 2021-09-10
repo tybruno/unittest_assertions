@@ -93,7 +93,6 @@ class TestAlmostEqual(AssertionTester):
             (1.00000001, 2.0),
             (0, 0.1 + 0.1j, 1),
             (1.1, 1.0, None, 0.05),
-            (1.1, 1.1, None, 0.05),
         ),
     )
     def test_assertion_raises(self, testing_data: tuple):
