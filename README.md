@@ -27,9 +27,9 @@ assert_is_instance("example str", int) # raise TypeError("'example str' is not a
 |-----------------|----------|
 |AssertEqual| first == second| 
 | AssertNotEqual| first != Second | 
-|AssertAlmostEqual| first ~ second|
-|AssertNotAlmostEqual| first !~ second| 
-|AssertCountEqual| len(first) == len(second)| 
+|AssertAlmostEqual| first ~= second|
+|AssertNotAlmostEqual| first !~= second| 
+|AssertCountEqual| Counter(list(first)) == Counter(list(second))| 
 |AssertMultilineEqual| first.splitlines() == second.splitlines()|
 |AsseritySequenceEqual| seq1 == seq2| 
 |AssertListEqual| list1 == list2| 
