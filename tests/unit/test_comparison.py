@@ -124,6 +124,49 @@ class TestNotAlmostEqual(AssertionTester):
         super().test_assertion_raises(*testing_data)
 
 
+class TestAssertCountEqual(AssertionTester):
+    _assertion = AssertCountEqual
+
+    @pytest.mark.parametrize(
+        "testing_data",
+        tuple(
+            (container, container) for container in BASIC_CONTAINERS_1.values()
+        ),
+    )
+    def test_assertion_passes(self, testing_data):
+        super().test_assertion_passes(*testing_data)
+
+    @pytest.mark.parametrize(
+        "testing_data",
+        tuple(
+            (container1, container2)
+            for container1, container2 in zip(
+                BASIC_CONTAINERS_1.values(),
+                BASIC_CONTAINERS_2.values(),
+            )
+            if not isinstance(container1, dict)
+            and not isinstance(container2, dict)
+        ),
+    )
+    def test_assertion_raises(self, testing_data):
+        super().test_assertion_raises(*testing_data)
+
+
+class TestAssertMultilineEqual(AssertionTester):
+    _assertion = AssertMultilineEqual
+
+    @pytest.mark.parametrize(
+        "testing_data",
+        ((MULTILINE_1, MULTILINE_1),),
+    )
+    def test_assertion_passes(self, testing_data):
+        super().test_assertion_passes(*testing_data)
+
+    @pytest.mark.parametrize("testing_data", ((MULTILINE_1, MULTILINE_2),))
+    def test_assertion_raises(self, testing_data):
+        super().test_assertion_raises(*testing_data)
+
+
 class TestAssertTupleEqual(AssertionTester):
     _assertion = AssertTupleEqual
 
@@ -202,34 +245,6 @@ class TestAssertDictEqual(AssertionTester):
             for dict1, dict2 in zip(
                 BASIC_CONTAINERS_1[dict], BASIC_CONTAINERS_2[dict]
             )
-        ),
-    )
-    def test_assertion_raises(self, testing_data):
-        super().test_assertion_raises(*testing_data)
-
-
-class TestAssertCountEqual(AssertionTester):
-    _assertion = AssertCountEqual
-
-    @pytest.mark.parametrize(
-        "testing_data",
-        tuple(
-            (container, container) for container in BASIC_CONTAINERS_1.values()
-        ),
-    )
-    def test_assertion_passes(self, testing_data):
-        super().test_assertion_passes(*testing_data)
-
-    @pytest.mark.parametrize(
-        "testing_data",
-        tuple(
-            (container1, container2)
-            for container1, container2 in zip(
-                BASIC_CONTAINERS_1.values(),
-                BASIC_CONTAINERS_2.values(),
-            )
-            if not isinstance(container1, dict)
-            and not isinstance(container2, dict)
         ),
     )
     def test_assertion_raises(self, testing_data):
@@ -394,20 +409,5 @@ class TestAssertGreaterEqual(AssertionTester):
         "testing_data",
         ((1, 2), (-1, 2), (1.1, 1.2), ("str", "string"), ([], [2])),
     )
-    def test_assertion_raises(self, testing_data):
-        super().test_assertion_raises(*testing_data)
-
-
-class TestAssertMultilineEqual(AssertionTester):
-    _assertion = AssertMultilineEqual
-
-    @pytest.mark.parametrize(
-        "testing_data",
-        ((MULTILINE_1, MULTILINE_1),),
-    )
-    def test_assertion_passes(self, testing_data):
-        super().test_assertion_passes(*testing_data)
-
-    @pytest.mark.parametrize("testing_data", ((MULTILINE_1, MULTILINE_2),))
     def test_assertion_raises(self, testing_data):
         super().test_assertion_raises(*testing_data)

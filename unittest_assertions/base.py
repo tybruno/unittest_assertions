@@ -11,7 +11,7 @@ class AbstractAssertion(ABC):
     """Foundational Abstract Method for Assertions"""
 
     @abstractmethod
-    def __call__(self, *args: Sequence, **kwargs: Mapping) -> None:
+    def __call__(self, *args, **kwargs) -> None:
         """Method to run the assertion.
 
         Args:
@@ -33,7 +33,7 @@ class BasicBuiltinAssertion(AbstractAssertion):
 
     _assertion_function: Callable
 
-    def __call__(self, *args: Sequence, **kwargs: Mapping) -> None:
+    def __call__(self, *args, **kwargs) -> None:
         """Run the Assertion function with the given args and kwargs.
 
         Args:
@@ -52,7 +52,7 @@ class BuiltinAssertion(BasicBuiltinAssertion):
 
     msg: Optional[Any] = field(default=None)
 
-    def __call__(self, *args: Sequence, **kwargs: Mapping) -> None:
+    def __call__(self, *args, **kwargs) -> None:
         """Run the Assertion function with the given args and kwargs
 
         Args:
