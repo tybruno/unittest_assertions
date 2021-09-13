@@ -1,9 +1,12 @@
 import warnings
-import logging
 
 import pytest
+
 from tests.base import BasicAsssertionTester
-from unittest_assertions.control import AssertRaises, AssertWarns, AssertLogs
+from unittest_assertions.control import (
+    AssertRaises,
+    AssertWarns,
+)
 
 
 def _raise(e):

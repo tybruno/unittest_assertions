@@ -1,8 +1,9 @@
+from string import Template
+
 import pytest
 
 from unittest_assertions.base import BuiltinAssertion
 from unittest_assertions.comparison import AssertEqual
-from string import Template
 
 
 class TestBuiltinAssertion:

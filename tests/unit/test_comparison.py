@@ -1,35 +1,35 @@
-from tests.base import AssertionTester
-from unittest_assertions.comparison import (
-    AssertEqual,
-    AssertNotEqual,
-    AssertAlmostEqual,
-    AssertNotAlmostEqual,
-    AssertDictEqual,
-    AssertSetEqual,
-    AssertTupleEqual,
-    AssertCountEqual,
-    AssertSequanceEqual,
-    AssertListEqual,
-    AssertLess,
-    AssertLessEqual,
-    AssertGreater,
-    AssertGreaterEqual,
-    AssertMultilineEqual,
-)
+import pytest
 
+from tests.base import AssertionTester
 from tests.conftest import (
     BASIC_CONTAINERS_1,
     BASIC_CONTAINERS_2,
-    combined_equal_all_basic_types,
-    combined_non_equal_all_basic_types,
-    equal_sequences,
-    not_equal_sequences,
-    equal_lists,
-    non_equal_list,
     MULTILINE_1,
     MULTILINE_2,
+    combined_equal_all_basic_types,
+    combined_non_equal_all_basic_types,
+    equal_lists,
+    equal_sequences,
+    non_equal_list,
+    not_equal_sequences,
 )
-import pytest
+from unittest_assertions.comparison import (
+    AssertAlmostEqual,
+    AssertCountEqual,
+    AssertDictEqual,
+    AssertEqual,
+    AssertGreater,
+    AssertGreaterEqual,
+    AssertLess,
+    AssertLessEqual,
+    AssertListEqual,
+    AssertMultilineEqual,
+    AssertNotAlmostEqual,
+    AssertNotEqual,
+    AssertSequanceEqual,
+    AssertSetEqual,
+    AssertTupleEqual,
+)
 
 
 class TestAssertEqual(AssertionTester):

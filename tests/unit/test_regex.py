@@ -1,8 +1,7 @@
 import pytest
+
 from tests.base import BasicAsssertionTester
 from unittest_assertions.regex import (
-    AssertRaisesRegex,
-    AssertWarnsRegex,
     AssertNotRegex,
     AssertRegex,
 )

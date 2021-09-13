@@ -1,9 +1,13 @@
 import pytest
+
 from tests.base import AssertionTester
-from unittest_assertions.container import AssertIn, AssertNotIn
 from tests.conftest import (
     ALL_BASIC_TYPES_1,
     ALL_BASIC_TYPES_2,
+)
+from unittest_assertions.container import (
+    AssertIn,
+    AssertNotIn,
 )
 
 

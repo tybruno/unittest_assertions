@@ -1,7 +1,11 @@
 import pytest
+
 from tests.base import AssertionTester
-from unittest_assertions.logic import AssertTrue, AssertFalse
 from tests.conftest import ALL_BASIC_TYPES_1
+from unittest_assertions.logic import (
+    AssertFalse,
+    AssertTrue,
+)
 
 
 class TestAssertTrue(AssertionTester):

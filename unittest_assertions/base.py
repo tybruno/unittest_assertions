@@ -1,10 +1,17 @@
+from abc import (
+    ABC,
+    abstractmethod,
+)
 from dataclasses import (
     dataclass,
     field,
 )
-from typing import Callable, Any, Optional, Mapping, Sequence
-from abc import abstractmethod, ABC
 from string import Template
+from typing import (
+    Any,
+    Callable,
+    Optional,
+)
 
 
 class AbstractAssertion(ABC):

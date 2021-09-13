@@ -1,7 +1,11 @@
-from unittest_assertions.base import BuiltinAssertion
-from dataclasses import dataclass, field
+from dataclasses import (
+    dataclass,
+    field,
+)
 from typing import Callable
 from unittest import TestCase
+
+from unittest_assertions.base import BuiltinAssertion
 
 
 @dataclass

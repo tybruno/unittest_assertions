@@ -1,5 +1,7 @@
 from typing import Type
+
 import pytest
+
 from unittest_assertions.base import (
     BasicBuiltinAssertion,
     BuiltinAssertion,

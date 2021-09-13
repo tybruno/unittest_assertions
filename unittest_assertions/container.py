@@ -1,9 +1,16 @@
 """ Container Assertions"""
-from unittest_assertions.base import BuiltinAssertion
-from dataclasses import dataclass, field
-from typing import Callable
+from dataclasses import (
+    dataclass,
+    field,
+)
+from typing import (
+    Any,
+    Callable,
+    Container,
+)
 from unittest import TestCase
-from typing import Any, Container
+
+from unittest_assertions.base import BuiltinAssertion
 
 
 @dataclass

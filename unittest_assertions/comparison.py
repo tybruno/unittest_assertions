@@ -6,11 +6,11 @@ from dataclasses import (
 from typing import (
     Any,
     Callable,
-    Sequence,
-    Mapping,
     List,
-    Tuple,
+    Mapping,
+    Sequence,
     Set,
+    Tuple,
     Union,
 )
 from unittest import TestCase

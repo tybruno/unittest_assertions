@@ -1,17 +1,18 @@
 import pytest
+
 from tests.base import AssertionTester
-from unittest_assertions.identity import (
-    AssertIs,
-    AssertIsNot,
-    AssertIsNone,
-    AssertIsNotNone,
-    AssertIsInstance,
-    AssertNotIsInstance,
-)
 from tests.conftest import (
     ALL_BASIC_TYPES_1,
     ALL_BASIC_TYPES_2,
     NOT_INSTANCE_TESTING_DATA,
+)
+from unittest_assertions.identity import (
+    AssertIs,
+    AssertIsInstance,
+    AssertIsNone,
+    AssertIsNot,
+    AssertIsNotNone,
+    AssertNotIsInstance,
 )
 
 

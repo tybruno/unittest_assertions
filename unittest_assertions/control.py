@@ -1,9 +1,16 @@
 """ Control Assertions """
-from unittest_assertions.base import BasicBuiltinAssertion
-from dataclasses import dataclass, field
-from typing import Callable, Type
-from unittest import TestCase
 import logging
+from dataclasses import (
+    dataclass,
+    field,
+)
+from typing import (
+    Callable,
+    Type,
+)
+from unittest import TestCase
+
+from unittest_assertions.base import BasicBuiltinAssertion
 
 
 @dataclass
