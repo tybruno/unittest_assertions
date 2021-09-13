@@ -40,7 +40,7 @@ class EqualityAssertion(BuiltinAssertion):
 
 @dataclass
 class AssertEqual(EqualityAssertion):
-    """assert `first` `==` `second`
+    """assert `first` == `second`
 
     raise `AssertionError` if `first` is not equal to `second`
 
@@ -59,7 +59,7 @@ class AssertEqual(EqualityAssertion):
 
 @dataclass
 class AssertNotEqual(EqualityAssertion):
-    """assert `first` `!=` `second`
+    """assert `first` != `second`
 
     raise `AssertionError` if `first` is equal to `second`
 
@@ -78,7 +78,7 @@ class AssertNotEqual(EqualityAssertion):
 
 @dataclass
 class AssertAlmostEqual(EqualityAssertion):
-    """assert `first` `~=` `second`
+    """assert `first` ~= `second`
 
     raise `AssertionError` if `first` is not almost equal to `second`
 
@@ -121,7 +121,7 @@ class AssertAlmostEqual(EqualityAssertion):
 
 @dataclass
 class AssertNotAlmostEqual(AssertAlmostEqual):
-    """assert `first` `!~=` `second`
+    """assert `first` !~= `second`
 
     raise `AssertionError` if `first` is almost  equal to `second`
 
@@ -140,7 +140,7 @@ class AssertNotAlmostEqual(AssertAlmostEqual):
 
 @dataclass
 class AssertCountEqual(EqualityAssertion):
-    """assert `Counter(list(first))` `==`  `Counter(list(second))`
+    """assert `Counter(list(first))` ==  `Counter(list(second))`
 
     raise `AssertionError` if `first` counter does not equal `second` counter
 
