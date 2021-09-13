@@ -10,7 +10,7 @@ class TestBuiltinAssertion:
     @pytest.mark.parametrize("function", (AssertEqual,))
     def test_init(self, msg, function):
         bulitin_assertion = BuiltinAssertion(msg=msg, _function=AssertEqual)
-        assert bulitin_assertion._function == function
+        assert bulitin_assertion._assertion_function == function
         assert bulitin_assertion.msg == msg
 
     @pytest.mark.parametrize("msg", (None, "Hello", Template("msg $a  $b")))

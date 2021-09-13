@@ -12,9 +12,13 @@ class ContainerAssertion(BuiltinAssertion):
 
 @dataclass
 class AssertIn(ContainerAssertion):
-    _function: Callable = field(default=TestCase().assertIn, init=False)
+    _assertion_function: Callable = field(
+        default=TestCase().assertIn, init=False
+    )
 
 
 @dataclass
 class AssertNotIn(ContainerAssertion):
-    _function: Callable = field(default=TestCase().assertNotIn, init=False)
+    _assertion_function: Callable = field(
+        default=TestCase().assertNotIn, init=False
+    )
