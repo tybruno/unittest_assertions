@@ -6,6 +6,7 @@ from unittest import TestCase
 
 @dataclass
 class AssertRaises(BasicBuiltinAssertion):
+
     _assertion_function: Callable = field(
         default=TestCase().assertRaises, init=False
     )

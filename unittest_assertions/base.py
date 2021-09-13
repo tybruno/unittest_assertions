@@ -48,7 +48,12 @@ class BasicBuiltinAssertion(AbstractAssertion):
 
 @dataclass
 class BuiltinAssertion(BasicBuiltinAssertion):
-    """Buitlin Assertion base class for assertions that have a `msg` argument"""
+    """Buitlin Assertion base class for assertions that have a `msg` argument
+
+    Attributes:
+        msg: Optional message that will be included when `AssertionError` is
+        raised.
+    """
 
     msg: Optional[Any] = field(default=None)
 

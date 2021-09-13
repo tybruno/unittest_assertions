@@ -1,3 +1,4 @@
+""" Equality and Comparison Assertions"""
 from dataclasses import (
     dataclass,
     field,
@@ -11,7 +12,6 @@ from typing import (
     Tuple,
     Set,
     Union,
-    AnyStr,
 )
 from unittest import TestCase
 
@@ -27,7 +27,8 @@ class EqualityAssertion(BuiltinAssertion):
 
         Args:
             first: First item that will be passed to the `_assertion_function`
-            second: Second item that will be passed to the `_assertion_function`
+            second: Second item that will be passed to the
+            `_assertion_function`
             *args: Arguments to be passed to the Assertion function
             **kwargs: Keyword arguments to be passed to the Assertion Function
 
