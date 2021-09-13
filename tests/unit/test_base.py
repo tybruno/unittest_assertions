@@ -9,7 +9,9 @@ class TestBuiltinAssertion:
     @pytest.mark.parametrize("msg", (None, "Hello"))
     @pytest.mark.parametrize("function", (AssertEqual,))
     def test_init(self, msg, function):
-        bulitin_assertion = BuiltinAssertion(msg=msg, _function=AssertEqual)
+        bulitin_assertion = BuiltinAssertion(
+            msg=msg, _assertion_function=AssertEqual
+        )
         assert bulitin_assertion._assertion_function == function
         assert bulitin_assertion.msg == msg
 
@@ -30,5 +32,7 @@ class TestBuiltinAssertion:
             assert arguments == _args
             assert expected_keyword_args == _kwargs
 
-        bulitin_assertion = BuiltinAssertion(msg=msg, _function=_mock_function)
+        bulitin_assertion = BuiltinAssertion(
+            msg=msg, _assertion_function=_mock_function
+        )
         bulitin_assertion.__call__(*arguments, **keyword_args)
