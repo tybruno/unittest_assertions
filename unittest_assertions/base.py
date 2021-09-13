@@ -34,7 +34,7 @@ class BasicBuiltinAssertion(AbstractAssertion):
     _assertion_function: Callable
 
     def __call__(self, *args, **kwargs) -> None:
-        """Run the Assertion function with the given args and kwargs.
+        """Run the Assertion function with the given function_args and function_kwargs.
 
         Args:
             *args: Arguments that will be passed to the `_assertion_function`
@@ -58,7 +58,7 @@ class BuiltinAssertion(BasicBuiltinAssertion):
     msg: Optional[Any] = field(default=None)
 
     def __call__(self, *args, **kwargs) -> None:
-        """Run the Assertion function with the given args and kwargs
+        """Run the Assertion function with the given function_args and function_kwargs
 
         Args:
             *args: Arguments that will be passed to the `_assertion_function`
@@ -70,7 +70,7 @@ class BuiltinAssertion(BasicBuiltinAssertion):
         if "msg" not in kwargs:
             msg: Any = self.msg
 
-            # If it is a Template string substitute it with the kwargs
+            # If it is a Template string substitute it with the function_kwargs
             if isinstance(msg, Template):
                 msg: str = msg.safe_substitute(kwargs)
             kwargs["msg"] = msg
