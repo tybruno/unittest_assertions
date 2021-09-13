@@ -3,11 +3,25 @@ from unittest_assertions.base import BuiltinAssertion
 from dataclasses import dataclass, field
 from typing import Callable
 from unittest import TestCase
+from typing import Any, Container
 
 
 @dataclass
 class ContainerAssertion(BuiltinAssertion):
-    def __call__(self, *, member, container):
+    """Perent class for Container assertions."""
+
+    def __call__(self, *, member: Any, container: Container) -> None:
+        """call `_assertion_function` with `member` and `container` as
+        agruments
+
+        Args:
+            member: will be checked to see if it is in the `container`
+            container: `container` that will be checked if it contains the
+             `container`
+
+        Returns:
+             None
+        """
         super().__call__(member=member, container=container)
 
 
