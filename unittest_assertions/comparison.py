@@ -2,7 +2,17 @@ from dataclasses import (
     dataclass,
     field,
 )
-from typing import Any, Callable, Sequence, Mapping, List, Tuple, Set, Union
+from typing import (
+    Any,
+    Callable,
+    Sequence,
+    Mapping,
+    List,
+    Tuple,
+    Set,
+    Union,
+    AnyStr,
+)
 from unittest import TestCase
 
 from unittest_assertions.base import BuiltinAssertion

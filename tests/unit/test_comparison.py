@@ -167,6 +167,43 @@ class TestAssertMultilineEqual(AssertionTester):
         super().test_assertion_raises(*testing_data)
 
 
+class TestAssertSequenceEqual(AssertionTester):
+    _assertion = AssertSequanceEqual
+
+    @pytest.mark.parametrize(
+        "testing_data",
+        equal_sequences(),
+    )
+    def test_assertion_passes(self, testing_data):
+        super().test_assertion_passes(*testing_data)
+
+    @pytest.mark.parametrize(
+        "testing_data",
+        not_equal_sequences(),
+    )
+    def test_assertion_raises(self, testing_data):
+        super().test_assertion_raises(*testing_data)
+
+
+class TestAssertListEqual(AssertionTester):
+    _assertion = AssertListEqual
+
+    @pytest.mark.parametrize(
+        "testing_data",
+        (equal_lists(),),
+    )
+    def test_assertion_passes(self, testing_data):
+        print(testing_data)
+        super().test_assertion_passes(*testing_data)
+
+    @pytest.mark.parametrize(
+        "testing_data",
+        (non_equal_list(),),
+    )
+    def test_assertion_raises(self, testing_data):
+        super().test_assertion_raises(*testing_data)
+
+
 class TestAssertTupleEqual(AssertionTester):
     _assertion = AssertTupleEqual
 
@@ -246,43 +283,6 @@ class TestAssertDictEqual(AssertionTester):
                 BASIC_CONTAINERS_1[dict], BASIC_CONTAINERS_2[dict]
             )
         ),
-    )
-    def test_assertion_raises(self, testing_data):
-        super().test_assertion_raises(*testing_data)
-
-
-class TestAssertSequenceEqual(AssertionTester):
-    _assertion = AssertSequanceEqual
-
-    @pytest.mark.parametrize(
-        "testing_data",
-        equal_sequences(),
-    )
-    def test_assertion_passes(self, testing_data):
-        super().test_assertion_passes(*testing_data)
-
-    @pytest.mark.parametrize(
-        "testing_data",
-        not_equal_sequences(),
-    )
-    def test_assertion_raises(self, testing_data):
-        super().test_assertion_raises(*testing_data)
-
-
-class TestAssertListEqual(AssertionTester):
-    _assertion = AssertListEqual
-
-    @pytest.mark.parametrize(
-        "testing_data",
-        (equal_lists(),),
-    )
-    def test_assertion_passes(self, testing_data):
-        print(testing_data)
-        super().test_assertion_passes(*testing_data)
-
-    @pytest.mark.parametrize(
-        "testing_data",
-        (non_equal_list(),),
     )
     def test_assertion_raises(self, testing_data):
         super().test_assertion_raises(*testing_data)
