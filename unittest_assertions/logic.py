@@ -1,10 +1,9 @@
-""" Logical Assertions """
+""" Logical Assertions """  # pylint: disable=duplicate-code
 from dataclasses import (
     dataclass,
     field,
 )
 from typing import (
-    Any,
     Callable,
 )
 from unittest import TestCase
@@ -13,23 +12,7 @@ from unittest_assertions.base import BuiltinAssertion
 
 
 @dataclass
-class LogicalAssertion(BuiltinAssertion):
-    """Parent class for logical assertions"""
-
-    def __call__(self, expr: Any) -> None:
-        """Evaluate the logical expression
-
-        Args:
-            expr: expression that will be evaluated by the assertion
-
-        Returns:
-            None
-        """
-        super().__call__(expr=expr)
-
-
-@dataclass
-class AssertTrue(LogicalAssertion):
+class AssertTrue(BuiltinAssertion):
     """assert `expr`
 
     raise `AssertionError` if not `expr`
@@ -47,7 +30,7 @@ class AssertTrue(LogicalAssertion):
 
 
 @dataclass
-class AssertFalse(LogicalAssertion):
+class AssertFalse(BuiltinAssertion):
     """assert not `expr`
 
     raise `AssertionError` if `expr`

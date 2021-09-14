@@ -1,10 +1,9 @@
-""" Identity Assertions """
+""" Identity Assertions """  # pylint: disable=duplicate-code
 from dataclasses import (
     dataclass,
     field,
 )
 from typing import (
-    Any,
     Callable,
 )
 from unittest import TestCase
@@ -13,29 +12,7 @@ from unittest_assertions.base import BuiltinAssertion
 
 
 @dataclass
-class AssertIs(BuiltinAssertion):
-    """assert `expr1` is `expr2`
-
-    raise `AssertionError` if `expr1` is not `expr2`
-
-    For more documentation read TestCase().assertIs.__doc__
-
-    Example:
-        >>> value = "string"
-        >>> assert_is = AssertIs()
-        >>> assert_is(value,value)
-    """
-
-    _assertion_function: Callable = field(
-        default=TestCase().assertIs, init=False
-    )
-
-    def __call__(self, expr1: Any, expr2: Any) -> None:
-        super().__call__(expr1=expr1, expr2=expr2)
-
-
-@dataclass
-class AssertIsNot(AssertIs):
+class AssertIsNot(BuiltinAssertion):
     """assert `expr1` is not `expr2`
 
     raise `AssertionError` if `expr1` is not `expr2`
@@ -70,17 +47,6 @@ class AssertIsNone(BuiltinAssertion):
     _assertion_function: Callable = field(
         default=TestCase().assertIsNone, init=False
     )
-
-    def __call__(self, obj: Any) -> None:
-        """Run assertion
-
-        Args:
-            obj: will that will be evaulated as `None` or not `None`
-
-        Returns:
-            None
-        """
-        super().__call__(obj=obj)
 
 
 @dataclass
@@ -117,20 +83,6 @@ class AssertIsInstance(BuiltinAssertion):
     _assertion_function: Callable = field(
         default=TestCase().assertIsInstance, init=False
     )
-
-    def __call__(self, obj, cls) -> None:
-        """Run assertion
-
-        Args:
-            obj: will be checked if it is an instance of `cls`
-            cls: class that will be used to check if `obj` is an
-             instance of it.
-
-        Returns:
-            None
-
-        """
-        super().__call__(obj=obj, cls=cls)
 
 
 @dataclass

@@ -1,12 +1,10 @@
-""" Control Assertions """
-import logging
+""" Control Assertions """  # pylint: disable=duplicate-code
 from dataclasses import (
     dataclass,
     field,
 )
 from typing import (
     Callable,
-    Type,
 )
 from unittest import TestCase
 
@@ -32,28 +30,6 @@ class AssertRaises(BasicBuiltinAssertion):
         default=TestCase().assertRaises, init=False
     )
 
-    def __call__(
-        self,
-        expected_exception: Type[Exception],
-        function: Callable,
-        *function_args,
-        **function_kwargs
-    ) -> None:
-        """Run Assertion
-
-        Args:
-            expected_exception: The expected `Exception` raised by the function
-            function: Function that will be called.
-            *function_args: arguments for the calling `function`
-            **function_kwargs: keyword arguments for the calling `function
-
-        Returns:
-            None
-        """
-        super().__call__(
-            expected_exception, function, *function_args, **function_kwargs
-        )
-
 
 @dataclass
 class AssertWarns(BasicBuiltinAssertion):
@@ -75,28 +51,6 @@ class AssertWarns(BasicBuiltinAssertion):
         default=TestCase().assertWarns, init=False
     )
 
-    def __call__(
-        self,
-        expected_warning: Type[Warning],
-        function: Callable,
-        *function_args,
-        **function_kwargs
-    ) -> None:
-        """Run Assertion
-
-        Args:
-            expected_warning: The expected `Warning` raised by the `function`
-            function: function that will be called
-            *function_args: arguments for the calling `function`
-            **function_kwargs: keyword arguments for the calling `function
-
-        Returns:
-            None
-        """
-        super().__call__(
-            expected_warning, function, *function_args, **function_kwargs
-        )
-
 
 @dataclass
 class AssertLogs(BasicBuiltinAssertion):
@@ -110,15 +64,3 @@ class AssertLogs(BasicBuiltinAssertion):
     _assertion_function: Callable = field(
         default=TestCase().assertLogs, init=False
     )
-
-    def __call__(self, logger: logging.Logger = None, level=None) -> None:
-        """Run Logging Assertion
-
-        Args:
-            logger: `logging.Logger` that will be asserted
-            level: level that the `logging.Logger` should log
-
-        Returns:
-            None
-        """
-        super().__call__(logger=logger, level=level)

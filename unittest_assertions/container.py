@@ -1,12 +1,10 @@
-""" Container Assertions"""
+""" Container Assertions"""  # pylint: disable=duplicate-code
 from dataclasses import (
     dataclass,
     field,
 )
 from typing import (
-    Any,
     Callable,
-    Container,
 )
 from unittest import TestCase
 
@@ -14,26 +12,7 @@ from unittest_assertions.base import BuiltinAssertion
 
 
 @dataclass
-class ContainerAssertion(BuiltinAssertion):
-    """Perent class for Container assertions."""
-
-    def __call__(self, *, member: Any, container: Container) -> None:
-        """call `_assertion_function` with `member` and `container` as
-        agruments
-
-        Args:
-            member: will be checked to see if it is in the `container`
-            container: `container` that will be checked if it contains the
-             `container`
-
-        Returns:
-             None
-        """
-        super().__call__(member=member, container=container)
-
-
-@dataclass
-class AssertIn(ContainerAssertion):
+class AssertIn(BuiltinAssertion):
     """assert `member` `in` `container`
 
     raise `AssertionError` if `member` not in `container`
@@ -51,7 +30,7 @@ class AssertIn(ContainerAssertion):
 
 
 @dataclass
-class AssertNotIn(ContainerAssertion):
+class AssertNotIn(BuiltinAssertion):
     """assert `member` `not in` `container`
 
     raise `AssertionError` if `member` in `container`

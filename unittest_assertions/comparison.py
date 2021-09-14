@@ -1,17 +1,10 @@
-""" Equality and Comparison Assertions"""
+""" Equality and Comparison Assertions"""  # pylint: disable=duplicate-code
 from dataclasses import (
     dataclass,
     field,
 )
 from typing import (
-    Any,
     Callable,
-    List,
-    Mapping,
-    Sequence,
-    Set,
-    Tuple,
-    Union,
 )
 from unittest import TestCase
 
@@ -19,27 +12,7 @@ from unittest_assertions.base import BuiltinAssertion
 
 
 @dataclass
-class EqualityAssertion(BuiltinAssertion):
-    """Parent class for Equality Assertions"""
-
-    def __call__(self, first: Any, second: Any, *args, **kwargs) -> None:
-        """Run the `_assertion_function`
-
-        Args:
-            first: First item that will be passed to the `_assertion_function`
-            second: Second item that will be passed to the
-            `_assertion_function`
-            *args: Arguments to be passed to the Assertion function
-            **kwargs: Keyword arguments to be passed to the Assertion Function
-
-        Returns:
-            None
-        """
-        super().__call__(first=first, second=second, *args, **kwargs)
-
-
-@dataclass
-class AssertEqual(EqualityAssertion):
+class AssertEqual(BuiltinAssertion):
     """assert `first` == `second`
 
     raise `AssertionError` if `first` is not equal to `second`
@@ -58,7 +31,7 @@ class AssertEqual(EqualityAssertion):
 
 
 @dataclass
-class AssertNotEqual(EqualityAssertion):
+class AssertNotEqual(BuiltinAssertion):
     """assert `first` != `second`
 
     raise `AssertionError` if `first` is equal to `second`
@@ -77,7 +50,7 @@ class AssertNotEqual(EqualityAssertion):
 
 
 @dataclass
-class AssertAlmostEqual(EqualityAssertion):
+class AssertAlmostEqual(BuiltinAssertion):
     """assert `first` ~= `second`
 
     raise `AssertionError` if `first` is not almost equal to `second`
@@ -94,33 +67,9 @@ class AssertAlmostEqual(EqualityAssertion):
         default=TestCase().assertAlmostEqual, init=False
     )
 
-    def __call__(
-        self,
-        first: Any,
-        second: Any,
-        places: Union[int, None] = None,
-        delta: Union[float, None] = None,
-    ) -> None:
-        """assert `first` almost equals `second`
-
-        Args:
-            first: object that will be compared with second
-            second: object that will be compared with second
-            places: The difference rounded to the given decimal places
-            (default: 7 decimal places)
-            delta: The amount of differnece that will raise the
-            `AssertionError`
-
-        Returns:
-            None
-        """
-        super().__call__(
-            first=first, second=second, places=places, delta=delta
-        )
-
 
 @dataclass
-class AssertNotAlmostEqual(AssertAlmostEqual):
+class AssertNotAlmostEqual(BuiltinAssertion):
     """assert `first` !~= `second`
 
     raise `AssertionError` if `first` is almost  equal to `second`
@@ -130,7 +79,8 @@ class AssertNotAlmostEqual(AssertAlmostEqual):
     Example:
         >>> assert_not_almost_equal = AssertNotAlmostEqual()
         >>> assert_not_almost_equal(1.00000001, 2.0)
-        >>> assert_not_almost_equal(first=1.1,second= 1.0, places=None, delta=0.05)
+        >>> assert_not_almost_equal(first=1.1,second= 1.0,
+        ... places=None, delta=0.05)
     """
 
     _assertion_function: Callable = field(
@@ -139,7 +89,7 @@ class AssertNotAlmostEqual(AssertAlmostEqual):
 
 
 @dataclass
-class AssertCountEqual(EqualityAssertion):
+class AssertCountEqual(BuiltinAssertion):
     """assert `Counter(list(first))` ==  `Counter(list(second))`
 
     raise `AssertionError` if `first` counter does not equal `second` counter
@@ -157,7 +107,7 @@ class AssertCountEqual(EqualityAssertion):
 
 
 @dataclass
-class AssertMultilineEqual(EqualityAssertion):
+class AssertMultilineEqual(BuiltinAssertion):
     """assert `first` multiline string == `second` multiline string
 
     raise `AssertionError` if `first` multiline string does not equal
@@ -194,18 +144,6 @@ class AssertSequanceEqual(BuiltinAssertion):
         default=TestCase().assertSequenceEqual, init=False
     )
 
-    def __call__(self, seq1: Sequence, seq2: Sequence) -> None:
-        """assert `seq1` == `seq2`
-
-        Args:
-            seq1: sequence that will be compared with `seq2`
-            seq2: sequence that will be compared with `seq1`
-
-        Returns:
-            None
-        """
-        super().__call__(seq1=seq1, seq2=seq2)
-
 
 @dataclass
 class AssertListEqual(BuiltinAssertion):
@@ -224,18 +162,6 @@ class AssertListEqual(BuiltinAssertion):
     _assertion_function: Callable = field(
         default=TestCase().assertListEqual, init=False
     )
-
-    def __call__(self, list1: List, list2: List) -> None:
-        """assert `list1` == `list2`
-
-        Args:
-            list1: list that will be compared with `list2`
-            list2: list that will be compared with `list1`
-
-        Returns:
-            None
-        """
-        super().__call__(list1=list1, list2=list2)
 
 
 @dataclass
@@ -256,18 +182,6 @@ class AssertTupleEqual(BuiltinAssertion):
         default=TestCase().assertTupleEqual, init=False
     )
 
-    def __call__(self, tuple1: Tuple, tuple2: Tuple) -> None:
-        """assert `tuple1` == `tuple2`
-
-        Args:
-            tuple1: tuple that will be compared with `tuple2`
-            tuple2: tuple that will be compared with `tuple1`
-
-        Returns:
-            None
-        """
-        super().__call__(tuple1=tuple1, tuple2=tuple2)
-
 
 @dataclass
 class AssertSetEqual(BuiltinAssertion):
@@ -286,18 +200,6 @@ class AssertSetEqual(BuiltinAssertion):
     _assertion_function: Callable = field(
         default=TestCase().assertSetEqual, init=False
     )
-
-    def __call__(self, set1: Set, set2: Set) -> None:
-        """assert `set1` == `set2`
-
-        Args:
-            set1: set that will be compared with `set2`
-            set2: set that will be compared with `set1`
-
-        Returns:
-            None
-        """
-        super().__call__(set1=set1, set2=set2)
 
 
 @dataclass
@@ -318,37 +220,9 @@ class AssertDictEqual(BuiltinAssertion):
         default=TestCase().assertDictEqual, init=False
     )
 
-    def __call__(self, d1: Mapping, d2: Mapping) -> None:
-        """assert `d1` == `d2`
-        Args:
-            d1: dictionary that will be compared with `d2`
-            d2: dictionary that will be compared with `d1`
-
-        Returns:
-            None
-        """
-        super().__call__(d1=d1, d2=d2)
-
 
 @dataclass
-class ComparisonAssertion(BuiltinAssertion):
-    """Parent class for Comparison Assertions"""
-
-    def __call__(self, a: Any, b: Any) -> None:
-        """Runs the `_assertion_function`
-
-        Args:
-            a: value that will be compared with `b`
-            b: value that will be compared with `a`
-
-        Returns:
-            None
-        """
-        super().__call__(a=a, b=b)
-
-
-@dataclass
-class AssertLess(ComparisonAssertion):
+class AssertLess(BuiltinAssertion):
     """assert `a` < `b`
 
     raise `AssertionError` if `a` is less than `b`
@@ -366,7 +240,7 @@ class AssertLess(ComparisonAssertion):
 
 
 @dataclass
-class AssertLessEqual(ComparisonAssertion):
+class AssertLessEqual(BuiltinAssertion):
     """assert `a` <= `b`
 
     raise `AssertionError` if `a` is less or equal to `b`
@@ -385,7 +259,7 @@ class AssertLessEqual(ComparisonAssertion):
 
 
 @dataclass
-class AssertGreater(ComparisonAssertion):
+class AssertGreater(BuiltinAssertion):
     """assert `a` > `b`
 
     raise `AssertionError` if `a` is greater than `b`
@@ -403,7 +277,7 @@ class AssertGreater(ComparisonAssertion):
 
 
 @dataclass
-class AssertGreaterEqual(ComparisonAssertion):
+class AssertGreaterEqual(BuiltinAssertion):
     """assert `a` >= `b`
 
     raise `AssertionError` if `a` is greater or equal to `b`

@@ -1,8 +1,4 @@
 """ Base classes and Abstract Base Classes """
-from abc import (
-    ABC,
-    abstractmethod,
-)
 from dataclasses import (
     dataclass,
     field,
@@ -15,25 +11,8 @@ from typing import (
 )
 
 
-class AbstractAssertion(ABC):
-    """Foundational Abstract Method for Assertions"""
-
-    @abstractmethod
-    def __call__(self, *args, **kwargs) -> None:
-        """Method to run the assertion.
-
-        Args:
-            *args: Arguments to be passed to the Assertion function
-            **kwargs: Keyword arguments to be passed to the Assertion Function
-
-        Returns:
-            None
-        """
-        ...
-
-
 @dataclass
-class BasicBuiltinAssertion(AbstractAssertion):
+class BasicBuiltinAssertion:
     """Basic Builtin Assertion base class
 
     `_assertion_function` is the assertion method from the `unittest` library.
@@ -42,11 +21,12 @@ class BasicBuiltinAssertion(AbstractAssertion):
     _assertion_function: Callable
 
     def __call__(self, *args, **kwargs) -> None:
-        """Run the Assertion function with the given function_args and function_kwargs.
+        """Run the Assertion function with the given args and kwargs
 
         Args:
             *args: Arguments that will be passed to the `_assertion_function`
-            **kwargs: Keyword arguments to be passed to the `_assertion_function`
+            **kwargs: Keyword arguments to be passed to the
+            `_assertion_function`
 
         Returns:
             None
@@ -66,11 +46,12 @@ class BuiltinAssertion(BasicBuiltinAssertion):
     msg: Optional[Any] = field(default=None)
 
     def __call__(self, *args, **kwargs) -> None:
-        """Run the Assertion function with the given function_args and function_kwargs
+        """Run the Assertion function with the given args and kwargs
 
         Args:
             *args: Arguments that will be passed to the `_assertion_function`
-            **kwargs: Keyword arguments to be passed to the `_assertion_function`
+            **kwargs: Keyword arguments to be passed to the
+            `_assertion_function`
 
         Returns:
             None
@@ -80,7 +61,7 @@ class BuiltinAssertion(BasicBuiltinAssertion):
 
             # If it is a Template string substitute it with the function_kwargs
             if isinstance(msg, Template):
-                msg: str = msg.safe_substitute(kwargs)
+                msg = msg.safe_substitute(kwargs)
             kwargs["msg"] = msg
 
         super().__call__(*args, **kwargs)
