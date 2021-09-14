@@ -3,7 +3,11 @@ from dataclasses import (
     dataclass,
     field,
 )
-from typing import Callable, Pattern, AnyStr, Type
+from typing import (
+    AnyStr,
+    Callable,
+    Type,
+)
 from unittest import TestCase
 
 from unittest_assertions.base import BasicBuiltinAssertion
