@@ -3,7 +3,7 @@ from dataclasses import (
     dataclass,
     field,
 )
-from typing import Callable
+from typing import Callable, Any
 from unittest import TestCase
 
 from unittest_assertions.base import BuiltinAssertion
@@ -13,14 +13,14 @@ from unittest_assertions.base import BuiltinAssertion
 class LogicalAssertion(BuiltinAssertion):
     """Parent class for logical assertions"""
 
-    def __call__(self, expr):
+    def __call__(self, expr: Any) -> None:
         """Evaluate the logical expression
 
         Args:
             expr: expression that will be evaluated by the assertion
 
         Returns:
-
+            None
         """
         super().__call__(expr=expr)
 

@@ -2,7 +2,7 @@ from dataclasses import (
     dataclass,
     field,
 )
-from typing import Callable
+from typing import Callable, Pattern, AnyStr
 from unittest import TestCase
 
 from unittest_assertions.base import BasicBuiltinAssertion
@@ -14,7 +14,12 @@ class AssertRaisesRegex(BasicBuiltinAssertion):
         default=TestCase().assertRaisesRegex, init=False
     )
 
-    def __call__(self, expected_exception, expected_regex, **kwargs):
+    def __call__(
+        self,
+        expected_exception: Exception,
+        expected_regex: Pattern[str],
+        **kwargs
+    ):
         super().__call__(
             expected_exception=expected_exception,
             expected_regex=expected_regex,
@@ -28,7 +33,9 @@ class AssertWarnsRegex(BasicBuiltinAssertion):
         default=TestCase().assertWarnsRegex, init=False
     )
 
-    def __call__(self, expected_warning, expected_regex, **kwargs):
+    def __call__(
+        self, expected_warning: Warning, expected_regex: Pattern[str], **kwargs
+    ):
         super().__call__(
             expected_warning=expected_warning,
             expected_regex=expected_regex,
@@ -42,7 +49,7 @@ class AssertRegex(BasicBuiltinAssertion):
         default=TestCase().assertRegex, init=False
     )
 
-    def __call__(self, text, expected_regex):
+    def __call__(self, text: AnyStr, expected_regex: Pattern[AnyStr]):
         super().__call__(text=text, expected_regex=expected_regex)
 
 
@@ -52,5 +59,5 @@ class AssertNotRegex(BasicBuiltinAssertion):
         default=TestCase().assertNotRegex, init=False
     )
 
-    def __call__(self, text, unexpected_regex):
+    def __call__(self, text: AnyStr, unexpected_regex: Pattern[AnyStr]):
         super().__call__(text=text, unexpected_regex=unexpected_regex)
