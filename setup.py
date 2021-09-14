@@ -1,6 +1,7 @@
+""" setupy.py file """
 import setuptools
 
-__version__ = "v1.2"
+__version__ = "v2.0"
 __author__ = "Tyler Bruno"
 
 with open("README.md", "r", encoding="utf-8") as file:
@@ -12,7 +13,8 @@ setuptools.setup(
     author=__author__,
     long_description=README,
     long_description_content_type="text/markdown",
-    keywords="python unittest pytest assertions assert assertify verify verification booleans standalone",
+    keywords="python unittest pytest assertions assert assertify verify "
+    "verification booleans standalone",
     url="https://github.com/tybruno/unittest_assertions",
     license="MIT",
     package_data={"unittest_assertions": ["py.typed"]},
