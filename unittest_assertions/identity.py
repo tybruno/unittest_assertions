@@ -12,6 +12,25 @@ from unittest_assertions.base import BuiltinAssertion
 
 
 @dataclass
+class AssertIs(BuiltinAssertion):
+    """assert `expr1` is `expr2`
+
+    raise `AssertionError` if `expr1` is not `expr2`
+
+    For more documentation read TestCase().assertIs.__doc__
+
+    Example:
+        >>> value = "string"
+        >>> assert_is = AssertIs()
+        >>> assert_is(value,value)
+    """
+
+    _assertion_function: Callable = field(
+        default=TestCase().assertIs, init=False
+    )
+
+
+@dataclass
 class AssertIsNot(BuiltinAssertion):
     """assert `expr1` is not `expr2`
 
