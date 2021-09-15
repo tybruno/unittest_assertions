@@ -21,7 +21,15 @@ jobs:
       - name: Update Pip
         run: |
           python -m pip install --upgrade pip
-      - name: super lint # black, pylint, flake8, isort
-        uses: github/super-linter@v4
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: black
+        run: |
+          pip install black
+          black .
+      - name: pylint
+        run: |
+          pip install pylint
+          pylint unittest_assertions/
+      - name: mypy
+        run: |
+          pip install mypy
+          mypy unittest_assertions/
