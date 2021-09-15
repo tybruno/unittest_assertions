@@ -1,6 +1,6 @@
 name: pull_request CI
 
-on: [push]
+on: push
 
 jobs:
   lint:
@@ -24,5 +24,4 @@ jobs:
       - name: super lint # black, pylint, flake8, isort
         uses: github/super-linter@v4
         env:
-          VALIDATE_ALL_CODEBASE: false
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
