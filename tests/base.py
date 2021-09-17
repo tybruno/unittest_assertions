@@ -3,13 +3,13 @@ from typing import Type
 import pytest
 
 from unittest_assertions.base import (
-    BasicBuiltinAssertion,
+    BuiltinAssertion,
     BuiltinAssertion,
 )
 
 
 class BasicAsssertionTester:
-    _assertion: Type[BasicBuiltinAssertion]
+    _assertion: Type[BuiltinAssertion]
 
     def test_assertion_passes(self, *args, **kwargs):
         assertion = self._assertion()
@@ -23,11 +23,6 @@ class BasicAsssertionTester:
 
 class AssertionTester:
     _assertion: Type[BuiltinAssertion]
-
-    @pytest.mark.parametrize("msg", ("message", None, 2))
-    def test_init(self, msg):
-        assertion = self._assertion(msg=msg)
-        assert assertion.msg == msg
 
     def test_assertion_passes(self, *args, **kwargs):
         assertion = self._assertion()

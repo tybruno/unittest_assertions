@@ -60,7 +60,7 @@ class AssertAlmostEqual(BuiltinAssertion):
     Example:
         >>> assert_almost_equal = AssertAlmostEqual()
         >>> assert_almost_equal(1.00000001, 1.0)
-        >>> assert_almost_equal(first=1.1, second=1.0, float=None, delta=0.5)
+        >>> assert_almost_equal(first=1.1, second=1.0, places=None, delta=0.5)
     """
 
     _assertion_function: Callable = field(
