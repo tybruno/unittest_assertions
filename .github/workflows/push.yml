@@ -23,7 +23,7 @@ jobs:
         - name: Run Pylint
           run: |
             pip install pylint
-            pylint .
+            pylint unittest_assertions/
       
 #   build:
 #     runs-on: ubuntu-latest
