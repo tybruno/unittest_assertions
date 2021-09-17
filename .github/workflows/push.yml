@@ -23,7 +23,7 @@ jobs:
       - name: black
         run: |
           pip install black
-          black .
+          black unittest_assertions/
   pylint:
       needs: format
       runs-on: ubuntu-latest
@@ -31,7 +31,7 @@ jobs:
         - name: pylint
           run: |
             pip install pylint
-            pylint unittest_assertions/unittest_assertions
+            pylint unittest_assertions/
   mypy:
       needs: format
       runs-on: ubuntu-latest
@@ -39,4 +39,4 @@ jobs:
         - name: mypy
           run: |
             pip install mypy
-            mypy unittest_assertions/unittest_assertions
+            mypy unittest_assertions/
