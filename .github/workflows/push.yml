@@ -4,6 +4,7 @@ on: push
 
 jobs:
   lint_and_format:
+  
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -16,6 +17,7 @@ jobs:
       - name: format and lint
       - uses: actions/checkout@v1
       - uses: ricardochaves/python-lint@v1.4.0
+      
 #   build:
 #     runs-on: ubuntu-latest
 #     steps:
