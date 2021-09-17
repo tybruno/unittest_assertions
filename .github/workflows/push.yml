@@ -18,6 +18,8 @@ jobs:
             python -m pip install --upgrade pip
         - uses: actions/checkout@v1
         - uses: ricardochaves/python-lint@master
+          with:
+            python-root-list: 'unittest_assertions unittest_assertions'
       
 #   build:
 #     runs-on: ubuntu-latest
