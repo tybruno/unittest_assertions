@@ -1,28 +1,66 @@
-from unittest_assertions.base import BuiltinAssertion
-from dataclasses import dataclass, field
-from typing import Callable
+""" Control Assertions """  # pylint: disable=duplicate-code
+from dataclasses import (
+    dataclass,
+    field,
+)
+from typing import (
+    Callable,
+)
 from unittest import TestCase
 
-
-@dataclass
-class AssertRaises(BuiltinAssertion):
-    function: Callable = field(default=TestCase().assertRaises, init=False)
-
-    def __call__(self, expected_exception, **kwargs):
-        super().__call__(expected_exception=expected_exception, **kwargs)
+from unittest_assertions.base import BasicBuiltinAssertion
 
 
 @dataclass
-class AssertWarns(BuiltinAssertion):
-    function: Callable = field(default=TestCase().assertWarns, init=False)
+class AssertRaises(BasicBuiltinAssertion):
+    """assert `Callable` raises `expected_exception`
 
-    def __call__(self, expected_warning, **kwargs):
-        super().__call__(expected_warning=expected_warning, **kwargs)
+    raise `AssertionError` if `Callable` does not raise `Exception`
+
+    For more documentation read TestCase().assertRaises.__doc__
+
+    Example:
+        >>> def _raise_value_error():
+        ...     raise ValueError()
+        >>> assert_raises = AssertRaises()
+        >>> assert_raises(ValueError,_raise_value_error )
+    """
+
+    _assertion_function: Callable = field(
+        default=TestCase().assertRaises, init=False
+    )
 
 
 @dataclass
-class AssertLogs(BuiltinAssertion):
-    function: Callable = field(default=TestCase().assertLogs, init=False)
+class AssertWarns(BasicBuiltinAssertion):
+    """assert `Callable` raises `Warning`
 
-    def __call__(self, logger=None, level=None):
-        super().__call__(logger=logger, level=level)
+    raise `AssertionError` if `Callable` does not raise `Warning`
+
+    For more documentation read TestCase().assertWarns.__doc__
+
+    Example:
+        >>> import warnings
+        >>> def _warning(message, warning: Warning):
+        ...     warnings.warn(message, warning)
+        >>> assert_warns = AssertWarns()
+        >>> assert_warns( Warning,_warning, str(), Warning )
+    """
+
+    _assertion_function: Callable = field(
+        default=TestCase().assertWarns, init=False
+    )
+
+
+@dataclass
+class AssertLogs(BasicBuiltinAssertion):
+    """assert `Callable` Logs
+
+    raise `AssertionError` if `Callable` does not Log
+
+    For more documentation read TestCase().assertLogs.__doc__
+    """
+
+    _assertion_function: Callable = field(
+        default=TestCase().assertLogs, init=False
+    )

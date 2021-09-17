@@ -1,50 +1,77 @@
+""" Regex Assertions """  # pylint: disable=duplicate-code
 from dataclasses import (
     dataclass,
     field,
 )
-from typing import Callable
+from typing import (
+    Callable,
+)
 from unittest import TestCase
 
-from unittest_assertions.base import BuiltinAssertion
+from unittest_assertions.base import BasicBuiltinAssertion
 
 
 @dataclass
-class AssertRaisesRegex(BuiltinAssertion):
-    function: Callable = field(
+class AssertRaisesRegex(BasicBuiltinAssertion):
+    """assert function raises regex
+
+    For more documentation read TestCase().assertRaisesRegex.__doc__
+
+    Example:
+        >>> assert_raises_regex = AssertRaisesRegex()
+        >>> assert_raises_regex(ValueError, "invalid literal for.*XYZ'$",
+        ... int, 'XYZ')
+    """
+
+    _assertion_function: Callable = field(
         default=TestCase().assertRaisesRegex, init=False
     )
 
-    def __call__(self, expected_exception, expected_regex, **kwargs):
-        super().__call__(
-            expected_exception=expected_exception,
-            expected_regex=expected_regex,
-            **kwargs
-        )
+
+@dataclass
+class AssertWarnsRegex(BasicBuiltinAssertion):
+    """assert function warns regex
+
+    For more documentation read TestCase().assertWarnsRegex.__doc__
+
+    Example:
+        >>> import warnings
+        >>>
+        >>> def legacy_function(msg):
+        ...     warnings.warn(msg,DeprecationWarning)
+        >>> assert_warns_regex = AssertWarnsRegex()
+        >>> assert_warns_regex(DeprecationWarning, r'deprecated',
+        ... legacy_function,r'legacy_function is deprecated')
+    """
+
+    _assertion_function: Callable = field(
+        default=TestCase().assertWarnsRegex, init=False
+    )
 
 
 @dataclass
-class AssertWarnsRegex(BuiltinAssertion):
-    function: Callable = field(default=TestCase().assertWarnsRegex, init=False)
+class AssertRegex(BasicBuiltinAssertion):
+    """assert regex
 
-    def __call__(self, expected_warning, expected_regex, **kwargs):
-        super().__call__(
-            expected_warning=expected_warning,
-            expected_regex=expected_regex,
-            **kwargs
-        )
+    Example:
+        >>> assert_regex = AssertRegex()
+        >>> assert_regex("Ala ma kota", r"k.t")
+    """
 
-
-@dataclass
-class AssertRegex(BuiltinAssertion):
-    function: Callable = field(default=TestCase().assertRegex, init=False)
-
-    def __call__(self, text, expected_regex):
-        super().__call__(text=text, expected_regex=expected_regex)
+    _assertion_function: Callable = field(
+        default=TestCase().assertRegex, init=False
+    )
 
 
 @dataclass
-class AssertNotRegex(BuiltinAssertion):
-    function: Callable = field(default=TestCase().assertNotRegex, init=False)
+class AssertNotRegex(BasicBuiltinAssertion):
+    """assert not regex
 
-    def __call__(self, text, unexpected_regex):
-        super().__call__(text=text, unexpected_regex=unexpected_regex)
+    Example:
+        >>> assert_regex = AssertNotRegex()
+        >>> assert_regex("Ala ma kota", r"wrong")
+    """
+
+    _assertion_function: Callable = field(
+        default=TestCase().assertNotRegex, init=False
+    )

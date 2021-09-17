@@ -1,20 +1,50 @@
-from unittest_assertions.base import BuiltinAssertion
-from dataclasses import dataclass, field
-from typing import Callable
+""" Logical Assertions """  # pylint: disable=duplicate-code
+from dataclasses import (
+    dataclass,
+    field,
+)
+from typing import (
+    Callable,
+)
 from unittest import TestCase
 
-
-@dataclass
-class LogicalAssertion(BuiltinAssertion):
-    def __call__(self, expr):
-        super().__call__(expr=expr)
+from unittest_assertions.base import BuiltinAssertion
 
 
 @dataclass
-class AssertTrue(LogicalAssertion):
-    function: Callable = field(default=TestCase().assertTrue, init=False)
+class AssertTrue(BuiltinAssertion):
+    """assert `expr`
+
+    raise `AssertionError` if not `expr`
+
+    For more documentation read TestCase().assertTrue.__doc__
+
+    Example:
+        >>> assert_true = AssertTrue()
+        >>> assert_true(True)
+    """
+
+    _assertion_function: Callable = field(
+        default=TestCase().assertTrue, init=False
+    )
 
 
 @dataclass
-class AssertFalse(LogicalAssertion):
-    function: Callable = field(default=TestCase().assertFalse, init=False)
+class AssertFalse(BuiltinAssertion):
+    """assert not `expr`
+
+    raise `AssertionError` if `expr`
+
+    For more documentation read TestCase().assertFalse.__doc__
+
+    Example:
+        >>> _false_objects = ["", 0, [], False]
+        >>> assert_false = AssertFalse()
+        >>> for obj in _false_objects:
+        ...     assert_false(obj)
+
+    """
+
+    _assertion_function: Callable = field(
+        default=TestCase().assertFalse, init=False
+    )

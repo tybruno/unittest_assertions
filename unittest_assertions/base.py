@@ -1,31 +1,67 @@
+""" Base classes and Abstract Base Classes """
 from dataclasses import (
     dataclass,
     field,
 )
-from typing import Callable, Union, Optional
-from abc import abstractmethod
 from string import Template
-
-
-class AbstractAssertion:
-    def __init__(
-        self,
-        function: Callable,
-    ):
-        ...
-
-    @abstractmethod
-    def __call__(self, *args, **kwargs):
-        ...
+from typing import (
+    Any,
+    Callable,
+    Optional,
+)
 
 
 @dataclass
-class BuiltinAssertion(AbstractAssertion):
-    function: Callable
-    msg: Optional[Union[None, str, Template]] = field(default=None)
+class BasicBuiltinAssertion:
+    """Basic Builtin Assertion base class
 
-    def __call__(self, **kwargs):
-        msg = self.msg
-        if isinstance(msg, Template):
-            msg = msg.substitute(kwargs)
-        self.function(**kwargs, msg=msg)
+    `_assertion_function` is the assertion method from the `unittest` library.
+    """
+
+    _assertion_function: Callable
+
+    def __call__(self, *args, **kwargs) -> None:
+        """Run the Assertion function with the given args and kwargs
+
+        Args:
+            *args: Arguments that will be passed to the `_assertion_function`
+            **kwargs: Keyword arguments to be passed to the
+            `_assertion_function`
+
+        Returns:
+            None
+        """
+        self._assertion_function(*args, **kwargs)
+
+
+@dataclass
+class BuiltinAssertion(BasicBuiltinAssertion):
+    """Buitlin Assertion base class for assertions that have a `msg` argument
+
+    Attributes:
+        msg: Optional message that will be included when `AssertionError` is
+        raised.
+    """
+
+    msg: Optional[Any] = field(default=None)
+
+    def __call__(self, *args, **kwargs) -> None:
+        """Run the Assertion function with the given args and kwargs
+
+        Args:
+            *args: Arguments that will be passed to the `_assertion_function`
+            **kwargs: Keyword arguments to be passed to the
+            `_assertion_function`
+
+        Returns:
+            None
+        """
+        if "msg" not in kwargs:
+            msg: Any = self.msg
+
+            # If it is a Template string substitute it with the function_kwargs
+            if isinstance(msg, Template):
+                msg = msg.safe_substitute(kwargs)
+            kwargs["msg"] = msg
+
+        super().__call__(*args, **kwargs)
