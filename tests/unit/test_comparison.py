@@ -78,8 +78,8 @@ class TestAlmostEqual(AssertionTester):
             (1.00000001, 1.0),
             (0, 0.1 + 0.1j, 0, None),
             (float("inf"), float("inf")),
-            (1.1, 1.0, None, 0.5),
-            (1.1, 1.1, None, 0.5),
+            (1.1, 1.0, None, None, 0.5),
+            (1.1, 1.1, None, None, 0.5),
         ),
     )
     def test_assertion_passes(self, testing_data: tuple):
@@ -117,8 +117,8 @@ class TestNotAlmostEqual(AssertionTester):
             (1.00000001, 1.0),
             (0, 0.1 + 0.1j, 0),
             (float("inf"), float("inf")),
-            (1.1, 1.0, None, 0.5),
-            (1.1, 1.1, None, 0.5),
+            (1.1, 1.0, None, None, 0.5),
+            (1.1, 1.1, None, None, 0.5),
         ),
     )
     def test_assertion_raises(self, testing_data: tuple):
