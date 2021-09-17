@@ -28,11 +28,6 @@ jobs:
           run: |
             pip install mypy
             mypy unittest_assertions/
-        - name: Run pycodestyle
-          run: |
-            pip install pycodestyle
-            black .
-            pycodestyle unittest_assertions/
         - name: Run isort
           run: |
             pip install isort
