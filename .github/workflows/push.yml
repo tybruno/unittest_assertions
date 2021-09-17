@@ -27,7 +27,7 @@ jobs:
         - name: Run mypy
           run: |
             pip install mypy
-            mypy .
+            mypy unittest_assertions/
         - name: Run pycodestyle
           run: |
             pip install pycodestyle
