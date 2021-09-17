@@ -3,7 +3,7 @@ name: pull_request CI
 on: push
 
 jobs:
-  build:
+  lint:
     runs-on: ubuntu-latest
     steps:
         - uses: actions/checkout@v2
@@ -11,6 +11,9 @@ jobs:
           uses: actions/setup-python@v2
           with:
             python-version: ${{ matrix.python-version }}
+        - name: Install dependencies
+          run: |
+           if [-f requirements.txt ]; then pip install -r requirements.txt; fi
         - name: Display Python version
           run: python -c "import sys; print(sys.version)"    
         - name: Update Pip
@@ -32,6 +35,27 @@ jobs:
           run: |
             pip install isort
             isort .
+            
+  pytest:
+    runs-on: ubuntu-latest
+    steps:
+        - uses: actions/checkout@v2
+        - name: Set up Python ${{ matrix.python-version }}
+          uses: actions/setup-python@v2
+          with:
+            python-version: ${{ matrix.python-version }}
+        - name: Install dependencies
+          run: |
+           if [-f requirements-test.txt ]; then pip install -r requirements-test.txt; fi
+        - name: Display Python version
+          run: python -c "import sys; print(sys.version)"    
+        - name: Update Pip
+          run: |
+            python -m pip install --upgrade pip
+        - name: Pytest
+            run: |
+              pip install pytest
+              pytest tests/
 
 #   build:
 #     runs-on: ubuntu-latest
