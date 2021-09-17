@@ -16,10 +16,14 @@ jobs:
         - name: Update Pip
           run: |
             python -m pip install --upgrade pip
-        - uses: actions/checkout@v1
-        - uses: ricardochaves/python-lint@master
-          with:
-            python-root-list: 'unittest_assertions unittest_assertions'
+        - name: Run Black
+          run: |
+            pip install black
+            black .
+        - name: Run Pylint
+          run: |
+            pip install pylint
+            pylint .
       
 #   build:
 #     runs-on: ubuntu-latest
