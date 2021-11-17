@@ -1,5 +1,5 @@
 
-name: Lint and Test
+name: Linting and Testing
 
 on: push
 
