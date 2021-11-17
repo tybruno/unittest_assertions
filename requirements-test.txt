@@ -1,1 +1,2 @@
 pytest
+pytest-builtin-types @ git+https://github.com/tybruno/pytest-builtin-types.git@main
