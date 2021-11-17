@@ -1,5 +1,6 @@
 [![Code Style](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/ambv/black)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blueviolet.svg)](https://opensource.org/licenses/MIT)
+[![Linting and Testing](https://github.com/tybruno/unittest_assertions/actions/workflows/linting-and-testing.yml/badge.svg)](https://github.com/tybruno/unittest_assertions/actions/workflows/linting-and-testing.yml)
 
 # unittest_assertions
 Thin wrapper around the python builtin `unittest` allowing developers to use the builtin assertions for non-unittest use cases.
