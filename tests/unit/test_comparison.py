@@ -2,17 +2,17 @@
 import pytest
 
 from tests.base import AssertionTester
-from tests.conftest import (
-    BASIC_CONTAINERS_1,
-    BASIC_CONTAINERS_2,
-    MULTILINE_1,
-    MULTILINE_2,
+from pytest_builtin_types import (
     combined_equal_all_basic_types,
     combined_non_equal_all_basic_types,
-    equal_lists,
     equal_sequences,
+    non_equal_sequences,
+    equal_lists,
     non_equal_list,
-    not_equal_sequences,
+    _BASIC_CONTAINERS_1,
+    _BASIC_CONTAINERS_2,
+    _MULTILINE_1,
+    _MULTILINE_2,
 )
 from unittest_assertions.comparison import (
     AssertAlmostEqual,
@@ -131,7 +131,8 @@ class TestAssertCountEqual(AssertionTester):
     @pytest.mark.parametrize(
         "testing_data",
         tuple(
-            (container, container) for container in BASIC_CONTAINERS_1.values()
+            (container, container)
+            for container in _BASIC_CONTAINERS_1.values()
         ),
     )
     def test_assertion_passes(self, testing_data):
@@ -142,8 +143,8 @@ class TestAssertCountEqual(AssertionTester):
         tuple(
             (container1, container2)
             for container1, container2 in zip(
-                BASIC_CONTAINERS_1.values(),
-                BASIC_CONTAINERS_2.values(),
+                _BASIC_CONTAINERS_1.values(),
+                _BASIC_CONTAINERS_2.values(),
             )
             if not isinstance(container1, dict)
             and not isinstance(container2, dict)
@@ -158,12 +159,12 @@ class TestAssertMultilineEqual(AssertionTester):
 
     @pytest.mark.parametrize(
         "testing_data",
-        ((MULTILINE_1, MULTILINE_1),),
+        ((_MULTILINE_1, _MULTILINE_1),),
     )
     def test_assertion_passes(self, testing_data):
         super().test_assertion_passes(*testing_data)
 
-    @pytest.mark.parametrize("testing_data", ((MULTILINE_1, MULTILINE_2),))
+    @pytest.mark.parametrize("testing_data", ((_MULTILINE_1, _MULTILINE_2),))
     def test_assertion_raises(self, testing_data):
         super().test_assertion_raises(*testing_data)
 
@@ -180,7 +181,7 @@ class TestAssertSequenceEqual(AssertionTester):
 
     @pytest.mark.parametrize(
         "testing_data",
-        not_equal_sequences(),
+        non_equal_sequences(),
     )
     def test_assertion_raises(self, testing_data):
         super().test_assertion_raises(*testing_data)
@@ -212,8 +213,8 @@ class TestAssertTupleEqual(AssertionTester):
         "testing_data",
         (
             (
-                BASIC_CONTAINERS_1[tuple],
-                BASIC_CONTAINERS_1[tuple],
+                _BASIC_CONTAINERS_1[tuple],
+                _BASIC_CONTAINERS_1[tuple],
             ),
         ),
     )
@@ -225,7 +226,7 @@ class TestAssertTupleEqual(AssertionTester):
         (
             (tup1, tup2)
             for tup1, tup2 in zip(
-                BASIC_CONTAINERS_1[tuple], BASIC_CONTAINERS_2[tuple]
+                _BASIC_CONTAINERS_1[tuple], _BASIC_CONTAINERS_2[tuple]
             )
         ),
     )
@@ -240,8 +241,8 @@ class TestAssertSetEqual(AssertionTester):
         "testing_data",
         (
             (
-                BASIC_CONTAINERS_1[set],
-                BASIC_CONTAINERS_1[set],
+                _BASIC_CONTAINERS_1[set],
+                _BASIC_CONTAINERS_1[set],
             ),
         ),
     )
@@ -253,7 +254,7 @@ class TestAssertSetEqual(AssertionTester):
         (
             (set1, set2)
             for set1, set2 in zip(
-                BASIC_CONTAINERS_1[set], BASIC_CONTAINERS_2[set]
+                _BASIC_CONTAINERS_1[set], _BASIC_CONTAINERS_2[set]
             )
         ),
     )
@@ -268,8 +269,8 @@ class TestAssertDictEqual(AssertionTester):
         "testing_data",
         (
             (
-                BASIC_CONTAINERS_1[dict],
-                BASIC_CONTAINERS_1[dict],
+                _BASIC_CONTAINERS_1[dict],
+                _BASIC_CONTAINERS_1[dict],
             ),
         ),
     )
@@ -281,7 +282,7 @@ class TestAssertDictEqual(AssertionTester):
         (
             (dict1, dict2)
             for dict1, dict2 in zip(
-                BASIC_CONTAINERS_1[dict], BASIC_CONTAINERS_2[dict]
+                _BASIC_CONTAINERS_1[dict], _BASIC_CONTAINERS_2[dict]
             )
         ),
     )

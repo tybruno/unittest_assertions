@@ -4,7 +4,6 @@ import pytest
 
 from unittest_assertions.base import (
     BuiltinAssertion,
-    BuiltinAssertion,
 )
 
 

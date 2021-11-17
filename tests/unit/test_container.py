@@ -2,11 +2,10 @@
 
 import pytest
 
+from pytest_builtin_types import _ALL_BASIC_TYPES_1,_ALL_BASIC_TYPES_2
+
 from tests.base import AssertionTester
-from tests.conftest import (
-    ALL_BASIC_TYPES_1,
-    ALL_BASIC_TYPES_2,
-)
+
 from unittest_assertions.container import (
     AssertIn,
     AssertNotIn,
@@ -31,7 +30,7 @@ class TestAssertIn(ContainerTester):
 
     @pytest.mark.parametrize(
         "testing_data",
-        tuple((key, ALL_BASIC_TYPES_1) for key in ALL_BASIC_TYPES_1.keys()),
+        tuple((key, _ALL_BASIC_TYPES_1) for key in _ALL_BASIC_TYPES_1.keys()),
     )
     def test_assertion_passes(self, testing_data):
         super().test_assertion_passes(testing_data)
@@ -39,8 +38,8 @@ class TestAssertIn(ContainerTester):
     @pytest.mark.parametrize(
         "testing_data",
         tuple(
-            (value, ALL_BASIC_TYPES_1[tuple])
-            for value in ALL_BASIC_TYPES_2[tuple]
+            (value, _ALL_BASIC_TYPES_1[tuple])
+            for value in _ALL_BASIC_TYPES_2[tuple]
         ),
     )
     def test_assertion_raises(self, testing_data):
@@ -53,8 +52,8 @@ class TestAssertNotIn(ContainerTester):
     @pytest.mark.parametrize(
         "testing_data",
         tuple(
-            (value, ALL_BASIC_TYPES_1[tuple])
-            for value in ALL_BASIC_TYPES_2[tuple]
+            (value, _ALL_BASIC_TYPES_1[tuple])
+            for value in _ALL_BASIC_TYPES_2[tuple]
         ),
     )
     def test_assertion_passes(self, testing_data):
@@ -62,7 +61,7 @@ class TestAssertNotIn(ContainerTester):
 
     @pytest.mark.parametrize(
         "testing_data",
-        tuple((key, ALL_BASIC_TYPES_1) for key in ALL_BASIC_TYPES_1.keys()),
+        tuple((key, _ALL_BASIC_TYPES_1) for key in _ALL_BASIC_TYPES_1.keys()),
     )
     def test_assertion_raises(self, testing_data):
         super().test_assertion_raises(testing_data)
