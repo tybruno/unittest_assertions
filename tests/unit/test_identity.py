@@ -1,13 +1,9 @@
 """ Testing unittest_assertions/identity.py """
 
 import pytest
-
+from pytest_builtin_types import equal_sequences, non_equal_sequences, _ALL_BASIC_TYPES_1, _NOT_INSTANCE_TESTING_DATA
 from tests.base import AssertionTester
-from tests.conftest import (
-    ALL_BASIC_TYPES_1,
-    ALL_BASIC_TYPES_2,
-    NOT_INSTANCE_TESTING_DATA,
-)
+
 from unittest_assertions.identity import (
     AssertIs,
     AssertIsInstance,
@@ -23,7 +19,7 @@ class TestIs(AssertionTester):
 
     @pytest.mark.parametrize(
         "testing_data",
-        tuple((value, value) for value in ALL_BASIC_TYPES_1.values()),
+        tuple(equal_sequences()),
     )
     def test_assertion_passes(self, testing_data: tuple):
         super().test_assertion_passes(*testing_data)
@@ -31,10 +27,7 @@ class TestIs(AssertionTester):
     @pytest.mark.parametrize(
         "testing_data",
         tuple(
-            (value1, value2)
-            for value1, value2 in zip(
-                ALL_BASIC_TYPES_1.values(), ALL_BASIC_TYPES_2.values()
-            )
+            non_equal_sequences()
         ),
     )
     def test_assertion_raises(self, testing_data: tuple):
@@ -47,10 +40,7 @@ class TestIsNot(AssertionTester):
     @pytest.mark.parametrize(
         "testing_data",
         tuple(
-            (value1, value2)
-            for value1, value2 in zip(
-                ALL_BASIC_TYPES_1.values(), ALL_BASIC_TYPES_2.values()
-            )
+            non_equal_sequences()
         ),
     )
     def test_assertion_passes(self, testing_data: tuple):
@@ -58,7 +48,7 @@ class TestIsNot(AssertionTester):
 
     @pytest.mark.parametrize(
         "testing_data",
-        tuple((value, value) for value in ALL_BASIC_TYPES_1.values()),
+        tuple(equal_sequences()),
     )
     def test_assertion_raises(self, testing_data: tuple):
         super().test_assertion_raises(*testing_data)
@@ -76,7 +66,7 @@ class TestAssertIsNone(AssertionTester):
 
     @pytest.mark.parametrize(
         "testing_data",
-        tuple((value,) for value in ALL_BASIC_TYPES_1.values()),
+        tuple((value,) for value in _ALL_BASIC_TYPES_1.values()),
     )
     def test_assertion_raises(self, testing_data: tuple):
         super().test_assertion_raises(*testing_data)
@@ -87,7 +77,7 @@ class TestAssertIsNotNone(AssertionTester):
 
     @pytest.mark.parametrize(
         "testing_data",
-        tuple((value,) for value in ALL_BASIC_TYPES_1.values()),
+        tuple((value,) for value in _ALL_BASIC_TYPES_1.values()),
     )
     def test_assertion_passes(self, testing_data: tuple):
         super().test_assertion_passes(*testing_data)
@@ -105,26 +95,30 @@ class TestAssertIsInstance(AssertionTester):
 
     @pytest.mark.parametrize(
         "testing_data",
-        tuple((value, type_) for type_, value in ALL_BASIC_TYPES_1.items()),
+        tuple((value, type_) for type_, value in _ALL_BASIC_TYPES_1.items()),
     )
     def test_assertion_passes(self, testing_data: tuple):
         super().test_assertion_passes(*testing_data)
 
-    @pytest.mark.parametrize("testing_data", tuple(NOT_INSTANCE_TESTING_DATA))
+    @pytest.mark.parametrize("testing_data", tuple(_NOT_INSTANCE_TESTING_DATA))
     def test_assertion_raises(self, testing_data: tuple):
-        super().test_assertion_raises(*testing_data)
+        obj, _type = testing_data
+        if not isinstance(obj,_type):
+            super().test_assertion_raises(obj,_type)
 
 
 class TestAssertNotIsInstance(AssertionTester):
     _assertion = AssertNotIsInstance
 
-    @pytest.mark.parametrize("testing_data", tuple(NOT_INSTANCE_TESTING_DATA))
+    @pytest.mark.parametrize("testing_data", tuple(_NOT_INSTANCE_TESTING_DATA))
     def test_assertion_passes(self, testing_data: tuple):
-        super().test_assertion_passes(*testing_data)
+        obj, _type = testing_data
+        if isinstance(obj,_type):
+            super().test_assertion_raises(obj,_type)
 
     @pytest.mark.parametrize(
         "testing_data",
-        tuple((value, type_) for type_, value in ALL_BASIC_TYPES_1.items()),
+        tuple((value, type_) for type_, value in _ALL_BASIC_TYPES_1.items()),
     )
     def test_assertion_raises(self, testing_data: tuple):
         super().test_assertion_raises(*testing_data)
