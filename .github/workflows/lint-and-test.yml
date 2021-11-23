@@ -8,4 +8,5 @@ jobs:
   lint:
     uses: tybruno/github-workflow-pylama/.github/workflows/pylama-workflow.yml@main
   test:
+    needs: lint
     uses: tybruno/github-workflow-pytest/.github/workflows/pytest-workflow.yml@main
