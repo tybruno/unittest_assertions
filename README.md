@@ -11,9 +11,8 @@ Thin wrapper around the python builtin `unittest` allowing developers to use the
 * **Easy**: Designed to make it be simple allowing developers to use the builtin unittest assertions for their own use cases.
 * **Great Developer Experience**: Being fully typed, documented, and tested makes it great for editor support and extension.
 * **There is More!!!**:
-    * [assertify](https://github.com/tybruno/assertify): Simple, Flexible, and Extendable python3.6+ library to evaulate an expression and return `True`/`False` or raise an `AssertionError` or `Exception`.
-    * [assertify_predicates](https://github.com/tybruno/assertify_predicates): Is an extension of Assertify which allows for assertifying predicates. This is useful for validating variables or user input.
-    * [descriptify](https://github.com/tybruno/descriptify): Descriptify is a library that contians helpful python descriptors. It uses `assertify_predicates` to validate various descriptors.
+    * [assertify](https://github.com/tybruno/assertify): Simple, Flexible, and Extendable python3.6+ library to evaluate an expression and return `True`/`False` or raise an `AssertionError` or `Exception`.
+    * [descriptify](https://github.com/tybruno/descriptify): Descriptify is a library that contains helpful python descriptors. It uses `assertify_predicates` to validate various descriptors.
 
 ## Installation
 ```bash
@@ -45,7 +44,7 @@ assert_in(member=1,container=[5,2,3])
 |AssertNotEqual| `assert first != second` | 
 |AssertAlmostEqual| `assert first ~= second` |
 |AssertNotAlmostEqual| `assert first !~= second` | 
-|AssertCountEqual| `assert Counter(list(first)) == Counter(list(second))`| 
+|AssertCountEqual| `assert len(first) == len(second)`| 
 |AssertMultilineEqual| `assert first.splitlines()` == `second.splitlines()` |
 |AssertSequenceEqual| `assert seq1 == seq2`| 
 |AssertListEqual| `assert list1 == list2`| 
@@ -80,8 +79,8 @@ assert_in(member=1,container=[5,2,3])
 ## Logic
 | Asserter| Expression | 
 |-----------------|----------------|
-|AssertTrue| `assert expr` |
-|AssertFalse| `assert not expr` |
+|AssertTrue| `assert expr is True` |
+|AssertFalse| `assert expr is False` |
 ## Regex
 | Asserter | Expression | 
 |-----------------|----------------|
