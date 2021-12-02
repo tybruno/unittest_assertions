@@ -8,11 +8,11 @@ from typing import (
 )
 from unittest import TestCase
 
-from unittest_assertions.base import BuiltinAssertion
+from unittest_assertions.base import Assertion
 
 
 @dataclass
-class AssertIn(BuiltinAssertion):
+class AssertIn(Assertion):
     """assert `member` `in` `container`
 
     raise `AssertionError` if `member` not in `container`
@@ -30,7 +30,7 @@ class AssertIn(BuiltinAssertion):
 
 
 @dataclass
-class AssertNotIn(BuiltinAssertion):
+class AssertNotIn(Assertion):
     """assert `member` `not in` `container`
 
     raise `AssertionError` if `member` in `container`

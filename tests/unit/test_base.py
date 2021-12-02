@@ -7,7 +7,7 @@ from typing import (
 
 import pytest
 
-from unittest_assertions.base import BuiltinAssertion
+from unittest_assertions.base import Assertion
 from unittest_assertions.comparison import AssertEqual
 
 
@@ -19,12 +19,12 @@ class TestBuiltinAssertion:
         """Test builtin assertion __init__
 
         Args:
-            function: function for BuiltinAssertion paramater
+            function: function for Assertion paramater
 
         Returns:
             None
         """
-        bulitin_assertion = BuiltinAssertion(_assertion_function=AssertEqual)
+        bulitin_assertion = Assertion(_assertion_function=AssertEqual)
         assert bulitin_assertion._assertion_function == function
 
     @pytest.mark.parametrize("arguments", (("hello", None, 2),))
@@ -33,7 +33,7 @@ class TestBuiltinAssertion:
         ({"testing": "hello there"}, {"msg": "message"}, {"a": 1, "b": 2}),
     )
     def test_call(self, arguments: Iterable, keyword_args: Mapping) -> None:
-        """Test `BuiltinAssertion` __call__ function
+        """Test `Assertion` __call__ function
 
         Args:
             arguments: arguments passed to __call__
@@ -56,7 +56,7 @@ class TestBuiltinAssertion:
             assert arguments == _args
             assert keyword_args == _kwargs
 
-        bulitin_assertion = BuiltinAssertion(
+        bulitin_assertion = Assertion(
             _assertion_function=_mock_function
         )
         bulitin_assertion.__call__(*arguments, **keyword_args)

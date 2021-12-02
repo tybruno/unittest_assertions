@@ -8,11 +8,11 @@ from typing import (
 )
 from unittest import TestCase
 
-from unittest_assertions.base import BuiltinAssertion
+from unittest_assertions.base import Assertion
 
 
 @dataclass
-class AssertRaisesRegex(BuiltinAssertion):
+class AssertRaisesRegex(Assertion):
     """assert function raises regex
 
     For more documentation read TestCase().assertRaisesRegex.__doc__
@@ -29,7 +29,7 @@ class AssertRaisesRegex(BuiltinAssertion):
 
 
 @dataclass
-class AssertWarnsRegex(BuiltinAssertion):
+class AssertWarnsRegex(Assertion):
     """assert function warns regex
 
     For more documentation read TestCase().assertWarnsRegex.__doc__
@@ -50,7 +50,7 @@ class AssertWarnsRegex(BuiltinAssertion):
 
 
 @dataclass
-class AssertRegex(BuiltinAssertion):
+class AssertRegex(Assertion):
     """assert regex
 
     Example:
@@ -64,7 +64,7 @@ class AssertRegex(BuiltinAssertion):
 
 
 @dataclass
-class AssertNotRegex(BuiltinAssertion):
+class AssertNotRegex(Assertion):
     """assert not regex
 
     Example:

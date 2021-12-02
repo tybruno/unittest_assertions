@@ -1,4 +1,8 @@
-""" Base classes and Abstract Base Classes """
+""" Base classes for assertions
+
+Objects provided by this module:
+    * `Assertion`: Base class for assertions
+"""
 from dataclasses import (
     dataclass,
 )
@@ -8,10 +12,15 @@ from typing import (
 
 
 @dataclass
-class BuiltinAssertion:
+class Assertion:
     """Basic Builtin Assertion base class
+    Example:
+        >>> from unittest import TestCase
+        >>> assert_equal = Assertion(_assertion_function=TestCase().assertEqual)
+        >>> assert_equal(1,1)
 
-    `_assertion_function` is the assertion method from the `unittest` library.
+    Attributes:
+        self._assertion_function: function that runs the assertion.
     """
 
     _assertion_function: Callable

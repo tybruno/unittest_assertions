@@ -8,11 +8,11 @@ from typing import (
 )
 from unittest import TestCase
 
-from unittest_assertions.base import BuiltinAssertion
+from unittest_assertions.base import Assertion
 
 
 @dataclass
-class AssertTrue(BuiltinAssertion):
+class AssertTrue(Assertion):
     """assert `expr`
 
     raise `AssertionError` if not `expr`
@@ -30,7 +30,7 @@ class AssertTrue(BuiltinAssertion):
 
 
 @dataclass
-class AssertFalse(BuiltinAssertion):
+class AssertFalse(Assertion):
     """assert not `expr`
 
     raise `AssertionError` if `expr`

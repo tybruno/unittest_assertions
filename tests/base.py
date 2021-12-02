@@ -3,12 +3,12 @@ from typing import Type
 import pytest
 
 from unittest_assertions.base import (
-    BuiltinAssertion,
+    Assertion,
 )
 
 
 class BasicAsssertionTester:
-    _assertion: Type[BuiltinAssertion]
+    _assertion: Type[Assertion]
 
     def test_assertion_passes(self, *args, **kwargs):
         assertion = self._assertion()
@@ -21,7 +21,7 @@ class BasicAsssertionTester:
 
 
 class AssertionTester:
-    _assertion: Type[BuiltinAssertion]
+    _assertion: Type[Assertion]
 
     def test_assertion_passes(self, *args, **kwargs):
         assertion = self._assertion()

@@ -8,11 +8,11 @@ from typing import (
 )
 from unittest import TestCase
 
-from unittest_assertions.base import BuiltinAssertion
+from unittest_assertions.base import Assertion
 
 
 @dataclass
-class AssertIs(BuiltinAssertion):
+class AssertIs(Assertion):
     """assert `expr1` is `expr2`
 
     raise `AssertionError` if `expr1` is not `expr2`
@@ -31,7 +31,7 @@ class AssertIs(BuiltinAssertion):
 
 
 @dataclass
-class AssertIsNot(BuiltinAssertion):
+class AssertIsNot(Assertion):
     """assert `expr1` is not `expr2`
 
     raise `AssertionError` if `expr1` is not `expr2`
@@ -51,7 +51,7 @@ class AssertIsNot(BuiltinAssertion):
 
 
 @dataclass
-class AssertIsNone(BuiltinAssertion):
+class AssertIsNone(Assertion):
     """assert `obj` is None
 
     raise `AssertionError` if `obj` is not None
@@ -87,7 +87,7 @@ class AssertIsNotNone(AssertIsNone):
 
 
 @dataclass
-class AssertIsInstance(BuiltinAssertion):
+class AssertIsInstance(Assertion):
     """assert isinstance(obj,cls)
 
     raise `AssertionError` if not isinstance(obj,cls)

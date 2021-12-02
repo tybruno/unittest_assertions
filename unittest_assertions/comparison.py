@@ -8,11 +8,11 @@ from typing import (
 )
 from unittest import TestCase
 
-from unittest_assertions.base import BuiltinAssertion
+from unittest_assertions.base import Assertion
 
 
 @dataclass
-class AssertEqual(BuiltinAssertion):
+class AssertEqual(Assertion):
     """assert `first` == `second`
 
     raise `AssertionError` if `first` is not equal to `second`
@@ -31,7 +31,7 @@ class AssertEqual(BuiltinAssertion):
 
 
 @dataclass
-class AssertNotEqual(BuiltinAssertion):
+class AssertNotEqual(Assertion):
     """assert `first` != `second`
 
     raise `AssertionError` if `first` is equal to `second`
@@ -50,7 +50,7 @@ class AssertNotEqual(BuiltinAssertion):
 
 
 @dataclass
-class AssertAlmostEqual(BuiltinAssertion):
+class AssertAlmostEqual(Assertion):
     """assert `first` ~= `second`
 
     raise `AssertionError` if `first` is not almost equal to `second`
@@ -69,7 +69,7 @@ class AssertAlmostEqual(BuiltinAssertion):
 
 
 @dataclass
-class AssertNotAlmostEqual(BuiltinAssertion):
+class AssertNotAlmostEqual(Assertion):
     """assert `first` !~= `second`
 
     raise `AssertionError` if `first` is almost  equal to `second`
@@ -89,7 +89,7 @@ class AssertNotAlmostEqual(BuiltinAssertion):
 
 
 @dataclass
-class AssertCountEqual(BuiltinAssertion):
+class AssertCountEqual(Assertion):
     """assert `Counter(list(first))` ==  `Counter(list(second))`
 
     raise `AssertionError` if `first` counter does not equal `second` counter
@@ -107,7 +107,7 @@ class AssertCountEqual(BuiltinAssertion):
 
 
 @dataclass
-class AssertMultilineEqual(BuiltinAssertion):
+class AssertMultilineEqual(Assertion):
     """assert `first` multiline string == `second` multiline string
 
     raise `AssertionError` if `first` multiline string does not equal
@@ -128,7 +128,7 @@ class AssertMultilineEqual(BuiltinAssertion):
 
 
 @dataclass
-class AssertSequanceEqual(BuiltinAssertion):
+class AssertSequanceEqual(Assertion):
     """assert `seq1` == `seq2`
 
     raise `AssertionError` if `seq1` is not equal to `seq2`
@@ -146,7 +146,7 @@ class AssertSequanceEqual(BuiltinAssertion):
 
 
 @dataclass
-class AssertListEqual(BuiltinAssertion):
+class AssertListEqual(Assertion):
     """assert `list1` == `list2`
 
     raise `AssertionError` if `list1` is not equal to `list2`
@@ -165,7 +165,7 @@ class AssertListEqual(BuiltinAssertion):
 
 
 @dataclass
-class AssertTupleEqual(BuiltinAssertion):
+class AssertTupleEqual(Assertion):
     """assert `tuple1` == `tuple2`
 
     raise `AssertionError` if `tuple1` is not equal to `tuple2`
@@ -184,7 +184,7 @@ class AssertTupleEqual(BuiltinAssertion):
 
 
 @dataclass
-class AssertSetEqual(BuiltinAssertion):
+class AssertSetEqual(Assertion):
     """assert `set1` == `set2`
 
     raise `AssertionError` if `set1` is not equal to `set2`
@@ -203,7 +203,7 @@ class AssertSetEqual(BuiltinAssertion):
 
 
 @dataclass
-class AssertDictEqual(BuiltinAssertion):
+class AssertDictEqual(Assertion):
     """assert `dic1` == `dict2`
 
     raise `AssertionError` if `dict1` is not equal to `dict2`
@@ -222,7 +222,7 @@ class AssertDictEqual(BuiltinAssertion):
 
 
 @dataclass
-class AssertLess(BuiltinAssertion):
+class AssertLess(Assertion):
     """assert `a` < `b`
 
     raise `AssertionError` if `a` is less than `b`
@@ -240,7 +240,7 @@ class AssertLess(BuiltinAssertion):
 
 
 @dataclass
-class AssertLessEqual(BuiltinAssertion):
+class AssertLessEqual(Assertion):
     """assert `a` <= `b`
 
     raise `AssertionError` if `a` is less or equal to `b`
@@ -259,7 +259,7 @@ class AssertLessEqual(BuiltinAssertion):
 
 
 @dataclass
-class AssertGreater(BuiltinAssertion):
+class AssertGreater(Assertion):
     """assert `a` > `b`
 
     raise `AssertionError` if `a` is greater than `b`
@@ -277,7 +277,7 @@ class AssertGreater(BuiltinAssertion):
 
 
 @dataclass
-class AssertGreaterEqual(BuiltinAssertion):
+class AssertGreaterEqual(Assertion):
     """assert `a` >= `b`
 
     raise `AssertionError` if `a` is greater or equal to `b`

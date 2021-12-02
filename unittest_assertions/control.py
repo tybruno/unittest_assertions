@@ -8,11 +8,11 @@ from typing import (
 )
 from unittest import TestCase
 
-from unittest_assertions.base import BuiltinAssertion
+from unittest_assertions.base import Assertion
 
 
 @dataclass
-class AssertRaises(BuiltinAssertion):
+class AssertRaises(Assertion):
     """assert `Callable` raises `expected_exception`
 
     raise `AssertionError` if `Callable` does not raise `Exception`
@@ -32,7 +32,7 @@ class AssertRaises(BuiltinAssertion):
 
 
 @dataclass
-class AssertWarns(BuiltinAssertion):
+class AssertWarns(Assertion):
     """assert `Callable` raises `Warning`
 
     raise `AssertionError` if `Callable` does not raise `Warning`
@@ -53,7 +53,7 @@ class AssertWarns(BuiltinAssertion):
 
 
 @dataclass
-class AssertLogs(BuiltinAssertion):
+class AssertLogs(Assertion):
     """assert `Callable` Logs
 
     raise `AssertionError` if `Callable` does not Log
