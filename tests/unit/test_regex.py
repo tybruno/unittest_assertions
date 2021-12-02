@@ -4,7 +4,7 @@ import warnings
 
 import pytest
 
-from tests.base import BasicAsssertionTester
+from tests.base import BasicAssertionTester
 from unittest_assertions.regex import (
     AssertNotRegex,
     AssertRaisesRegex,
@@ -17,7 +17,7 @@ def _raise(e):
     raise e
 
 
-class TestAssertRaisesRegex(BasicAsssertionTester):
+class TestAssertRaisesRegex(BasicAssertionTester):
     _assertion = AssertRaisesRegex
 
     @pytest.mark.parametrize(
@@ -39,7 +39,7 @@ def _legacy_function(msg, warning):
     warnings.warn(msg, warning)
 
 
-class TestAssertWarnsRegex(BasicAsssertionTester):
+class TestAssertWarnsRegex(BasicAssertionTester):
     _assertion = AssertWarnsRegex
 
     @pytest.mark.parametrize(
@@ -80,7 +80,7 @@ class TestAssertWarnsRegex(BasicAsssertionTester):
         super().test_assertion_raises(*testing_data)
 
 
-class TestAssertRegex(BasicAsssertionTester):
+class TestAssertRegex(BasicAssertionTester):
     _assertion = AssertRegex
 
     @pytest.mark.parametrize(
@@ -98,7 +98,7 @@ class TestAssertRegex(BasicAsssertionTester):
         super().test_assertion_raises(*testing_data)
 
 
-class TestAssertNotRegex(BasicAsssertionTester):
+class TestAssertNotRegex(BasicAssertionTester):
     _assertion = AssertNotRegex
 
     @pytest.mark.parametrize(

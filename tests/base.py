@@ -7,7 +7,7 @@ from unittest_assertions.base import (
 )
 
 
-class BasicAsssertionTester:
+class BasicAssertionTester:
     _assertion: Type[Assertion]
 
     def test_assertion_passes(self, *args, **kwargs):
