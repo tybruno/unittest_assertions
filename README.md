@@ -29,12 +29,12 @@ assert_is_instance("example str", int) # raise TypeError("'example str' is not a
 from unittest_assertions.comparison import AssertEqual
 assert_equal = AssertEqual()
 assert_equal(1,1)
-assert_equal(first="hello",second="hello")
+assert_equal(first="hello", second="hello")
 ```
 ```python
 from unittest_assertions.container import AssertNotIn
 assert_in = AssertNotIn()
-assert_in(member=1,container=[5,2,3])
+assert_in(member=1, container=[5,2,3])
 ```
 # Asserters
 ## Comparison
