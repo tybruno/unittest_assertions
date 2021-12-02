@@ -1,7 +1,5 @@
 """ Testing unittest_assertions/comparison.py """
 import pytest
-
-from tests.base import AssertionTester
 from pytest_builtin_types import (
     combined_equal_all_basic_types,
     combined_non_equal_all_basic_types,
@@ -14,6 +12,8 @@ from pytest_builtin_types import (
     _MULTILINE_1,
     _MULTILINE_2,
 )
+
+from tests.base import AssertionTester
 from unittest_assertions.comparison import (
     AssertAlmostEqual,
     AssertCountEqual,

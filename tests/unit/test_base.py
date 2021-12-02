@@ -1,7 +1,5 @@
 """ Testing unittest_assertions/base.py """
-from string import Template
 from typing import (
-    Any,
     Callable,
     Iterable,
     Mapping,

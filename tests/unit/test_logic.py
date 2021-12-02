@@ -2,8 +2,8 @@
 
 import pytest
 from pytest_builtin_types import _ALL_BASIC_TYPES_1
-from tests.base import AssertionTester
 
+from tests.base import AssertionTester
 from unittest_assertions.logic import (
     AssertFalse,
     AssertTrue,
