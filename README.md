@@ -42,12 +42,12 @@ assert_in(member=1,container=[5,2,3])
 | Asserter | Expression | 
 |-----------------|----------|
 |AssertEqual| `assert first == second`| 
-| AssertNotEqual| `assert first != second` | 
+|AssertNotEqual| `assert first != second` | 
 |AssertAlmostEqual| `assert first ~= second` |
 |AssertNotAlmostEqual| `assert first !~= second` | 
 |AssertCountEqual| `assert Counter(list(first)) == Counter(list(second))`| 
 |AssertMultilineEqual| `assert first.splitlines()` == `second.splitlines()` |
-|AsseritySequenceEqual| `assert seq1 == seq2`| 
+|AssertSequenceEqual| `assert seq1 == seq2`| 
 |AssertListEqual| `assert list1 == list2`| 
 |AssertTupleEqual| `assert tuple1 == tuple2`| 
 |AssertSetEqual| `assert set1 == set2` | 
@@ -64,8 +64,8 @@ assert_in(member=1,container=[5,2,3])
 ## Control
 | Asserter | Expression |
 |-----------------|----------------|
-|AssertRaises| excpected_exception | 
-|AssertWarns| excpected_warning| 
+|AssertRaises| expected_exception | 
+|AssertWarns| expected_warning| 
 |AssertLogs| logger(level) | 
 ## Identity
 | Asserter | Expression |
