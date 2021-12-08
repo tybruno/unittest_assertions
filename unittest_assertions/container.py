@@ -1,4 +1,9 @@
-""" Container Assertions"""  # pylint: disable=duplicate-code
+""" Container Assertions
+
+Objects provided by this module:
+    * `AssertIn`: `assert member in container`
+    * `AssertNotIn`: `assert member not in container`
+"""
 from dataclasses import (
     dataclass,
     field,
@@ -13,7 +18,7 @@ from unittest_assertions.base import Assertion
 
 @dataclass
 class AssertIn(Assertion):
-    """assert `member` `in` `container`
+    """`asser member in container`
 
     raise `AssertionError` if `member` not in `container`
 
@@ -31,7 +36,7 @@ class AssertIn(Assertion):
 
 @dataclass
 class AssertNotIn(Assertion):
-    """assert `member` `not in` `container`
+    """`asser member not in container`
 
     raise `AssertionError` if `member` in `container`
 

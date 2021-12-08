@@ -39,7 +39,20 @@ assert_in = AssertNotIn()
 assert_in(member=1, container=[5,2,3])
 ```
 # Asserters
-## Comparison
+## Container
+| Asserter | Expression |
+|-----------------|----------------|
+|AssertIn| `assert member in container`| 
+| AssertNotIn| `assert member not in container` |
+
+## Control
+| Asserter | Expression |
+|-----------------|----------------|
+|AssertRaises| expected_exception | 
+|AssertWarns| expected_warning| 
+|AssertLogs| logger(level) | 
+
+## Equality
 | Asserter | Expression | 
 |-----------------|----------|
 |AssertEqual| `assert first == second`| 
@@ -57,17 +70,7 @@ assert_in(member=1, container=[5,2,3])
 |AssertLessEqual| `assert a <= b` | 
 |AssertGreater| `assert a > b` | 
 |AssertGreater| `assert a >= b` | 
-## Container
-| Asserter | Expression |
-|-----------------|----------------|
-|AssertIn| `member in container`| 
-| AssertNotIn| `member not in container` |
-## Control
-| Asserter | Expression |
-|-----------------|----------------|
-|AssertRaises| expected_exception | 
-|AssertWarns| expected_warning| 
-|AssertLogs| logger(level) | 
+
 ## Identity
 | Asserter | Expression |
 |-----------------|----------------|

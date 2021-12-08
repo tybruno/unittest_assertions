@@ -1,4 +1,4 @@
-""" Comparison Assertions
+""" Equality Assertions
 
 Objects provided by this module:
     * `AssertEqual`: `assert first == second`
