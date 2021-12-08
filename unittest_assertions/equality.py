@@ -15,7 +15,7 @@ Objects provided by this module:
     * `AssertLess`: `assert a < b`
     * `AssertLessEqual`: `assert <= b`
     * `AssertGreater`: `assert a > b`
-    * `AssertGreaterEqual`: `assert >= b
+    * `AssertGreaterEqual`: `assert >= b`
 """
 from dataclasses import (
     dataclass,
