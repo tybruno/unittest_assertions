@@ -56,7 +56,5 @@ class TestBuiltinAssertion:
             assert arguments == _args
             assert keyword_args == _kwargs
 
-        bulitin_assertion = Assertion(
-            _assertion_function=_mock_function
-        )
+        bulitin_assertion = Assertion(_assertion_function=_mock_function)
         bulitin_assertion.__call__(*arguments, **keyword_args)

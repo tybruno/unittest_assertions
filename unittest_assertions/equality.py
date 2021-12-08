@@ -150,7 +150,7 @@ class AssertCountEqual(Assertion):
 
 @dataclass
 class AssertMultilineEqual(Assertion):
-    """ `assert first.splitlines() == second.splitlines()`
+    """`assert first.splitlines() == second.splitlines()`
 
     raise `AssertionError` if `first` multiline string does not equal
      `second` multiline string

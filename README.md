@@ -74,6 +74,8 @@ assert_in(member=1, container=[5,2,3])
 ## Identity
 | Asserter | Expression |
 |-----------------|----------------|
+|AssertTrue| `assert expr is True` |
+|AssertFalse| `assert expr is False` |
 |AssertIs| `assert exp1 is exp2`|
 |AssertIsNot| `assert exp1 is not exp2`| 
 |AssertIsNone| `assert obj is None`|
@@ -81,11 +83,6 @@ assert_in(member=1, container=[5,2,3])
 |AssertIsInstance|`assert isinstance(obj,class)` |
 |AssertIsNotInstance| `assert not isinstance(obj,class)` | 
 
-## Logic
-| Asserter| Expression | 
-|-----------------|----------------|
-|AssertTrue| `assert expr is True` |
-|AssertFalse| `assert expr is False` |
 ## Regex
 | Asserter | Expression | 
 |-----------------|----------------|

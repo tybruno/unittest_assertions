@@ -1,6 +1,8 @@
 """ Identity Assertions
 
 Objects provided by this module:
+    * `AssertTrue`: `assert expr is True`
+    * `AssertFalse`: `assert expr is False`
     * `AssertIs`: `assert expr1 is expr2`
     * `AssertIsNot`: `assert expr1 is not expr2`
     * `AssertIsNone`: `assert obj is None`
@@ -19,6 +21,45 @@ from typing import (
 from unittest import TestCase
 
 from unittest_assertions.base import Assertion
+
+
+@dataclass
+class AssertTrue(Assertion):
+    """`assert expr is True`
+
+    raise `AssertionError` if `expr is False`
+
+    For more documentation read TestCase().assertTrue.__doc__
+
+    Example:
+        >>> assert_true = AssertTrue()
+        >>> assert_true(True)
+    """
+
+    _assertion_function: Callable = field(
+        default=TestCase().assertTrue, init=False
+    )
+
+
+@dataclass
+class AssertFalse(Assertion):
+    """assert not `expr`
+
+    raise `AssertionError` if `expr`
+
+    For more documentation read TestCase().assertFalse.__doc__
+
+    Example:
+        >>> _false_objects = ["", 0, [], False]
+        >>> assert_false = AssertFalse()
+        >>> for obj in _false_objects:
+        ...     assert_false(obj)
+
+    """
+
+    _assertion_function: Callable = field(
+        default=TestCase().assertFalse, init=False
+    )
 
 
 @dataclass

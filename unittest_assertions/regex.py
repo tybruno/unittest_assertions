@@ -1,4 +1,11 @@
-""" Regex Assertions """  # pylint: disable=duplicate-code
+""" Regex Assertions
+
+Objects provided by this module:
+    * `AssertRaisesRegex`: asserts that the message in a raised exception matches a regex
+    * `AssertWarnsRegex`: asserts that the message in a triggered warning matches a regexp.
+    * `AssertRegex`: Fail the assertion unless the text matches the regular expression
+    * `AssertNotRegex`: Fail the assertion if the text matches the regular expression
+"""
 from dataclasses import (
     dataclass,
     field,
@@ -14,6 +21,8 @@ from unittest_assertions.base import Assertion
 @dataclass
 class AssertRaisesRegex(Assertion):
     """assert function raises regex
+
+    Asserts that the message in a raised exception matches a regex.
 
     For more documentation read TestCase().assertRaisesRegex.__doc__
 
@@ -31,6 +40,11 @@ class AssertRaisesRegex(Assertion):
 @dataclass
 class AssertWarnsRegex(Assertion):
     """assert function warns regex
+
+    Asserts that the message in a triggered warning matches a regexp.
+    Basic functioning is similar to assertWarns() with the addition
+    that only warnings whose messages also match the regular expression
+    are considered successful matches.
 
     For more documentation read TestCase().assertWarnsRegex.__doc__
 
@@ -53,6 +67,8 @@ class AssertWarnsRegex(Assertion):
 class AssertRegex(Assertion):
     """assert regex
 
+    Fail the assertion unless the text matches the regular expression.
+
     Example:
         >>> assert_regex = AssertRegex()
         >>> assert_regex("Ala ma kota", r"k.t")
@@ -66,6 +82,8 @@ class AssertRegex(Assertion):
 @dataclass
 class AssertNotRegex(Assertion):
     """assert not regex
+
+    Fail the assertion if the text matches the regular expression
 
     Example:
         >>> assert_regex = AssertNotRegex()
