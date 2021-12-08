@@ -20,7 +20,7 @@ from unittest_assertions.base import Assertion
 class AssertIn(Assertion):
     """`asser member in container`
 
-    raise `AssertionError` if `member` not in `container`
+    raise `AssertionError` if `member not in container`
 
     For more documentation read TestCase().assertIn.__doc__
 
@@ -38,7 +38,7 @@ class AssertIn(Assertion):
 class AssertNotIn(Assertion):
     """`asser member not in container`
 
-    raise `AssertionError` if `member` in `container`
+    raise `AssertionError` if `member in container`
 
     For more documentation read TestCase().assertNotIn.__doc__
 

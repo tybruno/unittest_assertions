@@ -1,4 +1,9 @@
-""" Control Assertions """  # pylint: disable=duplicate-code
+""" Control Assertions
+
+Objects provided by this module:
+    * `AssertRaises`: assert Callable raises expected exception
+    * `AssertWarns`: assert Callable raises a warning
+"""
 from dataclasses import (
     dataclass,
     field,
@@ -14,6 +19,13 @@ from unittest_assertions.base import Assertion
 @dataclass
 class AssertRaises(Assertion):
     """assert `Callable` raises `expected_exception`
+
+    Fail unless an exception of class expected_exception is raised
+    by the callable when invoked with specified positional and
+    keyword arguments. If a different type of exception is
+    raised, it will not be caught, and the test case will be
+    deemed to have suffered an error, exactly as for an
+    unexpected exception.
 
     raise `AssertionError` if `Callable` does not raise `Exception`
 
@@ -35,6 +47,13 @@ class AssertRaises(Assertion):
 class AssertWarns(Assertion):
     """assert `Callable` raises `Warning`
 
+    Fail unless a warning of class warnClass is triggered
+    by the callable when invoked with specified positional and
+    keyword arguments.  If a different type of warning is
+    triggered, it will not be handled: depending on the other
+    warning filtering rules in effect, it might be silenced, printed
+    out, or raised as an exception.
+
     raise `AssertionError` if `Callable` does not raise `Warning`
 
     For more documentation read TestCase().assertWarns.__doc__
@@ -55,6 +74,10 @@ class AssertWarns(Assertion):
 @dataclass
 class AssertLogs(Assertion):
     """assert `Callable` Logs
+
+    Fail unless a log message of level *level* or higher is emitted
+    on *logger_name* or its children.  If omitted, *level* defaults to
+    INFO and *logger* defaults to the root logger.
 
     raise `AssertionError` if `Callable` does not Log
 
