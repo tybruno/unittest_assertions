@@ -1,4 +1,14 @@
-""" Identity Assertions """  # pylint: disable=duplicate-code
+""" Identity Assertions
+
+Objects provided by this module:
+    * `AssertIs`: `assert expr1 is expr2`
+    * `AssertIsNot`: `assert expr1 is not expr2`
+    * `AssertIsNone`: `assert obj is None`
+    * `AssertIsNotNone`: `assert obj is not None`
+    * `AssertIsInstance`: `assert isinstance(obj, cls)`
+    * `AssertNotIsInstance`: `assert not isinstance(obj,cls)`
+"""
+
 from dataclasses import (
     dataclass,
     field,
@@ -13,9 +23,9 @@ from unittest_assertions.base import Assertion
 
 @dataclass
 class AssertIs(Assertion):
-    """assert `expr1` is `expr2`
+    """`assert expr1 is expr2`
 
-    raise `AssertionError` if `expr1` is not `expr2`
+    raise `AssertionError` if `expr1 is not expr2`
 
     For more documentation read TestCase().assertIs.__doc__
 
@@ -32,9 +42,9 @@ class AssertIs(Assertion):
 
 @dataclass
 class AssertIsNot(Assertion):
-    """assert `expr1` is not `expr2`
+    """`assert expr1 is not expr2`
 
-    raise `AssertionError` if `expr1` is not `expr2`
+    raise `AssertionError` if `expr1 is expr2`
 
     For more documentation read TestCase().assertIsNot.__doc__
 
@@ -52,9 +62,9 @@ class AssertIsNot(Assertion):
 
 @dataclass
 class AssertIsNone(Assertion):
-    """assert `obj` is None
+    """`assert obj is None`
 
-    raise `AssertionError` if `obj` is not None
+    raise `AssertionError` if `obj is not None`
 
     For more documentation read TestCase().assertIsNone.__doc__
 
@@ -70,9 +80,9 @@ class AssertIsNone(Assertion):
 
 @dataclass
 class AssertIsNotNone(AssertIsNone):
-    """assert `obj` is None
+    """`assert obj is not None`
 
-    raise `AssertionError` if `obj` is not None
+    raise `AssertionError` if `obj is None`
 
     For more documentation read TestCase().assertIsNone.__doc__
 
@@ -88,9 +98,9 @@ class AssertIsNotNone(AssertIsNone):
 
 @dataclass
 class AssertIsInstance(Assertion):
-    """assert isinstance(obj,cls)
+    """`assert isinstance(obj,cls)`
 
-    raise `AssertionError` if not isinstance(obj,cls)
+    raise `AssertionError` if `not isinstance(obj,cls)`
 
     For more documentation read TestCase().assertIsInstance.__doc__
 
@@ -106,9 +116,9 @@ class AssertIsInstance(Assertion):
 
 @dataclass
 class AssertNotIsInstance(AssertIsInstance):
-    """assert not isinstance(obj,cls)
+    """`assert not isinstance(obj,cls)`
 
-    raise `AssertionError` if isinstance(obj,cls)
+    raise `AssertionError` if `isinstance(obj,cls)`
 
     For more documentation read TestCase().assertNotIsInstance.__doc__
 
