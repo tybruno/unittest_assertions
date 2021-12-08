@@ -8,7 +8,7 @@ from typing import (
 import pytest
 
 from unittest_assertions.base import Assertion
-from unittest_assertions.comparison import AssertEqual
+from unittest_assertions.equality import AssertEqual
 
 
 class TestBuiltinAssertion:

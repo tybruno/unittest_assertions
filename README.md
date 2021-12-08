@@ -25,10 +25,12 @@ from unittest_assertions.identity import AssertIsInstance
 assert_is_instance = AssertIsInstance()
 assert_is_instance("example str", int) # raise TypeError("'example str' is not an instance of <class 'int'> : Raised a AssertionError")
 ```
+
 ```python
-from unittest_assertions.comparison import AssertEqual
+from unittest_assertions.equality import AssertEqual
+
 assert_equal = AssertEqual()
-assert_equal(1,1)
+assert_equal(1, 1)
 assert_equal(first="hello", second="hello")
 ```
 ```python
@@ -44,8 +46,8 @@ assert_in(member=1, container=[5,2,3])
 |AssertNotEqual| `assert first != second` | 
 |AssertAlmostEqual| `assert first ~= second` |
 |AssertNotAlmostEqual| `assert first !~= second` | 
-|AssertCountEqual| `assert len(first) == len(second)`| 
-|AssertMultilineEqual| `assert first.splitlines()` == `second.splitlines()` |
+|AssertCountEqual| `assert Counter(list(first) == Counter(list(second))`| 
+|AssertMultilineEqual| `assert first.splitlines() == second.splitlines()` |
 |AssertSequenceEqual| `assert seq1 == seq2`| 
 |AssertListEqual| `assert list1 == list2`| 
 |AssertTupleEqual| `assert tuple1 == tuple2`| 

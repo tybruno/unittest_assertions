@@ -1,4 +1,4 @@
-""" Testing unittest_assertions/comparison.py """
+""" Testing unittest_assertions/equality.py """
 import pytest
 from pytest_builtin_types import (
     combined_equal_all_basic_types,
@@ -14,7 +14,7 @@ from pytest_builtin_types import (
 )
 
 from tests.base import AssertionTester
-from unittest_assertions.comparison import (
+from unittest_assertions.equality import (
     AssertAlmostEqual,
     AssertCountEqual,
     AssertDictEqual,
@@ -27,7 +27,7 @@ from unittest_assertions.comparison import (
     AssertMultilineEqual,
     AssertNotAlmostEqual,
     AssertNotEqual,
-    AssertSequanceEqual,
+    AssertSequenceEqual,
     AssertSetEqual,
     AssertTupleEqual,
 )
@@ -170,7 +170,7 @@ class TestAssertMultilineEqual(AssertionTester):
 
 
 class TestAssertSequenceEqual(AssertionTester):
-    _assertion = AssertSequanceEqual
+    _assertion = AssertSequenceEqual
 
     @pytest.mark.parametrize(
         "testing_data",

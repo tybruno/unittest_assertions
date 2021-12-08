@@ -1,4 +1,22 @@
-""" Equality and Comparison Assertions"""  # pylint: disable=duplicate-code
+""" Comparison Assertions
+
+Objects provided by this module:
+    * `AssertEqual`: `assert first == second`
+    * `AssertNotEqual`: `assert first != second`
+    * `AssertAlmostEqual`: `assert first ~= second`
+    * `AssertNotAlmostEqual`: `assert first !~= second`
+    * `AssertCountEqual`: `assert len(first) == len(second)`
+    * `AssertMultilineEqual`: `assert first.splitlines() == second.splitlines()`
+    * `AssertSequenceEqual`: `assert seq1 == seq2`
+    * `AssertListEqual`: `assert list1 == list2`
+    * `AssertTupleEqual`: `assert tuple1 == tuple2`
+    * `AssertSetEqual`: `assert seq1 == seq2`
+    * `AssertDictEqual`: `assert dict1 == dict2`
+    * `AssertLess`: `assert a < b`
+    * `AssertLessEqual`: `assert <= b`
+    * `AssertGreater`: `assert a > b`
+    * `AssertGreaterEqual`: `assert >= b
+"""
 from dataclasses import (
     dataclass,
     field,
@@ -13,7 +31,7 @@ from unittest_assertions.base import Assertion
 
 @dataclass
 class AssertEqual(Assertion):
-    """assert `first` == `second`
+    """`assert first == second`
 
     raise `AssertionError` if `first` is not equal to `second`
 
@@ -32,7 +50,7 @@ class AssertEqual(Assertion):
 
 @dataclass
 class AssertNotEqual(Assertion):
-    """assert `first` != `second`
+    """`assert first != second`
 
     raise `AssertionError` if `first` is equal to `second`
 
@@ -51,11 +69,23 @@ class AssertNotEqual(Assertion):
 
 @dataclass
 class AssertAlmostEqual(Assertion):
-    """assert `first` ~= `second`
+    """`assert first ~= second`
 
     raise `AssertionError` if `first` is not almost equal to `second`
 
     For more documentation read TestCase().assertAlmostEqual.__doc__
+
+    Fail if the two objects are unequal as determined by their
+    difference rounded to the given number of decimal places
+    (default 7) and comparing to zero, or by comparing that the
+    difference between the two objects is more than the given
+    delta.
+
+    Note that decimal places (from zero) are usually not the same
+    as significant digits (measured from the most significant digit).
+
+    If the two objects compare equal then they will automatically
+    compare almost equal.
 
     Example:
         >>> assert_almost_equal = AssertAlmostEqual()
@@ -70,11 +100,20 @@ class AssertAlmostEqual(Assertion):
 
 @dataclass
 class AssertNotAlmostEqual(Assertion):
-    """assert `first` !~= `second`
+    """`assert first !~= second`
 
     raise `AssertionError` if `first` is almost  equal to `second`
 
     For more documentation read TestCase().assertNotAlmostEqual.__doc__
+    Fail if the two objects are equal as determined by their
+    difference rounded to the given number of decimal places
+    (default 7) and comparing to zero, or by comparing that the
+    difference between the two objects is less than the given delta.
+
+    Note that decimal places (from zero) are usually not the same
+    as significant digits (measured from the most significant digit).
+
+    Objects that are equal automatically fail.
 
     Example:
         >>> assert_not_almost_equal = AssertNotAlmostEqual()
@@ -90,7 +129,10 @@ class AssertNotAlmostEqual(Assertion):
 
 @dataclass
 class AssertCountEqual(Assertion):
-    """assert `Counter(list(first))` ==  `Counter(list(second))`
+    """`assert Counter(list(first) == Counter(list(second))`
+
+    Asserts that two iterables have the same elements, the same number of
+    times, without regard to order.
 
     raise `AssertionError` if `first` counter does not equal `second` counter
 
@@ -98,7 +140,7 @@ class AssertCountEqual(Assertion):
 
     Example:
         >>> assert_count_equal = AssertCountEqual()
-        >>> assert_count_equal([1,2],(1,2))
+        >>> assert_count_equal([0, 1, 1],(1, 0, 1))
     """
 
     _assertion_function: Callable = field(
@@ -108,7 +150,7 @@ class AssertCountEqual(Assertion):
 
 @dataclass
 class AssertMultilineEqual(Assertion):
-    """assert `first` multiline string == `second` multiline string
+    """ `assert first.splitlines() == second.splitlines()`
 
     raise `AssertionError` if `first` multiline string does not equal
      `second` multiline string
@@ -128,15 +170,21 @@ class AssertMultilineEqual(Assertion):
 
 
 @dataclass
-class AssertSequanceEqual(Assertion):
-    """assert `seq1` == `seq2`
+class AssertSequenceEqual(Assertion):
+    """`assert seq1 == seq2`
 
     raise `AssertionError` if `seq1` is not equal to `seq2`
 
     For more documentation read TestCase().assertSequenceEqual.__doc__
 
+    An equality assertion for ordered sequences (like lists and tuples).
+
+    For the purposes of this function, a valid ordered sequence type is one
+    which can be indexed, has a length, and has an equality operator.
+
+
     Example:
-        >>> assert_sequence_equal = AssertSequanceEqual()
+        >>> assert_sequence_equal = AssertSequenceEqual()
         >>> assert_sequence_equal((1,2.5),[1,2.5])
     """
 
@@ -147,7 +195,7 @@ class AssertSequanceEqual(Assertion):
 
 @dataclass
 class AssertListEqual(Assertion):
-    """assert `list1` == `list2`
+    """`assert list1 == list2`
 
     raise `AssertionError` if `list1` is not equal to `list2`
 
@@ -166,7 +214,7 @@ class AssertListEqual(Assertion):
 
 @dataclass
 class AssertTupleEqual(Assertion):
-    """assert `tuple1` == `tuple2`
+    """`assert tuple1 == tuple2`
 
     raise `AssertionError` if `tuple1` is not equal to `tuple2`
 
@@ -185,7 +233,7 @@ class AssertTupleEqual(Assertion):
 
 @dataclass
 class AssertSetEqual(Assertion):
-    """assert `set1` == `set2`
+    """`assert seq1 == seq2`
 
     raise `AssertionError` if `set1` is not equal to `set2`
 
@@ -204,7 +252,7 @@ class AssertSetEqual(Assertion):
 
 @dataclass
 class AssertDictEqual(Assertion):
-    """assert `dic1` == `dict2`
+    """`assert dict1 == dict2`
 
     raise `AssertionError` if `dict1` is not equal to `dict2`
 
@@ -223,7 +271,7 @@ class AssertDictEqual(Assertion):
 
 @dataclass
 class AssertLess(Assertion):
-    """assert `a` < `b`
+    """`assert a < b`
 
     raise `AssertionError` if `a` is less than `b`
 
@@ -241,7 +289,7 @@ class AssertLess(Assertion):
 
 @dataclass
 class AssertLessEqual(Assertion):
-    """assert `a` <= `b`
+    """`assert a <= b`
 
     raise `AssertionError` if `a` is less or equal to `b`
 
@@ -260,7 +308,7 @@ class AssertLessEqual(Assertion):
 
 @dataclass
 class AssertGreater(Assertion):
-    """assert `a` > `b`
+    """`assert a > b`
 
     raise `AssertionError` if `a` is greater than `b`
 
@@ -278,7 +326,7 @@ class AssertGreater(Assertion):
 
 @dataclass
 class AssertGreaterEqual(Assertion):
-    """assert `a` >= `b`
+    """`assert a >= b`
 
     raise `AssertionError` if `a` is greater or equal to `b`
 
