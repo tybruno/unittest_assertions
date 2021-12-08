@@ -40,6 +40,9 @@ class AssertTrue(Assertion):
         default=TestCase().assertTrue, init=False
     )
 
+    def __call__(self, expr):
+        super().__call__(expr=expr)
+
 
 @dataclass
 class AssertFalse(Assertion):
@@ -61,6 +64,9 @@ class AssertFalse(Assertion):
         default=TestCase().assertFalse, init=False
     )
 
+    def __call__(self, expr):
+        super().__call__(expr=expr)
+
 
 @dataclass
 class AssertIs(Assertion):
@@ -79,6 +85,9 @@ class AssertIs(Assertion):
     _assertion_function: Callable = field(
         default=TestCase().assertIs, init=False
     )
+
+    def __call__(self, expr1, expr2):
+        super().__call__(expr1=expr1, expr2=expr2)
 
 
 @dataclass
@@ -100,6 +109,9 @@ class AssertIsNot(Assertion):
         default=TestCase().assertIsNot, init=False
     )
 
+    def __call__(self, expr1, expr2):
+        super().__call__(expr1=expr1, expr2=expr2)
+
 
 @dataclass
 class AssertIsNone(Assertion):
@@ -117,6 +129,9 @@ class AssertIsNone(Assertion):
     _assertion_function: Callable = field(
         default=TestCase().assertIsNone, init=False
     )
+
+    def __call__(self, obj):
+        super().__call__(obj=obj)
 
 
 @dataclass
@@ -153,6 +168,9 @@ class AssertIsInstance(Assertion):
     _assertion_function: Callable = field(
         default=TestCase().assertIsInstance, init=False
     )
+
+    def __call__(self, obj, cls):
+        super().__call__(obj=obj, cls=cls)
 
 
 @dataclass

@@ -36,6 +36,13 @@ class AssertRaisesRegex(Assertion):
         default=TestCase().assertRaisesRegex, init=False
     )
 
+    def __call__(
+        self, expected_exception, expected_regex, function, *args, **kwargs
+    ):
+        super().__call__(
+            expected_exception, expected_regex, function, *args, **kwargs
+        )
+
 
 @dataclass
 class AssertWarnsRegex(Assertion):
@@ -62,6 +69,13 @@ class AssertWarnsRegex(Assertion):
         default=TestCase().assertWarnsRegex, init=False
     )
 
+    def __call__(
+        self, expected_warning, expected_regex, function, *args, **kwargs
+    ):
+        super().__call__(
+            expected_warning, expected_regex, function, *args, **kwargs
+        )
+
 
 @dataclass
 class AssertRegex(Assertion):
@@ -78,6 +92,9 @@ class AssertRegex(Assertion):
         default=TestCase().assertRegex, init=False
     )
 
+    def __call__(self, text, expected_regex):
+        super().__call__(text=text, expected_regex=expected_regex)
+
 
 @dataclass
 class AssertNotRegex(Assertion):
@@ -93,3 +110,6 @@ class AssertNotRegex(Assertion):
     _assertion_function: Callable = field(
         default=TestCase().assertNotRegex, init=False
     )
+
+    def __call__(self, text, unexpected_regex):
+        super().__call__(text=text, unexpected_regex=unexpected_regex)

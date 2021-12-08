@@ -33,6 +33,18 @@ class AssertIn(Assertion):
         default=TestCase().assertIn, init=False
     )
 
+    def __call__(self, member, container):
+        """run assertion
+
+        Args:
+            member:
+            container:
+
+        Returns:
+
+        """
+        super().__call__(member=member, container=container)
+
 
 @dataclass
 class AssertNotIn(Assertion):
@@ -50,3 +62,6 @@ class AssertNotIn(Assertion):
     _assertion_function: Callable = field(
         default=TestCase().assertNotIn, init=False
     )
+
+    def __call__(self, member, container):
+        super().__call__(member=member, container=container)

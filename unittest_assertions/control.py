@@ -21,7 +21,7 @@ class AssertRaises(Assertion):
     """assert `Callable` raises `expected_exception`
 
     Fail unless an exception of class expected_exception is raised
-    by the callable when invoked with specified positional and
+    by the callable_ when invoked with specified positional and
     keyword arguments. If a different type of exception is
     raised, it will not be caught, and the test case will be
     deemed to have suffered an error, exactly as for an
@@ -42,13 +42,18 @@ class AssertRaises(Assertion):
         default=TestCase().assertRaises, init=False
     )
 
+    def __call__(
+        self, expected_exception, callable_: Callable, *args, **kwargs
+    ):
+        super().__call__(expected_exception, callable_, *args, **kwargs)
+
 
 @dataclass
 class AssertWarns(Assertion):
     """assert `Callable` raises `Warning`
 
     Fail unless a warning of class warnClass is triggered
-    by the callable when invoked with specified positional and
+    by the callable_ when invoked with specified positional and
     keyword arguments.  If a different type of warning is
     triggered, it will not be handled: depending on the other
     warning filtering rules in effect, it might be silenced, printed
@@ -70,6 +75,9 @@ class AssertWarns(Assertion):
         default=TestCase().assertWarns, init=False
     )
 
+    def __call__(self, expected_warning, callable_, *args, **kwargs):
+        super().__call__(expected_warning, callable_, *args, **kwargs)
+
 
 @dataclass
 class AssertLogs(Assertion):
@@ -87,3 +95,6 @@ class AssertLogs(Assertion):
     _assertion_function: Callable = field(
         default=TestCase().assertLogs, init=False
     )
+
+    def __call__(self, logger=None, level=None):
+        super().__call__(logger=logger, level=level)

@@ -47,6 +47,9 @@ class AssertEqual(Assertion):
         default=TestCase().assertEqual, init=False
     )
 
+    def __call__(self, first, second):
+        super().__call__(first=first, second=second)
+
 
 @dataclass
 class AssertNotEqual(Assertion):
@@ -65,6 +68,9 @@ class AssertNotEqual(Assertion):
     _assertion_function: Callable = field(
         default=TestCase().assertNotEqual, init=False
     )
+
+    def __call__(self, first, second):
+        super().__call__(first=first, second=second)
 
 
 @dataclass
@@ -97,6 +103,11 @@ class AssertAlmostEqual(Assertion):
         default=TestCase().assertAlmostEqual, init=False
     )
 
+    def __call__(self, first, second, places=None, delta=None):
+        super().__call__(
+            first=first, second=second, places=places, delta=delta
+        )
+
 
 @dataclass
 class AssertNotAlmostEqual(Assertion):
@@ -126,6 +137,11 @@ class AssertNotAlmostEqual(Assertion):
         default=TestCase().assertNotAlmostEqual, init=False
     )
 
+    def __call__(self, first, second, places=None, delta=None):
+        super().__call__(
+            first=first, second=second, places=places, delta=delta
+        )
+
 
 @dataclass
 class AssertCountEqual(Assertion):
@@ -147,6 +163,9 @@ class AssertCountEqual(Assertion):
         default=TestCase().assertCountEqual, init=False
     )
 
+    def __call__(self, first, second):
+        super().__call__(first=first, second=second)
+
 
 @dataclass
 class AssertMultilineEqual(Assertion):
@@ -167,6 +186,9 @@ class AssertMultilineEqual(Assertion):
     _assertion_function: Callable = field(
         default=TestCase().assertMultiLineEqual, init=False
     )
+
+    def __call__(self, first, second):
+        super().__call__(first=first, second=second)
 
 
 @dataclass
@@ -192,6 +214,9 @@ class AssertSequenceEqual(Assertion):
         default=TestCase().assertSequenceEqual, init=False
     )
 
+    def __call__(self, seq1, seq2, seq_type=None):
+        super().__call__(seq1=seq1, seq2=seq2, seq_type=seq_type)
+
 
 @dataclass
 class AssertListEqual(Assertion):
@@ -210,6 +235,9 @@ class AssertListEqual(Assertion):
     _assertion_function: Callable = field(
         default=TestCase().assertListEqual, init=False
     )
+
+    def __call__(self, list1, list2):
+        super().__call__(list1=list1, list2=list2)
 
 
 @dataclass
@@ -230,6 +258,9 @@ class AssertTupleEqual(Assertion):
         default=TestCase().assertTupleEqual, init=False
     )
 
+    def __call__(self, tuple1, tuple2):
+        super().__call__(tuple1=tuple1, tuple2=tuple2)
+
 
 @dataclass
 class AssertSetEqual(Assertion):
@@ -248,6 +279,9 @@ class AssertSetEqual(Assertion):
     _assertion_function: Callable = field(
         default=TestCase().assertSetEqual, init=False
     )
+
+    def __call__(self, set1, set2):
+        super().__call__(set1=set1, set2=set2)
 
 
 @dataclass
@@ -268,6 +302,9 @@ class AssertDictEqual(Assertion):
         default=TestCase().assertDictEqual, init=False
     )
 
+    def __call__(self, d1, d2):
+        super().__call__(d1=d1, d2=d2)
+
 
 @dataclass
 class AssertLess(Assertion):
@@ -285,6 +322,9 @@ class AssertLess(Assertion):
     _assertion_function: Callable = field(
         default=TestCase().assertLess, init=False
     )
+
+    def __call__(self, a, b):
+        super().__call__(a=a, b=b)
 
 
 @dataclass
@@ -305,6 +345,9 @@ class AssertLessEqual(Assertion):
         default=TestCase().assertLessEqual, init=False
     )
 
+    def __call__(self, a, b):
+        super().__call__(a=a, b=b)
+
 
 @dataclass
 class AssertGreater(Assertion):
@@ -322,6 +365,9 @@ class AssertGreater(Assertion):
     _assertion_function: Callable = field(
         default=TestCase().assertGreater, init=False
     )
+
+    def __call__(self, a, b):
+        super().__call__(a=a, b=b)
 
 
 @dataclass
@@ -341,3 +387,6 @@ class AssertGreaterEqual(Assertion):
     _assertion_function: Callable = field(
         default=TestCase().assertGreaterEqual, init=False
     )
+
+    def __call__(self, a, b):
+        super().__call__(a=a, b=b)
