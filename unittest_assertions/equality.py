@@ -273,7 +273,7 @@ class AssertDictEqual(Assertion):
 class AssertLess(Assertion):
     """`assert a < b`
 
-    raise `AssertionError` if `a` is less than `b`
+    raise `AssertionError` if `a` is less than or equal `b`
 
     For more documentation read TestCase().assertLess.__doc__
 
@@ -291,7 +291,7 @@ class AssertLess(Assertion):
 class AssertLessEqual(Assertion):
     """`assert a <= b`
 
-    raise `AssertionError` if `a` is less or equal to `b`
+    raise `AssertionError` if `a` is greater than `b`
 
     For more documentation read TestCase().assertLessEqual.__doc__
 
@@ -310,7 +310,7 @@ class AssertLessEqual(Assertion):
 class AssertGreater(Assertion):
     """`assert a > b`
 
-    raise `AssertionError` if `a` is greater than `b`
+    raise `AssertionError` if `a` is less than or equal to `b`
 
     For more documentation read TestCase().assertGreater.__doc__
 
@@ -328,7 +328,7 @@ class AssertGreater(Assertion):
 class AssertGreaterEqual(Assertion):
     """`assert a >= b`
 
-    raise `AssertionError` if `a` is greater or equal to `b`
+    raise `AssertionError` if `a` is less than `b`
 
     For more documentation read TestCase().assertGreaterEqual.__doc__
 
