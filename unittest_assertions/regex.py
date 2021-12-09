@@ -12,6 +12,7 @@ from dataclasses import (
 )
 from typing import (
     Callable,
+    ContextManager,
 )
 from unittest import TestCase
 
@@ -39,9 +40,14 @@ class AssertRaisesRegex(Assertion):
     def __call__(
         self, expected_exception, expected_regex, function, *args, **kwargs
     ):
-        super().__call__(
-            expected_exception, expected_regex, function, *args, **kwargs
-        )
+        if isinstance(expected_exception, ContextManager):
+            super().__call__(
+                expected_exception, expected_regex, function, *args, **kwargs
+            )
+        else:
+            self._assertion_function(
+                expected_exception, expected_regex, function, *args, **kwargs
+            )
 
 
 @dataclass
@@ -72,9 +78,14 @@ class AssertWarnsRegex(Assertion):
     def __call__(
         self, expected_warning, expected_regex, function, *args, **kwargs
     ):
-        super().__call__(
-            expected_warning, expected_regex, function, *args, **kwargs
-        )
+        if isinstance(expected_warning, ContextManager):
+            super().__call__(
+                expected_warning, expected_regex, function, *args, **kwargs
+            )
+        else:
+            self._assertion_function(
+                expected_warning, expected_regex, function, *args, **kwargs
+            )
 
 
 @dataclass

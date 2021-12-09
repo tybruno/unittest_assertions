@@ -24,13 +24,13 @@ class TestBuiltinAssertion:
         Returns:
             None
         """
-        bulitin_assertion = Assertion(_assertion_function=AssertEqual)
-        assert bulitin_assertion._assertion_function == function
+        builtin_assertion = Assertion(_assertion_function=AssertEqual)
+        assert builtin_assertion._assertion_function == function
 
     @pytest.mark.parametrize("arguments", (("hello", None, 2),))
     @pytest.mark.parametrize(
         "keyword_args",
-        ({"testing": "hello there"}, {"msg": "message"}, {"a": 1, "b": 2}),
+        ({"testing": "hello there"}, {"a": 1, "b": 2}),
     )
     def test_call(self, arguments: Iterable, keyword_args: Mapping) -> None:
         """Test `Assertion` __call__ function
@@ -53,8 +53,9 @@ class TestBuiltinAssertion:
                 None
 
             """
+            keyword_args["msg"] = builtin_assertion.msg
             assert arguments == _args
             assert keyword_args == _kwargs
 
-        bulitin_assertion = Assertion(_assertion_function=_mock_function)
-        bulitin_assertion.__call__(*arguments, **keyword_args)
+        builtin_assertion = Assertion(_assertion_function=_mock_function)
+        builtin_assertion.__call__(*arguments, **keyword_args)

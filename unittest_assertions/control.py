@@ -10,6 +10,7 @@ from dataclasses import (
 )
 from typing import (
     Callable,
+    ContextManager,
 )
 from unittest import TestCase
 
@@ -45,7 +46,12 @@ class AssertRaises(Assertion):
     def __call__(
         self, expected_exception, callable_: Callable, *args, **kwargs
     ):
-        super().__call__(expected_exception, callable_, *args, **kwargs)
+        if isinstance(expected_exception, ContextManager):
+            super().__call__(expected_exception, callable_, *args, **kwargs)
+        else:
+            self._assertion_function(
+                expected_exception, callable_, *args, **kwargs
+            )
 
 
 @dataclass
@@ -76,7 +82,12 @@ class AssertWarns(Assertion):
     )
 
     def __call__(self, expected_warning, callable_, *args, **kwargs):
-        super().__call__(expected_warning, callable_, *args, **kwargs)
+        if isinstance(expected_warning, ContextManager):
+            super().__call__(expected_warning, callable_, *args, **kwargs)
+        else:
+            self._assertion_function(
+                expected_warning, callable_, *args, **kwargs
+            )
 
 
 @dataclass

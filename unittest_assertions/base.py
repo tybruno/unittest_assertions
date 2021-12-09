@@ -5,6 +5,7 @@ Objects provided by this module:
 """
 from dataclasses import (
     dataclass,
+    field,
 )
 from typing import (
     Callable,
@@ -24,6 +25,7 @@ class Assertion:
     """
 
     _assertion_function: Callable
+    msg: str = field(default=None)
 
     def __call__(self, *args, **kwargs) -> None:
         """Run the Assertion function with the given args and kwargs
@@ -36,4 +38,5 @@ class Assertion:
         Returns:
             None
         """
-        self._assertion_function(*args, **kwargs)
+        msg = kwargs.pop("msg", self.msg)
+        self._assertion_function(*args, **kwargs, msg=msg)
