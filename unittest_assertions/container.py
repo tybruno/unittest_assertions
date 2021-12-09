@@ -10,6 +10,8 @@ from dataclasses import (
 )
 from typing import (
     Callable,
+    Any,
+    Container,
 )
 from unittest import TestCase
 
@@ -18,7 +20,7 @@ from unittest_assertions.base import Assertion
 
 @dataclass
 class AssertIn(Assertion):
-    """`asser member in container`
+    """`assert member in container`
 
     raise `AssertionError` if `member not in container`
 
@@ -33,21 +35,21 @@ class AssertIn(Assertion):
         default=TestCase().assertIn, init=False
     )
 
-    def __call__(self, member, container):
-        """run assertion
+    def __call__(self, member: Any, container: Container) -> None:
+        """`assert member in container`
 
         Args:
-            member:
-            container:
+            member: check if in `container`
+            container: `container` that is checked to have `member`
 
         Returns:
-
+            None
         """
         super().__call__(member=member, container=container)
 
 
 @dataclass
-class AssertNotIn(Assertion):
+class AssertNotIn(AssertIn):
     """`asser member not in container`
 
     raise `AssertionError` if `member in container`
@@ -62,6 +64,3 @@ class AssertNotIn(Assertion):
     _assertion_function: Callable = field(
         default=TestCase().assertNotIn, init=False
     )
-
-    def __call__(self, member, container):
-        super().__call__(member=member, container=container)

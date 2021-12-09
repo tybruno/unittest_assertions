@@ -13,9 +13,9 @@ Objects provided by this module:
     * `AssertSetEqual`: `assert seq1 == seq2`
     * `AssertDictEqual`: `assert dict1 == dict2`
     * `AssertLess`: `assert a < b`
-    * `AssertLessEqual`: `assert <= b`
+    * `AssertLessEqual`: `assert a <= b`
     * `AssertGreater`: `assert a > b`
-    * `AssertGreaterEqual`: `assert >= b`
+    * `AssertGreaterEqual`: `assert a>= b`
 """
 from dataclasses import (
     dataclass,
@@ -23,6 +23,15 @@ from dataclasses import (
 )
 from typing import (
     Callable,
+    Any,
+    Sequence,
+    Type,
+    List,
+    Tuple,
+    Set,
+    Dict,
+    Mapping,
+    Optional,
 )
 from unittest import TestCase
 
@@ -30,7 +39,30 @@ from unittest_assertions.base import Assertion
 
 
 @dataclass
-class AssertEqual(Assertion):
+class EqualityAssertion(Assertion):
+    """Parent equality `Assertion` class"""
+
+    def __call__(
+        self,
+        first: Any,
+        second: Any,
+        *args: Optional[Sequence],
+        **kwargs: Optional[Mapping]
+    ) -> None:
+        """Assert equality comparison on the `first` and `second`
+
+        Args:
+            first: will be compared against `second`
+            second: will be compared against `first`
+            *args: Optional function_args
+            **kwargs: Optional function_kwargs
+
+        """
+        super().__call__(first=first, second=second, *args, **kwargs)
+
+
+@dataclass
+class AssertEqual(EqualityAssertion):
     """`assert first == second`
 
     raise `AssertionError` if `first` is not equal to `second`
@@ -47,12 +79,9 @@ class AssertEqual(Assertion):
         default=TestCase().assertEqual, init=False
     )
 
-    def __call__(self, first, second):
-        super().__call__(first=first, second=second)
-
 
 @dataclass
-class AssertNotEqual(Assertion):
+class AssertNotEqual(EqualityAssertion):
     """`assert first != second`
 
     raise `AssertionError` if `first` is equal to `second`
@@ -69,12 +98,9 @@ class AssertNotEqual(Assertion):
         default=TestCase().assertNotEqual, init=False
     )
 
-    def __call__(self, first, second):
-        super().__call__(first=first, second=second)
-
 
 @dataclass
-class AssertAlmostEqual(Assertion):
+class AssertAlmostEqual(EqualityAssertion):
     """`assert first ~= second`
 
     raise `AssertionError` if `first` is not almost equal to `second`
@@ -103,14 +129,26 @@ class AssertAlmostEqual(Assertion):
         default=TestCase().assertAlmostEqual, init=False
     )
 
-    def __call__(self, first, second, places=None, delta=None):
+    def __call__(
+        self, first: Any, second: Any, places: int = None, delta: float = None
+    ) -> None:
+        """Assert `first` almost equals `second`
+
+        For more documentation read unittest.TestCase.assertSequenceEqual.__doc__
+
+        Args:
+            first: will be checked if it almost equals `second`
+            second: will be checked if it almost equals `first`
+            places: precision of decimal places
+            delta: the amount of acceptable difference
+        """
         super().__call__(
             first=first, second=second, places=places, delta=delta
         )
 
 
 @dataclass
-class AssertNotAlmostEqual(Assertion):
+class AssertNotAlmostEqual(AssertAlmostEqual):
     """`assert first !~= second`
 
     raise `AssertionError` if `first` is almost  equal to `second`
@@ -137,14 +175,9 @@ class AssertNotAlmostEqual(Assertion):
         default=TestCase().assertNotAlmostEqual, init=False
     )
 
-    def __call__(self, first, second, places=None, delta=None):
-        super().__call__(
-            first=first, second=second, places=places, delta=delta
-        )
-
 
 @dataclass
-class AssertCountEqual(Assertion):
+class AssertCountEqual(EqualityAssertion):
     """`assert Counter(list(first) == Counter(list(second))`
 
     Asserts that two iterables have the same elements, the same number of
@@ -163,12 +196,9 @@ class AssertCountEqual(Assertion):
         default=TestCase().assertCountEqual, init=False
     )
 
-    def __call__(self, first, second):
-        super().__call__(first=first, second=second)
-
 
 @dataclass
-class AssertMultilineEqual(Assertion):
+class AssertMultilineEqual(AssertEqual):
     """`assert first.splitlines() == second.splitlines()`
 
     raise `AssertionError` if `first` multiline string does not equal
@@ -187,23 +217,19 @@ class AssertMultilineEqual(Assertion):
         default=TestCase().assertMultiLineEqual, init=False
     )
 
-    def __call__(self, first, second):
-        super().__call__(first=first, second=second)
-
 
 @dataclass
 class AssertSequenceEqual(Assertion):
     """`assert seq1 == seq2`
-
-    raise `AssertionError` if `seq1` is not equal to `seq2`
-
-    For more documentation read TestCase().assertSequenceEqual.__doc__
 
     An equality assertion for ordered sequences (like lists and tuples).
 
     For the purposes of this function, a valid ordered sequence type is one
     which can be indexed, has a length, and has an equality operator.
 
+    raise `AssertionError` if `seq1` is not equal to `seq2`
+
+    For more documentation read TestCase().assertSequenceEqual.__doc__
 
     Example:
         >>> assert_sequence_equal = AssertSequenceEqual()
@@ -214,7 +240,23 @@ class AssertSequenceEqual(Assertion):
         default=TestCase().assertSequenceEqual, init=False
     )
 
-    def __call__(self, seq1, seq2, seq_type=None):
+    def __call__(
+        self, seq1: Sequence, seq2: Sequence, seq_type: Type = None
+    ) -> None:
+        """An equality assertion for ordered sequences (like lists and tuples).
+
+        For the purposes of this function, a valid ordered sequence type is one
+        which can be indexed, has a length, and has an equality operator.
+
+        Args:
+            seq1: The first sequence to compare.
+            seq2: The second sequence to compare.
+            seq_type: The expected datatype of the sequences, or None if no
+                    datatype should be enforced.
+
+        Returns:
+            None
+        """
         super().__call__(seq1=seq1, seq2=seq2, seq_type=seq_type)
 
 
@@ -236,7 +278,13 @@ class AssertListEqual(Assertion):
         default=TestCase().assertListEqual, init=False
     )
 
-    def __call__(self, list1, list2):
+    def __call__(self, list1: List, list2: List) -> None:
+        """assert `list1` is deep equal to `list2`
+
+        Args:
+            list1: check if equal to `list2`
+            list2: check if equal to `list1`
+        """
         super().__call__(list1=list1, list2=list2)
 
 
@@ -258,7 +306,13 @@ class AssertTupleEqual(Assertion):
         default=TestCase().assertTupleEqual, init=False
     )
 
-    def __call__(self, tuple1, tuple2):
+    def __call__(self, tuple1: Tuple, tuple2: Tuple) -> None:
+        """assert `tuple1` deep equals `tuple2`
+
+        Args:
+            tuple1: check if equal to `tuple2`
+            tuple2: check if equal to `tuple1`
+        """
         super().__call__(tuple1=tuple1, tuple2=tuple2)
 
 
@@ -280,7 +334,13 @@ class AssertSetEqual(Assertion):
         default=TestCase().assertSetEqual, init=False
     )
 
-    def __call__(self, set1, set2):
+    def __call__(self, set1: Set, set2: Set) -> None:
+        """assertify `set1` is deep equal to `set2`
+
+        Args:
+            set1: checks if deep equal to `set2`
+            set2: checks if deep equal to `set1`
+        """
         super().__call__(set1=set1, set2=set2)
 
 
@@ -302,12 +362,34 @@ class AssertDictEqual(Assertion):
         default=TestCase().assertDictEqual, init=False
     )
 
-    def __call__(self, d1, d2):
+    def __call__(self, d1: Dict, d2: Dict) -> None:
+        """assertify `dict1` is deep equal to `dict2`
+
+        Args:
+            dict1: checks if deep equal to `dict2`
+            dict2: checks if deep equal to `dict1`
+        """
         super().__call__(d1=d1, d2=d2)
 
 
 @dataclass
-class AssertLess(Assertion):
+class ComparisonAssertion(Assertion):
+    """Parent class for Comparison Assertions"""
+
+    def __call__(self, a: Any, b: Any) -> None:
+        """Compares `a` with `b`
+        Args:
+            a: compares to `b`
+            b: compares to `a`
+
+        Returns:
+            `True` if `a` and `b` pass comparison
+        """
+        super().__call__(a=a, b=b)
+
+
+@dataclass
+class AssertLess(ComparisonAssertion):
     """`assert a < b`
 
     raise `AssertionError` if `a` is less than or equal `b`
@@ -323,12 +405,9 @@ class AssertLess(Assertion):
         default=TestCase().assertLess, init=False
     )
 
-    def __call__(self, a, b):
-        super().__call__(a=a, b=b)
-
 
 @dataclass
-class AssertLessEqual(Assertion):
+class AssertLessEqual(ComparisonAssertion):
     """`assert a <= b`
 
     raise `AssertionError` if `a` is greater than `b`
@@ -345,12 +424,9 @@ class AssertLessEqual(Assertion):
         default=TestCase().assertLessEqual, init=False
     )
 
-    def __call__(self, a, b):
-        super().__call__(a=a, b=b)
-
 
 @dataclass
-class AssertGreater(Assertion):
+class AssertGreater(ComparisonAssertion):
     """`assert a > b`
 
     raise `AssertionError` if `a` is less than or equal to `b`
@@ -366,12 +442,9 @@ class AssertGreater(Assertion):
         default=TestCase().assertGreater, init=False
     )
 
-    def __call__(self, a, b):
-        super().__call__(a=a, b=b)
-
 
 @dataclass
-class AssertGreaterEqual(Assertion):
+class AssertGreaterEqual(ComparisonAssertion):
     """`assert a >= b`
 
     raise `AssertionError` if `a` is less than `b`
@@ -387,6 +460,3 @@ class AssertGreaterEqual(Assertion):
     _assertion_function: Callable = field(
         default=TestCase().assertGreaterEqual, init=False
     )
-
-    def __call__(self, a, b):
-        super().__call__(a=a, b=b)

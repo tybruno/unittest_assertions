@@ -9,6 +9,7 @@ from dataclasses import (
 )
 from typing import (
     Callable,
+    Union,
 )
 
 
@@ -28,7 +29,7 @@ class Assertion:
     msg: str = field(default=None)
 
     def __call__(self, *args, **kwargs) -> None:
-        """Run the Assertion function with the given args and kwargs
+        """Run the Assertion function with the given function_args and function_kwargs
 
         Args:
             *args: Arguments that will be passed to the `_assertion_function`
@@ -38,5 +39,5 @@ class Assertion:
         Returns:
             None
         """
-        msg = kwargs.pop("msg", self.msg)
+        msg: Union[str, None] = kwargs.pop("msg", self.msg)
         self._assertion_function(*args, **kwargs, msg=msg)

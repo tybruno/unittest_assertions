@@ -17,6 +17,8 @@ from dataclasses import (
 )
 from typing import (
     Callable,
+    Any,
+    Type,
 )
 from unittest import TestCase
 
@@ -40,13 +42,20 @@ class AssertTrue(Assertion):
         default=TestCase().assertTrue, init=False
     )
 
-    def __call__(self, expr):
+    def __call__(self, expr: Any) -> None:
+        """`assert expr is True`
+
+
+        Args:
+            expr: Expression that will be evaluated as True
+
+        """
         super().__call__(expr=expr)
 
 
 @dataclass
-class AssertFalse(Assertion):
-    """assert not `expr`
+class AssertFalse(AssertTrue):
+    """`assert expr is False`
 
     raise `AssertionError` if `expr`
 
@@ -64,9 +73,6 @@ class AssertFalse(Assertion):
         default=TestCase().assertFalse, init=False
     )
 
-    def __call__(self, expr):
-        super().__call__(expr=expr)
-
 
 @dataclass
 class AssertIs(Assertion):
@@ -80,18 +86,25 @@ class AssertIs(Assertion):
         >>> value = "string"
         >>> assert_is = AssertIs()
         >>> assert_is(value,value)
+        True
     """
 
     _assertion_function: Callable = field(
         default=TestCase().assertIs, init=False
     )
 
-    def __call__(self, expr1, expr2):
+    def __call__(self, expr1: Any, expr2: Any) -> None:
+        """`assert expr1 is expr2`
+
+        Args:
+            expr1: check if is `expr2`
+            expr2: check if is `expr1
+        """
         super().__call__(expr1=expr1, expr2=expr2)
 
 
 @dataclass
-class AssertIsNot(Assertion):
+class AssertIsNot(AssertIs):
     """`assert expr1 is not expr2`
 
     raise `AssertionError` if `expr1 is expr2`
@@ -108,9 +121,6 @@ class AssertIsNot(Assertion):
     _assertion_function: Callable = field(
         default=TestCase().assertIsNot, init=False
     )
-
-    def __call__(self, expr1, expr2):
-        super().__call__(expr1=expr1, expr2=expr2)
 
 
 @dataclass
@@ -130,7 +140,12 @@ class AssertIsNone(Assertion):
         default=TestCase().assertIsNone, init=False
     )
 
-    def __call__(self, obj):
+    def __call__(self, obj: Any) -> None:
+        """`assert obj is None`
+
+        Args:
+            obj: Object that will be checked if it is `None`
+        """
         super().__call__(obj=obj)
 
 
@@ -169,7 +184,13 @@ class AssertIsInstance(Assertion):
         default=TestCase().assertIsInstance, init=False
     )
 
-    def __call__(self, obj, cls):
+    def __call__(self, obj: Any, cls: Type) -> None:
+        """`assert isinstance(obj,cls)`
+
+        Args:
+            obj: check if `isinstance` of `cls`
+            cls: check if `obj` is instance of `cls`
+        """
         super().__call__(obj=obj, cls=cls)
 
 

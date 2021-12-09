@@ -4,6 +4,7 @@ Objects provided by this module:
     * `AssertRaises`: assert Callable raises expected exception
     * `AssertWarns`: assert Callable raises a warning
 """
+import logging
 from dataclasses import (
     dataclass,
     field,
@@ -11,6 +12,12 @@ from dataclasses import (
 from typing import (
     Callable,
     ContextManager,
+    Union,
+    Type,
+    Tuple,
+    Optional,
+    Collection,
+    Mapping,
 )
 from unittest import TestCase
 
@@ -44,8 +51,14 @@ class AssertRaises(Assertion):
     )
 
     def __call__(
-        self, expected_exception, callable_: Callable, *args, **kwargs
-    ):
+        self,
+        expected_exception: Union[
+            Type[BaseException], Tuple[Type[BaseException]]
+        ],
+        callable_: Callable,
+        *args: Optional[Collection],
+        **kwargs: Optional[Mapping],
+    ) -> None:
         if isinstance(expected_exception, ContextManager):
             super().__call__(expected_exception, callable_, *args, **kwargs)
         else:
@@ -81,7 +94,13 @@ class AssertWarns(Assertion):
         default=TestCase().assertWarns, init=False
     )
 
-    def __call__(self, expected_warning, callable_, *args, **kwargs):
+    def __call__(
+        self,
+        expected_warning: Type[Warning],
+        callable_: Callable,
+        *args: Optional,
+        **kwargs: Optional,
+    ) -> None:
         if isinstance(expected_warning, ContextManager):
             super().__call__(expected_warning, callable_, *args, **kwargs)
         else:
@@ -107,5 +126,5 @@ class AssertLogs(Assertion):
         default=TestCase().assertLogs, init=False
     )
 
-    def __call__(self, logger=None, level=None):
+    def __call__(self, logger: logging.Logger = None, level: int = None):
         super().__call__(logger=logger, level=level)
