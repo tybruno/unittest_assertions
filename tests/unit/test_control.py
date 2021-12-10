@@ -3,7 +3,7 @@ import warnings
 
 import pytest
 
-from tests.base import BasicAsssertionTester
+from tests.base import BasicAssertionTester
 from unittest_assertions.control import (
     AssertRaises,
     AssertWarns,
@@ -18,7 +18,7 @@ def _warning(message, warning: Warning):
     warnings.warn(message, warning)
 
 
-class TestAssertRaises(BasicAsssertionTester):
+class TestAssertRaises(BasicAssertionTester):
     _assertion = AssertRaises
 
     @pytest.mark.parametrize(
@@ -53,7 +53,7 @@ class TestAssertRaises(BasicAsssertionTester):
             assert_raises(*testing_data)
 
 
-class TestAssertWarns(BasicAsssertionTester):
+class TestAssertWarns(BasicAssertionTester):
     _assertion = AssertWarns
 
     @pytest.mark.parametrize(

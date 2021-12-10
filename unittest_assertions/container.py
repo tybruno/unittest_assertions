@@ -1,21 +1,28 @@
-""" Container Assertions"""  # pylint: disable=duplicate-code
+""" Container Assertions
+
+Objects provided by this module:
+    * `AssertIn`: `assert member in container`
+    * `AssertNotIn`: `assert member not in container`
+"""
 from dataclasses import (
     dataclass,
     field,
 )
 from typing import (
     Callable,
+    Any,
+    Container,
 )
 from unittest import TestCase
 
-from unittest_assertions.base import BuiltinAssertion
+from unittest_assertions.base import Assertion
 
 
 @dataclass
-class AssertIn(BuiltinAssertion):
-    """assert `member` `in` `container`
+class AssertIn(Assertion):
+    """`assert member in container`
 
-    raise `AssertionError` if `member` not in `container`
+    raise `AssertionError` if `member not in container`
 
     For more documentation read TestCase().assertIn.__doc__
 
@@ -28,12 +35,24 @@ class AssertIn(BuiltinAssertion):
         default=TestCase().assertIn, init=False
     )
 
+    def __call__(self, member: Any, container: Container) -> None:
+        """`assert member in container`
+
+        Args:
+            member: check if in `container`
+            container: `container` that is checked to have `member`
+
+        Returns:
+            None
+        """
+        super().__call__(member=member, container=container)
+
 
 @dataclass
-class AssertNotIn(BuiltinAssertion):
-    """assert `member` `not in` `container`
+class AssertNotIn(AssertIn):
+    """`asser member not in container`
 
-    raise `AssertionError` if `member` in `container`
+    raise `AssertionError` if `member in container`
 
     For more documentation read TestCase().assertNotIn.__doc__
 

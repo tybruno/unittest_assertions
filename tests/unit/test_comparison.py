@@ -1,7 +1,5 @@
-""" Testing unittest_assertions/comparison.py """
+""" Testing unittest_assertions/equality.py """
 import pytest
-
-from tests.base import AssertionTester
 from pytest_builtin_types import (
     combined_equal_all_basic_types,
     combined_non_equal_all_basic_types,
@@ -14,7 +12,9 @@ from pytest_builtin_types import (
     _MULTILINE_1,
     _MULTILINE_2,
 )
-from unittest_assertions.comparison import (
+
+from tests.base import AssertionTester
+from unittest_assertions.equality import (
     AssertAlmostEqual,
     AssertCountEqual,
     AssertDictEqual,
@@ -27,7 +27,7 @@ from unittest_assertions.comparison import (
     AssertMultilineEqual,
     AssertNotAlmostEqual,
     AssertNotEqual,
-    AssertSequanceEqual,
+    AssertSequenceEqual,
     AssertSetEqual,
     AssertTupleEqual,
 )
@@ -78,8 +78,8 @@ class TestAlmostEqual(AssertionTester):
             (1.00000001, 1.0),
             (0, 0.1 + 0.1j, 0, None),
             (float("inf"), float("inf")),
-            (1.1, 1.0, None, None, 0.5),
-            (1.1, 1.1, None, None, 0.5),
+            (1.1, 1.0, None, 0.5),
+            (1.1, 1.1, None, 0.5),
         ),
     )
     def test_assertion_passes(self, testing_data: tuple):
@@ -117,8 +117,8 @@ class TestNotAlmostEqual(AssertionTester):
             (1.00000001, 1.0),
             (0, 0.1 + 0.1j, 0),
             (float("inf"), float("inf")),
-            (1.1, 1.0, None, None, 0.5),
-            (1.1, 1.1, None, None, 0.5),
+            (1.1, 1.0, None, 0.5),
+            (1.1, 1.1, None, 0.5),
         ),
     )
     def test_assertion_raises(self, testing_data: tuple):
@@ -170,7 +170,7 @@ class TestAssertMultilineEqual(AssertionTester):
 
 
 class TestAssertSequenceEqual(AssertionTester):
-    _assertion = AssertSequanceEqual
+    _assertion = AssertSequenceEqual
 
     @pytest.mark.parametrize(
         "testing_data",

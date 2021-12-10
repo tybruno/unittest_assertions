@@ -1,10 +1,17 @@
 """ Testing unittest_assertions/identity.py """
 
 import pytest
-from pytest_builtin_types import equal_sequences, non_equal_sequences, _ALL_BASIC_TYPES_1, _NOT_INSTANCE_TESTING_DATA
-from tests.base import AssertionTester
+from pytest_builtin_types import (
+    equal_sequences,
+    non_equal_sequences,
+    _ALL_BASIC_TYPES_1,
+    _NOT_INSTANCE_TESTING_DATA,
+)
 
+from tests.base import AssertionTester
 from unittest_assertions.identity import (
+    AssertTrue,
+    AssertFalse,
     AssertIs,
     AssertIsInstance,
     AssertIsNone,
@@ -12,6 +19,34 @@ from unittest_assertions.identity import (
     AssertIsNotNone,
     AssertNotIsInstance,
 )
+
+
+class TestAssertTrue(AssertionTester):
+    _assertion = AssertTrue
+
+    @pytest.mark.parametrize(
+        "testing_data", tuple(value for value in _ALL_BASIC_TYPES_1.values())
+    )
+    def test_assertion_passes(self, testing_data: tuple):
+        super().test_assertion_passes(testing_data)
+
+    @pytest.mark.parametrize("testing_data", (False, 0, None, "", []))
+    def test_assertion_raises(self, testing_data: tuple):
+        super().test_assertion_raises(testing_data)
+
+
+class TestAssertFalse(AssertionTester):
+    _assertion = AssertFalse
+
+    @pytest.mark.parametrize("testing_data", (False, 0, None, "", []))
+    def test_assertion_passes(self, testing_data: tuple):
+        super().test_assertion_passes(testing_data)
+
+    @pytest.mark.parametrize(
+        "testing_data", tuple(value for value in _ALL_BASIC_TYPES_1.values())
+    )
+    def test_assertion_raises(self, testing_data: tuple):
+        super().test_assertion_raises(testing_data)
 
 
 class TestIs(AssertionTester):
@@ -26,9 +61,7 @@ class TestIs(AssertionTester):
 
     @pytest.mark.parametrize(
         "testing_data",
-        tuple(
-            non_equal_sequences()
-        ),
+        tuple(non_equal_sequences()),
     )
     def test_assertion_raises(self, testing_data: tuple):
         super().test_assertion_raises(*testing_data)
@@ -39,9 +72,7 @@ class TestIsNot(AssertionTester):
 
     @pytest.mark.parametrize(
         "testing_data",
-        tuple(
-            non_equal_sequences()
-        ),
+        tuple(non_equal_sequences()),
     )
     def test_assertion_passes(self, testing_data: tuple):
         super().test_assertion_passes(*testing_data)
@@ -103,8 +134,8 @@ class TestAssertIsInstance(AssertionTester):
     @pytest.mark.parametrize("testing_data", tuple(_NOT_INSTANCE_TESTING_DATA))
     def test_assertion_raises(self, testing_data: tuple):
         obj, _type = testing_data
-        if not isinstance(obj,_type):
-            super().test_assertion_raises(obj,_type)
+        if not isinstance(obj, _type):
+            super().test_assertion_raises(obj, _type)
 
 
 class TestAssertNotIsInstance(AssertionTester):
@@ -113,8 +144,8 @@ class TestAssertNotIsInstance(AssertionTester):
     @pytest.mark.parametrize("testing_data", tuple(_NOT_INSTANCE_TESTING_DATA))
     def test_assertion_passes(self, testing_data: tuple):
         obj, _type = testing_data
-        if isinstance(obj,_type):
-            super().test_assertion_raises(obj,_type)
+        if isinstance(obj, _type):
+            super().test_assertion_raises(obj, _type)
 
     @pytest.mark.parametrize(
         "testing_data",

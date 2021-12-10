@@ -1,11 +1,9 @@
 """ Testing unittest_assertions/container.py """
 
 import pytest
-
-from pytest_builtin_types import _ALL_BASIC_TYPES_1,_ALL_BASIC_TYPES_2
+from pytest_builtin_types import _ALL_BASIC_TYPES_1, _ALL_BASIC_TYPES_2
 
 from tests.base import AssertionTester
-
 from unittest_assertions.container import (
     AssertIn,
     AssertNotIn,
