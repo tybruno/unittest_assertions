@@ -22,19 +22,19 @@ pip install unittest-assertions
 ```python
 from unittest_assertions.identity import AssertIsInstance
 
-assert_is_instance = AssertIsInstance()
-assert_is_instance("example str", int) # raise TypeError("'example str' is not an instance of <class 'int'> : Raised a AssertionError")
+assert_is_instance = AssertIsInstance(msg="Raised an AssertionError")
+assert_is_instance("example str", int) # raise TypeError("'example str' is not an instance of <class 'int'> : Raised an AssertionError")
 ```
 
 ```python
-from unittest_assertions.equality import AssertEqual
+from unittest_assertions import AssertEqual
 
 assert_equal = AssertEqual()
 assert_equal(1, 1)
 assert_equal(first="hello", second="hello")
 ```
 ```python
-from unittest_assertions.container import AssertNotIn
+from unittest_assertions import AssertNotIn
 assert_in = AssertNotIn()
 assert_in(member=1, container=[5,2,3])
 ```
