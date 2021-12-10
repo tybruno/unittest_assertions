@@ -1,7 +1,7 @@
 """ setupy.py file """
 import setuptools
 
-__version__ = "v2.3"
+__version__ = "v3.0"
 __author__ = "Tyler Bruno"
 
 with open("README.md", "r", encoding="utf-8") as file:
