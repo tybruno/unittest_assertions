@@ -23,7 +23,7 @@ pip install unittest-assertions
 from unittest_assertions.identity import AssertIsInstance
 
 assert_is_instance = AssertIsInstance(msg="Raised an AssertionError")
-assert_is_instance("example str", int) # raise TypeError("'example str' is not an instance of <class 'int'> : Raised an AssertionError")
+assert_is_instance("example str", int) # raise AssertionError("'example str' is not an instance of <class 'int'> : Raised an AssertionError")
 ```
 
 ```python
