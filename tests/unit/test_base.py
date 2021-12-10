@@ -14,8 +14,8 @@ from unittest_assertions.equality import AssertEqual
 class TestBuiltinAssertion:
     """Testing builtin assertions"""
 
-    @pytest.mark.parametrize("function", (AssertEqual,))
-    def test_init(self, function: Callable) -> None:
+    @pytest.mark.parametrize("testing_data", ((AssertEqual,"Message"),))
+    def test_init(self, testing_data: Callable) -> None:
         """Test builtin assertion __init__
 
         Args:
@@ -24,8 +24,10 @@ class TestBuiltinAssertion:
         Returns:
             None
         """
-        builtin_assertion = Assertion(_assertion_function=AssertEqual)
+        function, message = testing_data
+        builtin_assertion = Assertion(_assertion_function=function,msg=message)
         assert builtin_assertion._assertion_function == function
+        assert builtin_assertion.msg == message
 
     @pytest.mark.parametrize("arguments", (("hello", None, 2),))
     @pytest.mark.parametrize(
