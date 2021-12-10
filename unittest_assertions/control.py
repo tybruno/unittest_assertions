@@ -59,6 +59,17 @@ class AssertRaises(Assertion):
         *args: Optional[Collection],
         **kwargs: Optional[Mapping],
     ) -> None:
+        """assert `callable_` raises `expected_exception`
+
+        Args:
+            expected_exception: The expected exception to be raised by `callable_`
+            callable_: callable that is expecting to raise exception `expected_exception`
+            *args: Optional function_args
+            **kwargs: Optional function_kwargs
+
+        Returns:
+            None
+        """
         if isinstance(expected_exception, ContextManager):
             super().__call__(expected_exception, callable_, *args, **kwargs)
         else:
@@ -101,6 +112,17 @@ class AssertWarns(Assertion):
         *args: Optional,
         **kwargs: Optional,
     ) -> None:
+        """assert `Callable` raises `Warning`
+
+        Args:
+            expected_warning: The expected warning to be raised by `callable_`
+            callable_: The callable that is expected to raise `expected_warning`
+            *args: Optional function_args
+            **kwargs: Optional function_kwargs
+
+        Returns:
+            None
+        """
         if isinstance(expected_warning, ContextManager):
             super().__call__(expected_warning, callable_, *args, **kwargs)
         else:
@@ -127,4 +149,13 @@ class AssertLogs(Assertion):
     )
 
     def __call__(self, logger: logging.Logger = None, level: int = None):
+        """assert `logger` logs at `level`
+
+        Args:
+            logger: check it if logger logs at `level`
+            level: that `logger` should log at
+
+        Returns:
+            None
+        """
         super().__call__(logger=logger, level=level)

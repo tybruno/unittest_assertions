@@ -350,7 +350,7 @@ class AssertSetEqual(Assertion):
     )
 
     def __call__(self, set1: Set, set2: Set) -> None:
-        """assertify `set1` is deep equal to `set2`
+        """assert `set1` is deep equal to `set2`
 
         Args:
             set1: checks if deep equal to `set2`
@@ -378,7 +378,7 @@ class AssertDictEqual(Assertion):
     )
 
     def __call__(self, d1: Dict, d2: Dict) -> None:
-        """assertify `dict1` is deep equal to `dict2`
+        """assert `dict1` is deep equal to `dict2`
 
         Args:
             d1: checks if deep equal to `d2`
