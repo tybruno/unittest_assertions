@@ -30,8 +30,7 @@ from typing import (
     Tuple,
     Set,
     Dict,
-    Mapping,
-    Optional,
+    Iterable,
 )
 from unittest import TestCase
 
@@ -39,30 +38,7 @@ from unittest_assertions.base import Assertion
 
 
 @dataclass
-class EqualityAssertion(Assertion):
-    """Parent equality `Assertion` class"""
-
-    def __call__(
-        self,
-        first: Any,
-        second: Any,
-        *args: Optional[Sequence],
-        **kwargs: Optional[Mapping]
-    ) -> None:
-        """Assert equality comparison on the `first` and `second`
-
-        Args:
-            first: will be compared against `second`
-            second: will be compared against `first`
-            *args: Optional function_args
-            **kwargs: Optional function_kwargs
-
-        """
-        super().__call__(first=first, second=second, *args, **kwargs)
-
-
-@dataclass
-class AssertEqual(EqualityAssertion):
+class AssertEqual(Assertion):
     """`assert first == second`
 
     raise `AssertionError` if `first` is not equal to `second`
@@ -79,9 +55,22 @@ class AssertEqual(EqualityAssertion):
         default=TestCase().assertEqual, init=False
     )
 
+    def __call__(
+        self,
+        first: Any,
+        second: Any,
+    ) -> None:
+        """Assert equality comparison on the `first` and `second`
+
+        Args:
+            first: will be compared against `second`
+            second: will be compared against `first`
+        """
+        super().__call__(first=first, second=second)
+
 
 @dataclass
-class AssertNotEqual(EqualityAssertion):
+class AssertNotEqual(AssertEqual):
     """`assert first != second`
 
     raise `AssertionError` if `first` is equal to `second`
@@ -100,7 +89,7 @@ class AssertNotEqual(EqualityAssertion):
 
 
 @dataclass
-class AssertAlmostEqual(EqualityAssertion):
+class AssertAlmostEqual(Assertion):
     """`assert first ~= second`
 
     raise `AssertionError` if `first` is not almost equal to `second`
@@ -177,7 +166,7 @@ class AssertNotAlmostEqual(AssertAlmostEqual):
 
 
 @dataclass
-class AssertCountEqual(EqualityAssertion):
+class AssertCountEqual(Assertion):
     """`assert Counter(list(first) == Counter(list(second))`
 
     Asserts that two iterables have the same elements, the same number of
@@ -195,6 +184,19 @@ class AssertCountEqual(EqualityAssertion):
     _assertion_function: Callable = field(
         default=TestCase().assertCountEqual, init=False
     )
+
+    def __call__(
+        self,
+        first: Iterable,
+        second: Iterable,
+    ) -> None:
+        """Assert equality comparison on the `first` and `second`
+
+        Args:
+            first: will be compared against `second`
+            second: will be compared against `first`
+        """
+        super().__call__(first=first, second=second)
 
 
 @dataclass
@@ -216,6 +218,19 @@ class AssertMultilineEqual(AssertEqual):
     _assertion_function: Callable = field(
         default=TestCase().assertMultiLineEqual, init=False
     )
+
+    def __call__(
+        self,
+        first: str,
+        second: str,
+    ) -> None:
+        """Assert equality comparison on the `first` and `second`
+
+        Args:
+            first: will be compared against `second`
+            second: will be compared against `first`
+        """
+        super().__call__(first=first, second=second)
 
 
 @dataclass
@@ -366,8 +381,8 @@ class AssertDictEqual(Assertion):
         """assertify `dict1` is deep equal to `dict2`
 
         Args:
-            dict1: checks if deep equal to `dict2`
-            dict2: checks if deep equal to `dict1`
+            d1: checks if deep equal to `d2`
+            d2: checks if deep equal to `d1`
         """
         super().__call__(d1=d1, d2=d2)
 
