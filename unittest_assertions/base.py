@@ -26,7 +26,7 @@ class Assertion:
     """
 
     _assertion_function: Callable
-    msg: str = field(default=None)
+    msg: Union[str, None] = field(default=None)
 
     def __call__(self, *args, **kwargs) -> None:
         """Run the Assertion function with the given function_args and function_kwargs
