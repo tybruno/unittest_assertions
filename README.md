@@ -12,7 +12,6 @@ Thin wrapper around the python builtin `unittest` allowing developers to use the
 * **Great Developer Experience**: Being fully typed, documented, and tested makes it great for editor support and extension.
 * **There is More!!!**:
     * [assertify](https://github.com/tybruno/assertify): Simple, Flexible, and Extendable python3.6+ library to evaluate an expression and return `True`/`False` or raise an `AssertionError` or `Exception`.
-    * [descriptify](https://github.com/tybruno/descriptify): Descriptify is a library that contains helpful python descriptors. It uses `assertify_predicates` to validate various descriptors.
 
 ## Installation
 ```bash
@@ -48,9 +47,9 @@ assert_in(member=1, container=[5,2,3])
 ## Control
 | Asserter | Expression |
 |-----------------|----------------|
-|AssertRaises| expected_exception | 
-|AssertWarns| expected_warning| 
-|AssertLogs| logger(level) | 
+|AssertRaises| `assert function raises expected_exception` | 
+|AssertWarns| `assert function warns expected_warning`| 
+|AssertLogs| `assert logger(level)` | 
 
 ## Equality
 | Asserter | Expression | 
